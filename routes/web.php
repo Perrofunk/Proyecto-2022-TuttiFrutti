@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Product;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +15,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Escucha una ruta ("https://www.TuttiFrutti.com/) y utiliza un Controlador para devolver una vista
+Route::get('/', [WelcomeController::class, 'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//TuttiFrutti.com/products
+Route::get('/products', [ProductController::class, 'index']);
+
+//TuttiFrutti.com/products/Manzana
+Route::get('/products/{product}', [ProductController::class, 'show']);
+
+Auth::routes();
+
+//TuttiFrutti.com/products/Home
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
