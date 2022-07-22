@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index(){
-        return view('products', [
+        return view('products.index', [
             'products' => Product::all(),
             'categories' => Category::all()
         ]);
     }
     public function show(Product $product){
-        return view('product', [
+        return view('products.show', [
             'product'=>$product
         ]);
     }
