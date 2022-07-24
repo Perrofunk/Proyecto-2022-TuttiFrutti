@@ -1,9 +1,10 @@
-<div class="relative bg-light d-flex flex-column align-top justify-content-center navbar-light bg-white shadow-sm">
+<div class="bg-light d-flex flex-column align-top justify-content-center navbar-light">
 
-
-    <div class="d-flex align-items-center">
-        <a href="/home" class=" text-decoration-none"><img class="ms-4" src="/img/metallica.png" height="30px" width="30px" alt="">Home</a>
+    <div class="d-flex shadow-sm">
+        <a href="/home" class=" text-decoration-none d-flex flex-row align-items-center"><img class="ms-4" src="/img/metallica.png" height="30px" width="30px" alt=""><span>Home</span></a>
+        <x-partials.search/>
         <ul class="navbar-nav ms-auto pe-5 d-flex flex-row gap-4">
+
 
             <!-- Authentication Links -->
             @guest
@@ -40,3 +41,4 @@
             @endguest
         </ul>
     </div>
+</div>

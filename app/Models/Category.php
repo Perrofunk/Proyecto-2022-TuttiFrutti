@@ -13,5 +13,11 @@ class Category extends Model
     public function products(){
         return $this->hasMany(Product::class);
     }
+    //QueryFilter del modelo categoria, para poder usar la funcion filter() para filtrar categorias
+    public function scopeFilter($query, array $filters){
+        if($filters['search'] ?? false){
+            $query->where('name', 'like', '%' . request('search') . '%');
+        };
+    }
 }
 
