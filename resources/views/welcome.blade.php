@@ -8,7 +8,7 @@
 
             <div class="d-flex flex-column align-items-center">
                 <x-partials.hero />
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero corrupti ipsum est atque voluptas
+                <p>Lorem ipsum s dolor sit amet consectetur adipisicing elit. Vero corrupti ipsum est atque voluptas
                     molestias quaerat doloribus tenetur magnam nesciunt.</p>
 
                 <div class="d-flex pt-5 justify-content-center btn-group mb-3">
@@ -20,26 +20,35 @@
                     <a href="?category_id=2"><button class="btn-light">Verduras</button></a>
 
                     <a href="?category_id=3"><button class="btn-light">Otro</button></a>
-                </div>
+                </div> 
+                
                 <div class=" container">
-                    @if ($error ?? false)
+                   @if ($error ?? false)
                         <div class="d-flex justify-content-center p-5 m-5">
                             <h3>
                         {{$error}}
                     </h3>
                     </div>
                     @else
-                    <div class="row row-cols-1 row-cols-md-4 g-4">
+                    <div class="row row-cols-2 row-cols-md-4 g-4">
                         
                         <x-products-component :products="$products" />
                         
 
                     </div>
-                    @endif
+                    
+                    
                 </div>
+                    
+                @endif
+                
             </div>
+            
         </div>
-    </div>
+        {{-- Paginacion --}}
+        <div class="container">
+                {{$products->links()}}
+                </div>
 </body>
 
 </html>
