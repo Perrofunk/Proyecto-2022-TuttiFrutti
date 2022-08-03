@@ -2,14 +2,19 @@
 
 
 <body class="antialiased" style="background-color: #1a202c">
-    <x-navbar-component/>
+     <x-navbar-component action="/"/>
 
         <div class="d-flex py-5 justify-content-center bg-success text-white">
-
             <div class="d-flex flex-column align-items-center">
                 <x-partials.hero />
                 <p>Lorem ipsum s dolor sit amet consectetur adipisicing elit. Vero corrupti ipsum est atque voluptas
                     molestias quaerat doloribus tenetur magnam nesciunt.</p>
+                    @if ($error ?? false)
+                        
+                    @else                        
+                        <x-carousel-component :products="$products"/>
+                    @endif
+                    
 
                 <div class="d-flex pt-5 justify-content-center btn-group mb-3">
 
@@ -27,8 +32,8 @@
                         <div class="d-flex justify-content-center p-5 m-5">
                             <h3>
                         {{$error}}
-                    </h3>
-                    </div>
+                        </h3>
+                        </div>
                     @else
                     <div class="row row-cols-2 row-cols-md-4 g-4">
                         
@@ -36,19 +41,24 @@
                         
 
                     </div>
-                    
+                    @endif
                     
                 </div>
                     
-                @endif
+                
                 
             </div>
             
         </div>
         {{-- Paginacion --}}
+        @if ($error ?? false)
+                        
+        @else                        
         <div class="container">
-                {{$products->links()}}
-                </div>
+            {{$products->links()}}
+        </div>
+        @endif
 </body>
 
 </html>
+

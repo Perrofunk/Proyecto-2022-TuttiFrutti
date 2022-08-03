@@ -1,8 +1,14 @@
+@props(['action'])
 <div class="bg-light d-flex flex-column align-top justify-content-center navbar-light">
 
     <div class="d-flex shadow-sm">
-        <a href="/home" class=" text-decoration-none d-flex flex-row align-items-center"><img class="ms-4" src="/img/metallica.png" height="30px" width="30px" alt=""><span>Home</span></a>
-        <x-partials.search/>
+        @if (Auth::check())
+            <a href="/home" class=" text-decoration-none d-flex flex-row align-items-center"><img class="ms-4" src="/img/metallica.png" height="30px" width="30px" alt=""><span>Home</span></a>
+        @else
+            <a href="/" class=" text-decoration-none d-flex flex-row align-items-center"><img class="ms-4" src="/img/metallica.png" height="30px" width="30px" alt=""></a>
+        @endif
+        
+        <x-partials.search :action="$action"/>
         <ul class="navbar-nav ms-auto pe-5 d-flex flex-row gap-4">
 
 

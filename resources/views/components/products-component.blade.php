@@ -18,16 +18,15 @@
 
     Ahora utilizando foreach vamos a iterar sobre la coleccion, guardando cada objeto en una variable y ejecutando el codigo para cada objeto individual. Todo el codigo que sigue, desde el foreach hasta el endforeach, se repite para cada objeto de la coleccion.
 -->
-
 @foreach ($products as $product)
-
-{{-- Se utiliza un componente "wrapper" <x-card-component /> para encerrar el codigo en dos divs, uno que le asigna una columna, y otro que le asigna la clase "card" --}}
+    {{-- Se utiliza un componente "wrapper" <x-card-component /> para encerrar el codigo en dos divs, uno que le asigna una columna, y otro que le asigna la clase "card" --}}
 <x-card-component>
     
     
     @php
     
-/*  Busca en la tabla de categorias -> segun el ID de categoria del producto -> el nombre de la categoria. Lo guarda en la variable $category, que luego se usa para mostrar el nombre de la categoria como subtitulo en la carta de producto (h6 card-subtitle)    */
+        /*  Busca en la tabla de categorias -> segun el ID de categoria del    producto -> el nombre de la categoria. Lo guarda en la variable $category, que luego se usa para mostrar el nombre de la categoria como subtitulo en la carta de producto (h6 card-subtitle)    */
+
 
     $category = App\Models\Category::find($product['category_id']);
     $category = $category['name'];
@@ -54,7 +53,7 @@
 @endphp
 
 {{-- Cuando el foreach recorre la coleccion y guarda el objeto individual en la variable $product se hace posible acceder a sus propiedades, como 'id' y 'name'. --}}
-    <a href="/products/{{$product['id']}}"><img src="img/metallica.png"  class="card-img-top" alt=""></a>
+    <a href="/products/{{$product['id']}}"><img src="img/{{$product['img_route']}}"  class="card-img-top" alt=""></a>
     
     <div class="card-body">
     

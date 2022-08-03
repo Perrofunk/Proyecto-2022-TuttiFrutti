@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index(){
+        $products = Product::oldest('id')->filter(request(['category_id', 'search']))->paginate('8');
         return view('products.index', [
-            'products' => Product::all(),
-            'categories' => Category::all()
+            'products' => $products
         ]);
     }
     public function show(Product $product){
