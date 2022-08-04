@@ -4,7 +4,9 @@
 <body class="antialiased" style="background-color: #1a202c">
      <x-navbar-component action="/"/>
 
-        <div class="d-flex py-5 justify-content-center bg-success text-white">
+     <button><a href="/admin/products/create">Create</a></button>
+     
+     <div class="d-flex py-5 justify-content-center bg-success text-white">
             <div class="d-flex flex-column align-items-center">
                 <x-partials.hero />
                 <p>Lorem ipsum s dolor sit amet consectetur adipisicing elit. Vero corrupti ipsum est atque voluptas

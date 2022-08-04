@@ -31,3 +31,6 @@ Auth::routes();
 //TuttiFrutti.com/products/Home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/admin/products/create', [\App\Http\Controllers\ProductController::class, 'create']);
+
+Route::post('/', [ProductController::class, 'store']);

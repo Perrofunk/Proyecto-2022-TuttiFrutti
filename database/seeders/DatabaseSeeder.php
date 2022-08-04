@@ -11,6 +11,7 @@ use App\Models\Supplier;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -40,18 +41,25 @@ class DatabaseSeeder extends Seeder
 
         $compras=Compra::all();
         foreach ($compras as $compra){
-            DetalleCompra::factory(1)->create([
-                'compra_id'=>$compra->id,
-                'product_id'=>Product::all()->random(3)->first()->id
+            DetalleCompra::factory(3)->state(new Sequence(
+                ['compra_id'=>$compra->id,
+                'product_id'=>Product::all()->random(3)->first()->id],
+                ['compra_id'=>$compra->id,
+                'product_id'=>Product::all()->random(3)->first()->id],
+                ['compra_id'=>$compra->id,
+                'product_id'=>Product::all()->random(3)->first()->id]
+                ))->create();
+            $detalleCompras = DetalleCompra::where('compra_id', $compra->id)->get();
+            $totalDetalle=0;
+            foreach ($detalleCompras as $detalleCompra){
+                $compraIndividual= $detalleCompra->costo_unitario;
+                $cantidadIndividual=$detalleCompra->cantidad;
+                $totalDetalle+=$compraIndividual*$cantidadIndividual;
+            };
+            $compra->update([
+                'total'=> $totalDetalle
             ]);
-            DetalleCompra::factory(1)->create([
-                'compra_id'=>$compra->id,
-                'product_id'=>Product::all()->random(3)->first()->id
-            ]);
-            DetalleCompra::factory(1)->create([
-                'compra_id'=>$compra->id,
-                'product_id'=>Product::all()->random(3)->first()->id
-            ]);
+        
         }
         // Compra::factory(6)->create([
         //     'supplier_id'=>rand(1, 3)
