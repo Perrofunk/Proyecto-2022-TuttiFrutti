@@ -24,37 +24,49 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        
-        Storage::makeDirectory('public/posts');
+        Storage::deleteDirectory('public/images');
+        Storage::makeDirectory('public/images');
+
         $this->call(UserSeeder::class);
+
         $this->call(CategorySeeder::class);
-        $this->call(ProductSeeder::class);
+        
         Tag::factory(8)->create();
         $this->call(PostSeeder::class);
+        $this->call(ProductSeeder::class);
 
+
+
+        //Proveedores
         $suppliers = Supplier::factory(3)->create();
         foreach ($suppliers as $supplier) {
             Compra::factory(3)->create([
                 'supplier_id'=>$supplier->id
             ]);
         }
-
+    
+        //Compras, pertenecen a un proveedor
         $compras=Compra::all();
         foreach ($compras as $compra){
             DetalleCompra::factory(3)->state(new Sequence(
-                ['compra_id'=>$compra->id,
-                'product_id'=>Product::all()->random(3)->first()->id],
-                ['compra_id'=>$compra->id,
-                'product_id'=>Product::all()->random(3)->first()->id],
-                ['compra_id'=>$compra->id,
-                'product_id'=>Product::all()->random(3)->first()->id]
+                fn ($sequence) => ['compra_id'=>$compra->id,
+                'product_id'=>Product::all()->random(1)->first()->id]
+                // ['compra_id'=>$compra->id,
+                // 'product_id'=>Product::all()->random(3)->first()->id],
+                // ['compra_id'=>$compra->id,
+                // 'product_id'=>Product::all()->random(3)->first()->id],
+                // ['compra_id'=>$compra->id,
+                // 'product_id'=>Product::all()->random(3)->first()->id]
                 ))->create();
             $detalleCompras = DetalleCompra::where('compra_id', $compra->id)->get();
             $totalDetalle=0;
             foreach ($detalleCompras as $detalleCompra){
-                $compraIndividual= $detalleCompra->costo_unitario;
-                $cantidadIndividual=$detalleCompra->cantidad;
-                $totalDetalle+=$compraIndividual*$cantidadIndividual;
+
+                $compraIndividual = $detalleCompra->costo_unitario;
+
+                $cantidadIndividual = $detalleCompra->cantidad;
+
+                $totalDetalle += $compraIndividual*$cantidadIndividual;
             };
             $compra->update([
                 'total'=> $totalDetalle

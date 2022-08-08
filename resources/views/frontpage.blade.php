@@ -4,17 +4,28 @@
 <body class="antialiased" style="background-color: #1a202c">
      <x-navbar-component action="/"/>
 
-     <button><a href="/admin/products/create">Create</a></button>
-     
      <div class="d-flex py-5 justify-content-center bg-success text-white">
+        
+
             <div class="d-flex flex-column align-items-center">
-                <x-partials.hero />
+            
+                <div style="display: flex; align-items:center; justify-content:center" class="w-100">
+                    
+                    <div style="height:37.031px; width:139.948px;margin-right:auto"></div>
+                    <div style="display: flex; justify-content:center;">
+                    <x-partials.hero />
+                    </div>
+                    <div style="display:flex;justify-content:flex-end;align-items:center;margin-left:auto">
+                        <a role="button" class="btn btn-secondary" href="/admin/products/create">Create</a>
+                        <a role="button" class="btn btn-secondary" href="/admin">Admin</a>
+                    </div>
+                </div>
                 <p>Lorem ipsum s dolor sit amet consectetur adipisicing elit. Vero corrupti ipsum est atque voluptas
                     molestias quaerat doloribus tenetur magnam nesciunt.</p>
                     @if ($error ?? false)
                         
                     @else                        
-                        <x-carousel-component :products="$products"/>
+                        {{-- <x-carousel-component :products="$products"/> --}}
                     @endif
                     
 
