@@ -47,3 +47,6 @@ Route::get('/admin/products/create', [ProductController::class, 'create']);
 Route::get('/admin/products/index', [ProductController::class, 'index']);
 
 Route::post('/', [ProductController::class, 'store']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
