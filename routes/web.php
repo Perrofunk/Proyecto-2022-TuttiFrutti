@@ -44,7 +44,7 @@ Route::get('/admin/compras/create', [AdminController::class, 'comprasCreate']);
 
 Route::get('/admin/products/create', [ProductController::class, 'create']);
 
-Route::get('/admin/products/index', [ProductController::class, 'index']);
+Route::get('/admin/products/index', [AdminController::class, 'productsIndex']);
 
 Route::post('/', [ProductController::class, 'store']);
 Auth::routes();

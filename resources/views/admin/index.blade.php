@@ -8,7 +8,7 @@
 
 @section('content')
     
-@section('content')
+
     <div class="d-flex flex-column">
         <h1 class=" text-center">Admin DASHBOARD</h1>
         <h4 class="" style="margin-left: 15%; margin-top:15px">Bienvenido [PLACEHOLDER]</h4>
@@ -34,7 +34,7 @@
         </div>
 
     </div>
-@endsection
+
 @stop
 
 @section('css')

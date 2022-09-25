@@ -17,6 +17,11 @@ class AdminController extends Controller
             'proveedores' => Supplier::all()
         ]);
     }
+    public function productsIndex(){
+        return view('admin.products.index', [
+            'products' => Product::all()
+        ]);
+    }
     public function comprasIndex(){
         return view('admin.compras.index', [
             'compras' => Compra::all(),
