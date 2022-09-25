@@ -318,6 +318,11 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+        [   'text' => 'Dashboard',
+            'submenu' =>[   ['text'=>'Index', 'url'=>'admin'],
+                            ['text'=>'Productos', 'url'=>'admin/products/index'],
+                            ['text'=>'Compras', 'url'=>'admin/compras/index']]
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
