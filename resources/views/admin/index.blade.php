@@ -1,6 +1,14 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
 
 @section('content')
+    
+
     <div class="d-flex flex-column">
         <h1 class=" text-center">Admin DASHBOARD</h1>
         <h4 class="" style="margin-left: 15%; margin-top:15px">Bienvenido [PLACEHOLDER]</h4>
@@ -26,4 +34,15 @@
         </div>
 
     </div>
-@endsection
+
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop
+
+
