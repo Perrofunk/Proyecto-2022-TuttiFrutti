@@ -3,36 +3,35 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Compras - Index</h1>
 @stop
 
 
 @section('content')
-
-    @php
-    use App\Models\Product;
-    use App\Models\Category;
-    @endphp
-
-            {{-- Header --}}
+        {{-- Header --}}
             
-        <div style="display: flex; justify-content:space-evenly">
-
+        <h2 style="display: flex; justify-content:space-evenly">
             <a role="button" class="btn btn-primary w-25 mt-3" href="create">
                 Registrar Nueva Compra
             </a>
+        </h2>
 
-        </div>
-
+        <h3>Registro de Compras</h3>
 
         {{-- Main --}}
         {{-- style="display: flex; flex-wrap:wrap; justify-content:space-evenly; align-items:flex-start"--}}
             
-        <div class="row row-cols-2 row-cols-md-4 g-4">
-            @foreach ($compras as $compra)
-                <x-compra-button :compra="$compra" :proveedores="$proveedores" :detalleCompras="$detalleCompras"></x-compra-button>
-            @endforeach
-        </div>
+
+        
+    <div class="row row-cols-2 row-cols-md-4">
+        @foreach ($compras as $compra)
+        
+            <x-compra-button :compra="$compra" />
+            
+        @endforeach
+    </div>
+    {{-- Links de Paginacion --}}
+    {{ $compras->links() }}
 
 @stop
 

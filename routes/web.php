@@ -40,6 +40,8 @@ Route::get('/admin', [AdminController::class, 'index']);
 
 Route::get('/admin/compras/index', [AdminController::class, 'comprasIndex']);
 
+Route::get('/admin/compras/{compra}', [AdminController::class, 'comprasShow']);
+
 Route::get('/admin/compras/create', [AdminController::class, 'comprasCreate']);
 
 Route::get('/admin/products/create', [ProductController::class, 'create']);

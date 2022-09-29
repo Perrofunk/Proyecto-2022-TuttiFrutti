@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Compra;
 use App\Models\DetalleCompra;
+use App\Models\PaymentType;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Supplier;
@@ -30,7 +31,7 @@ class DatabaseSeeder extends Seeder
         Storage::deleteDirectory('public/imagenes');
         Storage::makeDirectory('public/imagenes');
 
-
+        $this->call(UserTypeSeeder::class);
 
         $this->call(UserSeeder::class);
 
@@ -43,7 +44,7 @@ class DatabaseSeeder extends Seeder
 
 
         //Proveedores
-        $suppliers = Supplier::factory(3)->create();
+        $suppliers = Supplier::factory(5)->create();
         foreach ($suppliers as $supplier) {
             Compra::factory(3)->create([
                 'supplier_id'=>$supplier->id
@@ -82,5 +83,25 @@ class DatabaseSeeder extends Seeder
         //     'supplier_id'=>rand(1, 3)
         // ]);
         
+        //Tipos de Usuario
+            //Cliente / Clients
+                //Depende de:
+                    //Zona / Zone
+                    $this->call(ZoneSeeder::class);
+                    //Direccion / Address
+                    $this->call(AddressSeeder::class);
+                        
+                        $this->call(ClientSeeder::class);
+            //Empleado / Employee
+                $this->call(EmployeeSeeder::class);
+            //Admin
+                $this->call(AdminSeeder::class);
+
+            
+            //Ventas
+        
+            //Tipo de Pago / Payment_type
+            $this->call(PaymentTypeSeeder::class);
+
     }
 }

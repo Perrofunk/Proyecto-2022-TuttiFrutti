@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Supplier extends Model
+class Address extends Model
 {
     use HasFactory;
 
-    public function compras(){
-        return $this->hasMany(Compra::class, 'supplier_id');
+    public function zone(){
+        $this->belongsTo(Zone::class);
     }
 }

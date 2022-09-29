@@ -12,9 +12,7 @@ class AdminController extends Controller
 {
     public function index(){
         return view('admin.index', [
-            'compras' => Compra::all(),
-            'detalleCompra' => DetalleCompra::all(),
-            'proveedores' => Supplier::all()
+            'compras' => Compra::all()
         ]);
     }
     public function productsIndex(){
@@ -24,9 +22,12 @@ class AdminController extends Controller
     }
     public function comprasIndex(){
         return view('admin.compras.index', [
-            'compras' => Compra::all(),
-            'detalleCompras' => DetalleCompra::all(),
-            'proveedores' => Supplier::all()
+            'compras' => Compra::paginate('12')
+        ]);
+    }
+    public function comprasShow(Compra $compra){
+        return view('admin.compras.show', [
+            'compra' => $compra
         ]);
     }
     public function comprasCreate(){

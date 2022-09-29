@@ -5,7 +5,6 @@
      <x-navbar-component action="/"/>
 
      <div class="d-flex py-5 justify-content-center bg-success text-white">
-        
 
             <div class="d-flex flex-column align-items-center">
             
