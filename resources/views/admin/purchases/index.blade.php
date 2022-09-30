@@ -24,14 +24,14 @@
 
         
     <div class="row row-cols-2 row-cols-md-4">
-        @foreach ($compras as $compra)
+        @foreach ($purchases as $purchase)
         
-            <x-compra-button :compra="$compra" />
+            <x-compra-button :purchase="$purchase" />
             
         @endforeach
     </div>
     {{-- Links de Paginacion --}}
-    {{ $compras->links() }}
+    {{ $purchases->links() }}
 
 @stop
 

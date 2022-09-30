@@ -8,6 +8,8 @@ use App\Models\DetalleCompra;
 use App\Models\PaymentType;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Purchase;
+use App\Models\PurchaseDetail;
 use App\Models\Supplier;
 use App\Models\Tag;
 use App\Models\User;
@@ -43,19 +45,19 @@ class DatabaseSeeder extends Seeder
 
 
 
-        //Proveedores
+        //Proveedores / Suppliers
         $suppliers = Supplier::factory(5)->create();
         foreach ($suppliers as $supplier) {
-            Compra::factory(3)->create([
+            Purchase::factory(3)->create([
                 'supplier_id'=>$supplier->id
             ]);
         }
     
-        //Compras, pertenecen a un proveedor
-        $compras=Compra::all();
-        foreach ($compras as $compra){
-            DetalleCompra::factory(3)->state(new Sequence(
-                fn ($sequence) => ['compra_id'=>$compra->id,
+        //Compras / Purchases, pertenecen a un proveedor
+        $purchases=Purchase::all();
+        foreach ($purchases as $purchase){
+            PurchaseDetail::factory(3)->state(new Sequence(
+                fn ($sequence) => ['purchase_id'=>$purchase->id,
                 'product_id'=>Product::all()->random(1)->first()->id]
                 // ['compra_id'=>$compra->id,
                 // 'product_id'=>Product::all()->random(3)->first()->id],
@@ -64,18 +66,18 @@ class DatabaseSeeder extends Seeder
                 // ['compra_id'=>$compra->id,
                 // 'product_id'=>Product::all()->random(3)->first()->id]
                 ))->create();
-            $detalleCompras = DetalleCompra::where('compra_id', $compra->id)->get();
-            $totalDetalle=0;
-            foreach ($detalleCompras as $detalleCompra){
+            $purchaseDetails = PurchaseDetail::where('purchase_id', $purchase->id)->get();
+            $detailTotal=0;
+            foreach ($purchaseDetails as $purchaseDetail){
 
-                $compraIndividual = $detalleCompra->costo_unitario;
+                $price = $purchaseDetail->costo_unitario;
 
-                $cantidadIndividual = $detalleCompra->cantidad;
+                $quantity = $purchaseDetail->cantidad;
 
-                $totalDetalle += $compraIndividual*$cantidadIndividual;
+                $detailTotal += $price*$quantity;
             };
-            $compra->update([
-                'total'=> $totalDetalle
+            $purchase->update([
+                'total'=> $detailTotal
             ]);
         
         }

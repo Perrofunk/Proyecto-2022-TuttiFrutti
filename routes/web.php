@@ -38,11 +38,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/admin', [AdminController::class, 'index']);
 
-Route::get('/admin/compras/index', [AdminController::class, 'comprasIndex']);
+Route::get('/admin/purchases/index', [AdminController::class, 'purchasesIndex']);
 
-Route::get('/admin/compras/{compra}', [AdminController::class, 'comprasShow']);
+Route::get('/admin/purchases/{compra}', [AdminController::class, 'purchasesShow']);
 
-Route::get('/admin/compras/create', [AdminController::class, 'comprasCreate']);
+Route::get('/admin/purchases/create', [AdminController::class, 'purchasesCreate']);
 
 Route::get('/admin/products/create', [ProductController::class, 'create']);
 

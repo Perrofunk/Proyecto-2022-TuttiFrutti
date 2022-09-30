@@ -10,6 +10,6 @@ class PaymentType extends Model
     use HasFactory;
 
     public function sales(){
-        return $this->hasMany(Sales::class);
+        return $this->hasMany(Sale::class);
     }
 }

@@ -28,8 +28,8 @@
         <div class="d-flex justify-content-center flex-wrap" style="width: 40%">
             <div class="bg-light w-100 border border-2 border-light">
                 <h3 class="text-center mt-2">COMPRAS</h3>
-                <a class="btn btn-primary w-100 py-3 border rounded-0 border-primary" href="/admin/compras/index" role="button">INDEX</a>
-                <a role="button" class="btn btn-secondary w-100 border rounded-0 border-secondary" href="/admin/compras/create">CREAR</a>
+                <a class="btn btn-primary w-100 py-3 border rounded-0 border-primary" href="/admin/purchases/index" role="button">INDEX</a>
+                <a role="button" class="btn btn-secondary w-100 border rounded-0 border-secondary" href="/admin/purchases/create">CREAR</a>
             </div>
         </div>
 

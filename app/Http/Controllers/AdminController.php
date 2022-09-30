@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Compra;
-use App\Models\DetalleCompra;
+use App\Models\Purchase;
+use App\Models\PurchaseDetail;
 use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ class AdminController extends Controller
 {
     public function index(){
         return view('admin.index', [
-            'compras' => Compra::all()
+            'purchases' => Purchase::all()
         ]);
     }
     public function productsIndex(){
@@ -20,17 +20,17 @@ class AdminController extends Controller
             'products' => Product::all()
         ]);
     }
-    public function comprasIndex(){
-        return view('admin.compras.index', [
-            'compras' => Compra::paginate('12')
+    public function PurchasesIndex(){
+        return view('admin.purchases.index', [
+            'purchases' => Purchase::paginate('12')
         ]);
     }
-    public function comprasShow(Compra $compra){
-        return view('admin.compras.show', [
-            'compra' => $compra
+    public function PurchasesShow(Purchase $purchase){
+        return view('admin.purchases.show', [
+            'purchase' => $purchase
         ]);
     }
-    public function comprasCreate(){
-        return view('admin.compras.create');
+    public function PurchasesCreate(){
+        return view('admin.purchases.create');
     }
 }
