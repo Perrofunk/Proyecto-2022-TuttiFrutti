@@ -321,7 +321,7 @@ return [
         [   'text' => 'Dashboard',
             'submenu' =>[   ['text'=>'Index', 'url'=>'admin'],
                             ['text'=>'Productos', 'url'=>'admin/products/index'],
-                            ['text'=>'Compras', 'url'=>'admin/compras/index']]
+                            ['text'=>'Compras', 'url'=>'admin/purchases/index']]
         ],
         ['header' => 'account_settings'],
         [

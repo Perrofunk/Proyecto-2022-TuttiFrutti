@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\PaymentType;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class SaleFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'date'=>$this->faker->dateTime(),
+            'total'=>$this->faker->randomNumber(3),
+            'payment_type_id'=>PaymentType::all()->random()->id,
+            'user_id'=>User::all()->random()->id
         ];
     }
 }

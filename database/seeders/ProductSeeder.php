@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Image;
 use App\Models\Product;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -41,5 +42,6 @@ class ProductSeeder extends Seeder
             'category_id'=>'3'
         ]);
         Product::factory(5)->create();
+        
     }
 }

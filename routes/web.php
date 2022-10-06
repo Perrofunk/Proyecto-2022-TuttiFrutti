@@ -40,7 +40,7 @@ Route::get('/admin', [AdminController::class, 'index']);
 
 Route::get('/admin/purchases/index', [AdminController::class, 'purchasesIndex']);
 
-Route::get('/admin/purchases/{compra}', [AdminController::class, 'purchasesShow']);
+Route::get('/admin/purchases/{purchase}', [AdminController::class, 'purchasesShow']);
 
 Route::get('/admin/purchases/create', [AdminController::class, 'purchasesCreate']);
 

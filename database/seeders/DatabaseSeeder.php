@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Compra;
 use App\Models\DetalleCompra;
+use App\Models\Image;
 use App\Models\PaymentType;
 use App\Models\Post;
 use App\Models\Product;
@@ -13,6 +14,7 @@ use App\Models\PurchaseDetail;
 use App\Models\Supplier;
 use App\Models\Tag;
 use App\Models\User;
+use Database\Factories\ImageFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
@@ -39,10 +41,16 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CategorySeeder::class);
         
-        Tag::factory(8)->create();
-        $this->call(PostSeeder::class);
         $this->call(ProductSeeder::class);
 
+
+        // $products = Product::all();
+        foreach (Product::all() as $product) {
+            Image::factory([
+                'imageable_id'=>$product->id,
+                'imageable_type'=>Product::class
+            ]);
+        }
 
 
         //Proveedores / Suppliers
@@ -54,17 +62,11 @@ class DatabaseSeeder extends Seeder
         }
     
         //Compras / Purchases, pertenecen a un proveedor
-        $purchases=Purchase::all();
-        foreach ($purchases as $purchase){
+        
+        foreach (Purchase::all() as $purchase){
             PurchaseDetail::factory(3)->state(new Sequence(
                 fn ($sequence) => ['purchase_id'=>$purchase->id,
                 'product_id'=>Product::all()->random(1)->first()->id]
-                // ['compra_id'=>$compra->id,
-                // 'product_id'=>Product::all()->random(3)->first()->id],
-                // ['compra_id'=>$compra->id,
-                // 'product_id'=>Product::all()->random(3)->first()->id],
-                // ['compra_id'=>$compra->id,
-                // 'product_id'=>Product::all()->random(3)->first()->id]
                 ))->create();
             $purchaseDetails = PurchaseDetail::where('purchase_id', $purchase->id)->get();
             $detailTotal=0;
@@ -104,6 +106,8 @@ class DatabaseSeeder extends Seeder
         
             //Tipo de Pago / Payment_type
             $this->call(PaymentTypeSeeder::class);
+
+            $this->call(SaleSeeder::class);
 
     }
 }

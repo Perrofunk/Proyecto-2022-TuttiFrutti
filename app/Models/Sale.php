@@ -12,4 +12,7 @@ class Sale extends Model
     public function paymentType(){
         return $this->belongsTo(PaymentType::class);
     }
+    public function details(){
+        return $this->hasMany(SaleDetail::class);
+    }
 }
