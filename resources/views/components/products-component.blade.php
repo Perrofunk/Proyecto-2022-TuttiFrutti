@@ -9,6 +9,10 @@
     En este caso decimos que, (importante prestar atencion a los simbolos) 'products' es igual a $products (variable que desde el controller pasamos a la vista, y que contiene la coleccion de datos de la Base de datos).
     --}}
 @props(['products'])
+@php
+    use Illuminate\Support\Facades\Route;
+    $prefix = Route::current()->action['prefix'];
+@endphp
 <!--
     Ahora que ya tenemos $products en este archivo (usando props, lo pasamos desde la vista [que a su vez se pasa desde el controller] hasta aca), podemos trabajar con esta variable. 
 
@@ -50,14 +54,15 @@
             $textColor="text-muted";//Texto gris
     }
     
+    
 @endphp
 
 {{-- Cuando el foreach recorre la coleccion y guarda el objeto individual en la variable $product se hace posible acceder a sus propiedades, como 'id' y 'name'. --}}
-    <a href="/products/{{$product['id']}}"><img src="/{{ $product['img_route']}}"  class="card-img-top" alt=""></a>
+    <a href="{{$prefix}}/products/{{$product['id']}}"><img src="/{{ $product->image->url}}"  class="card-img-top" alt=""></a>
     
     <div class="card-body">
     
-        <a class=" text-decoration-none" href="/products/{{$product['id']}}">
+        <a class=" text-decoration-none" href="{{$prefix}}/products/{{$product['id']}}">
             <h2 class="text-center card-title">{{$product['name']}}</h2>
             <h6 class="card-subtitle mb-2 {{$textColor}}">{{$category}}</h6>
         </a>

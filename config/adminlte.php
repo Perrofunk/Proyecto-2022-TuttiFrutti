@@ -320,8 +320,8 @@ return [
         ],
         [   'text' => 'Dashboard',
             'submenu' =>[   ['text'=>'Index', 'url'=>'admin'],
-                            ['text'=>'Productos', 'url'=>'admin/products/index'],
-                            ['text'=>'Compras', 'url'=>'admin/purchases/index']]
+                            ['text'=>'Productos', 'url'=>'admin/products'],
+                            ['text'=>'Compras', 'url'=>'admin/purchases']]
         ],
         ['header' => 'account_settings'],
         [

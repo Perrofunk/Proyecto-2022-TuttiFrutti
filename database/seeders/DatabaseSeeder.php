@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Storage::deleteDirectory('public/imagenes');
+        // Storage::deleteDirectory('public/storage');
         // Storage::makeDirectory('public/imagenes');
 
         Storage::deleteDirectory('public/imagenes');
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
 
         // $products = Product::all();
         foreach (Product::all() as $product) {
-            Image::factory([
+            Image::factory(1)->create([
                 'imageable_id'=>$product->id,
                 'imageable_type'=>Product::class
             ]);
