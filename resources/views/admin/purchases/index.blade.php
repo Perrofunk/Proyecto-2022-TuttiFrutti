@@ -13,27 +13,6 @@
     {{-- Alpine JS --}}
     <script defer src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.store('card', {
-                on: true,
-
-                toggle() {
-                    this.on = !this.on
-                }
-            })
-            Alpine.store('table', {
-                on: false,
-
-                toggle() {
-                    this.on = !this.on
-                }
-            })
-        })
-    </script>
-
-    
-
     <h3>Registro de Compras</h3>
 
     {{-- Main --}}
@@ -51,15 +30,15 @@
             <button class="btn rounded-0 btn-primary" x-on:click="card = false, table = true">
                 Vista De Tabla
             </button>
-            <div class="d-flex flex-row align-items-center">
-                <div class="border border-dark">
-                  <label for="inputPassword6" class="col-form-label"><x-fluentui-search-square-24 /></label>
+            <form {{$attributes}} class="input-group ms-4 flex-row align-items-center" action="/">
+                <div class="form-outline">
+                  <input type="text" name="search" id="form1" class="" />
+                  <label class="form-label" for="form1"></label>
                 </div>
-                <div class="">
-                  <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                <div>
+                    <button class=" btn-light" type="submit">Search</button>
                 </div>
-              </div>
-        </div>
+            </form>
 
 
         <div x-transition x-show.important="card" class="row row-cols-2 row-cols-md-4">
