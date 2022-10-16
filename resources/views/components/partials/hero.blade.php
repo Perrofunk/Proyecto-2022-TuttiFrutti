@@ -1,1 +1,1 @@
-<h1 class="bold" style="">Tutti Frutti</h1>
+<h1 class="bold text-center" style="">Tutti Frutti</h1>

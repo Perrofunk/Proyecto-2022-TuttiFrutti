@@ -12,6 +12,7 @@
 @php
     use Illuminate\Support\Facades\Route;
     $prefix = Route::current()->action['prefix'];
+    $count = 0;
 @endphp
 <!--
     Ahora que ya tenemos $products en este archivo (usando props, lo pasamos desde la vista [que a su vez se pasa desde el controller] hasta aca), podemos trabajar con esta variable. 
@@ -23,6 +24,9 @@
     Ahora utilizando foreach vamos a iterar sobre la coleccion, guardando cada objeto en una variable y ejecutando el codigo para cada objeto individual. Todo el codigo que sigue, desde el foreach hasta el endforeach, se repite para cada objeto de la coleccion.
 -->
 @foreach ($products as $product)
+@php
+    $count += 1;
+@endphp
     {{-- Se utiliza un componente "wrapper" <x-card-component /> para encerrar el codigo en dos divs, uno que le asigna una columna, y otro que le asigna la clase "card" --}}
 <x-card-component>
     
@@ -72,3 +76,8 @@
     
 </x-card-component>
 @endforeach
+@if ($count == 1)
+<script>
+    document.getElementById('product-list').firstElementChild.classList.add('w-50');
+</script>
+@endif

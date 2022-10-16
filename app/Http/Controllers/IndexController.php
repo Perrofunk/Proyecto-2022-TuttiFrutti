@@ -13,10 +13,14 @@ class IndexController extends Controller
         $products = Product::oldest('id')->filter(request(['category_id', 'search']))->paginate('8');
         $categories = Category::oldest('id')->filter(request(['search']))->paginate('4');
 
+        dd(auth()->user()->clients);
+        if (auth()->user()->user_type) {
+                # code...
+        };
         if ($products->count()==0){ 
-        return view('frontpage', [
+                return view('frontpage', [
                 'error' =>'No hay resultados 😔'
-        ]);
+                ]);
         }else{
 
             return view('frontpage', [

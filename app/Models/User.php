@@ -43,8 +43,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     //relacion de uno a muchos
-    public function posts(){
-        return $this->hasMany(Post::class);
+    public function sales(){
+        return $this->hasMany(Sale::class);
     }
     public function clients(){
         return $this->hasMany(Client::class);
