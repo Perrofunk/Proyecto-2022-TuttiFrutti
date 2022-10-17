@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
         // Storage::deleteDirectory('public/storage');
         // Storage::makeDirectory('public/imagenes');
 
-        Storage::deleteDirectory('public/imagenes');
-        Storage::makeDirectory('public/imagenes');
+        Storage::deleteDirectory('imagenes');
+        Storage::makeDirectory('imagenes');
 
         $this->call(UserTypeSeeder::class);
 
