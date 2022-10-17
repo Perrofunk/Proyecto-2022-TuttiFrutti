@@ -18,7 +18,6 @@ class EmployeeFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 'ok',
             'date_of_employment' => $this->faker->date()
         ];
     }

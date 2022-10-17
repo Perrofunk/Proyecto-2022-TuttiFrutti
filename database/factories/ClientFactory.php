@@ -19,7 +19,6 @@ class ClientFactory extends Factory
     public function definition()
     {
         return [
-            'user_id'=>User::where('user_type', '=', '3')->orderBy('id')->get()->random()->id,
             'address_id' => Address::all()->random()->id
         ];
     }

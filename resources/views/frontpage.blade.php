@@ -5,6 +5,16 @@
      <x-navbar-component action="/"/>
 
      <div class="d-flex py-5 justify-content-center bg-cyan text-white" style="background-color: #093a4b">
+        
+            <?php
+            use App\Models\Client;
+            use App\Models\User;
+            use App\Models\Employee;
+            use App\Models\Product;
+            use App\Models\Category;
+            use App\Models\Admin;
+            ?>
+            
 
             <div class="d-flex flex-column align-items-center" >
             

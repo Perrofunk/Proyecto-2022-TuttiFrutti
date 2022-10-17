@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -69,6 +70,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'surname'=>$data['surname'],
             'email' => $data['email'],
+            'userable_id'=>Client::factory()->create()->id,
+            'userable_type'=>Client::class,
             'password' => Hash::make($data['password']),
         ]);
     }

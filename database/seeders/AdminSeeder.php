@@ -17,11 +17,6 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::where('user_type', '=', '1')->get();
-        foreach ($users as $user) {
-            Admin::factory(1)->create([
-                'user_id' => $user->id
-            ]);
-        }
+        //
     }
 }

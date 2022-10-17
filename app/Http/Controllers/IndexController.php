@@ -13,8 +13,8 @@ class IndexController extends Controller
         $products = Product::oldest('id')->filter(request(['category_id', 'search']))->paginate('8');
         $categories = Category::oldest('id')->filter(request(['search']))->paginate('4');
 
-        dd(auth()->user()->clients);
-        if (auth()->user()->user_type) {
+        dd(auth()->user()->userable);
+        if (auth()->user()->userable) {
                 # code...
         };
         if ($products->count()==0){ 
