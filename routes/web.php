@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 //Escucha una ruta ("https://www.TuttiFrutti.com/) y utiliza un Controlador para devolver una vista
+Auth::routes();
+
 Route::get('/', [IndexController::class, 'index']);
 
 //TuttiFrutti.com/products
@@ -30,7 +32,7 @@ Route::get('/products', [ProductController::class, 'index']);
 //TuttiFrutti.com/products/Manzana
 Route::get('/products/{product}', [ProductController::class, 'show']);
 
-Auth::routes();
+
 
 //TuttiFrutti.com/products/Home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

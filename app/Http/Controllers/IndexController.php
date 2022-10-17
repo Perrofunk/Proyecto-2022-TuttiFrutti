@@ -9,14 +9,17 @@ use Illuminate\Support\Facades\Session;
 
 class IndexController extends Controller
 {
-    public function index(){
+        public function index(){
+                $auth = auth()->user();
+        if ($auth){
+                if ($auth->user_type) {
+                        return redirect('admin');
+                }
+        }
         $products = Product::oldest('id')->filter(request(['category_id', 'search']))->paginate('8');
         $categories = Category::oldest('id')->filter(request(['search']))->paginate('4');
 
-        dd(auth()->user()->clients);
-        if (auth()->user()->user_type) {
-                # code...
-        };
+        
         if ($products->count()==0){ 
                 return view('frontpage', [
                 'error' =>'No hay resultados 😔'
