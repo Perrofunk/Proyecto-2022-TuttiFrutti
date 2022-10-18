@@ -23,6 +23,8 @@
                 Registrar Nueva Compra
             </a>
         </h2>
+
+        <div class="d-flex flex-column-reverse">
         <div class="btn-group" role="group" aria-label="Button group">
             <button class="btn rounded-0 btn-primary" x-on:click="card = true, table = false">
                 Vista De Carta
@@ -30,15 +32,19 @@
             <button class="btn rounded-0 btn-primary" x-on:click="card = false, table = true">
                 Vista De Tabla
             </button>
-            <form {{$attributes}} class="input-group ms-4 flex-row align-items-center" action="/">
+        </div>
+            <form class="input-group flex-row align-items-center" action="/">
+                
                 <div class="form-outline">
                   <input type="text" name="search" id="form1" class="" />
                   <label class="form-label" for="form1"></label>
                 </div>
+                
                 <div>
-                    <button class=" btn-light" type="submit">Search</button>
+                    <button class="btn rounded-0 btn-dark" type="submit">Search</button>
                 </div>
             </form>
+        </div>
 
 
         <div x-transition x-show.important="card" class="row row-cols-2 row-cols-md-4">

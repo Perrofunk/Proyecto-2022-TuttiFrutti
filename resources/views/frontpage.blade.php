@@ -4,15 +4,15 @@
 <body class="antialiased">
      <x-navbar-component action="/"/>
 
-     <div class="d-flex py-5 justify-content-center bg-cyan text-white" style="background-color: #093a4b">
+     <div class="d-flex justify-content-center text-white" style="background-color: #093a4b">
 
             <div class="d-flex flex-column align-items-center" >
             
                 
                     <x-partials.hero />
                     
-                <p>Lorem ipsum s dolor sit amet consectetur adipisicing elit. Vero corrupti ipsum est atque voluptas
-                    molestias quaerat doloribus tenetur magnam nesciunt.</p>
+                
+                    
                     @if ($error ?? false)
                         
                     @else                        
@@ -20,19 +20,19 @@
                     @endif
                     
 
-            <div class="d-flex flex-column align-items-center p-2 border border-info border-1 rounded-3" style="background-color: #092d4b">
-                <div class=" text-center btn-group-vertical">
+            <div class="d-flex flex-column align-items-center p-2 border border-info border-1 rounded-3" style=" ;background-color: #092d4b">
+                {{-- <div class=" text-center btn-group-vertical">
                     <div class="container-fluid m-0 p-0 ">
                     <a href="/"><button class="rounded-0 rounded-top btn btn-light w-100">Todo</button></a>
                     </div>
-                    {{-- <div class="d-flex pt-1 justify-content-center mb-3"> --}}
-                        <div class="btn-group">
+                    <div class="d-flex pt-1 justify-content-center mb-3">
+                         <div class="btn-group">
                         <a href="?category_id=1"><button class="rounded-0 btn btn-danger ">Frutas</button></a>
                         <a href="?category_id=2"><button class="rounded-0 btn btn-success">Verduras</button></a>
                         <a href="?category_id=3"><button class="rounded-0 btn btn-primary">Otro</button></a>
                         </div>
-                    {{-- </div>  --}}
-                </div>
+                    </div> 
+                </div> --}}
                 <div class=" container">
                    @if ($error ?? false)
                         <div class="d-flex justify-content-center p-5 m-5">
@@ -41,7 +41,7 @@
                         </h3>
                         </div>
                     @else
-                    <div id="product-list" class="row row-cols-2 row-cols-md-4 g-4 justify-content-center">
+                    <div id="product-list" class="row row-cols-2 row-cols-md-6 g-2 justify-content-center ">
                         
                         <x-products-component :products="$products" />
                         
@@ -60,7 +60,7 @@
                         
         @else                        
         <div class="container">
-            {{$products->links()}}
+            {{-- {{$products->links()}} --}}
         </div>
         @endif
     

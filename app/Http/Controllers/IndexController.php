@@ -16,8 +16,8 @@ class IndexController extends Controller
                         return redirect('admin');
                 }
         }
-        $products = Product::oldest('id')->filter(request(['category_id', 'search']))->paginate('8');
-        $categories = Category::oldest('id')->filter(request(['search']))->paginate('4');
+        $products = Product::oldest('id')->filter(request(['category_id', 'search']))->take(6)->get();
+        $categories = Category::oldest('id')->filter(request(['search']))->get();
 
         
         if ($products->count()==0){ 

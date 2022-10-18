@@ -10,6 +10,7 @@
     <div class="row row-cols-2 row-cols-md-4 g-4">
     <x-products-component :products="$products" />
     </div>
+    {{ $products->links() }}
     @stop
 
     @section('css')

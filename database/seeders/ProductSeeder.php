@@ -19,27 +19,34 @@ class ProductSeeder extends Seeder
     {
         Product::create([
             'name'=>'Manzana',
-            'category_id'=>'1'
+            'category_id'=>'1',
+            'price'=>'200'
+        ],
+        [
+            'name'=>'banana',
+            'category_id'=>'1',
+            'price'=>'120'
         ]);
-        Product::create([
-            'name'=>'Banana',
-            'category_id'=>'1'
-        ]);
+        
         Product::create([
             'name'=>'Ciruela',
-            'category_id'=>'1'
+            'category_id'=>'1',
+            'price'=>250
         ]);
         Product::create([
             'name'=>'Acelga',
-            'category_id'=>'2'
+            'category_id'=>'2',
+            'price'=>150
         ]);
         Product::create([
             'name'=>'Lechuga',
-            'category_id'=>'2'
+            'category_id'=>'2',
+            'price'=>150
         ]);
         Product::create([
             'name'=>'Chía',
-            'category_id'=>'3'
+            'category_id'=>'3',
+            'price'=>150
         ]);
         Product::factory(5)->create();
         
