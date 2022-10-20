@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     use HasFactory;
+    protected $fillable=['street', 'address', 'department', 'between_streets', 'zone_id', 'details'];
 
     public function zone(){
         return $this->belongsTo(Zone::class);
