@@ -1,5 +1,5 @@
 @props(['action'])
-<nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+<nav class="nav navbar navbar-dark ">
     <div class="container">
         <a class="navbar-brand d-flex" href="{{ url('/') }}">
             <div class="pe-3" style="border-right:1px solid black" ><img  src="/img/metallica.png" style="height:25px;width:25px;" alt=""></div>

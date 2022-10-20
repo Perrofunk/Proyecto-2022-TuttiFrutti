@@ -10,6 +10,9 @@ class Address extends Model
     use HasFactory;
 
     public function zone(){
-        $this->belongsTo(Zone::class);
+        return $this->belongsTo(Zone::class);
+    }
+    public function client(){
+        return $this->hasOne(Client::class);
     }
 }

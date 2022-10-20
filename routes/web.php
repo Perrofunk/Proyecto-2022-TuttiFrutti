@@ -24,10 +24,9 @@ use Illuminate\Support\Facades\Auth;
 //Escucha una ruta ("https://www.TuttiFrutti.com/) y utiliza un Controlador para devolver una vista
 Auth::routes();
 
-Route::get('/', [IndexController::class, 'index']);
+
 
 //TuttiFrutti.com/products
-Route::get('/products', [ProductController::class, 'index']);
 
 //TuttiFrutti.com/products/Manzana
 Route::get('/products/{product}', [ProductController::class, 'show']);
@@ -36,16 +35,20 @@ Route::get('/products/{product}', [ProductController::class, 'show']);
 
 //TuttiFrutti.com/products/Home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
 //ADMIN
-
+Route::resource('', IndexController::class)->only([
+    'index'
+]);
 Route::resource('admin', AdminController::class)->only([
     'index'
 ])->middleware('auth');
-Route::resource('admin/purchases', PurchaseController::class)->middleware('auth');
-Route::resource('admin/products', ProductController::class)->middleware('auth');
+Route::resource('purchases', PurchaseController::class)->middleware('auth');
+Route::resource('suppliers', PurchaseController::class)->middleware('auth');
 
+Route::resource('products', ProductController::class)->only([
+    'index'
+]);
+Route::resource('admin/products', ProductController::class);
 // Route::resource('admin.');
 
 // ('/admin/purchases/index', [AdminController::class, 'purchasesIndex'])->name('admin.purchases');
@@ -59,6 +62,6 @@ Route::resource('admin/products', ProductController::class)->middleware('auth');
 // Route::get('/admin/products/index', [AdminController::class, 'productsIndex']);
 
 Route::post('/', [ProductController::class, 'store']);
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
