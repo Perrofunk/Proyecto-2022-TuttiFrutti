@@ -1,17 +1,20 @@
 <x-partials.htmlhead />
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
             <div class="container">
-                <a class="navbar-brand d-flex" href="{{ url('/') }}">
-                    <div class="pe-3" style="border-right:1px solid black" ><img  src="/img/metallica.png" style="height:25px;width:25px;" alt=""></div>
-                    <div class="ps-3"><strong>TuttiFrutti</strong> </div>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
+            <a href="/" class=" text-decoration-none d-flex flex-row align-items-center"><img class="ms-4" src="/img/logo2.png" height="30px" width="30px" alt=""><span>TUTTI FRUTTI</span></a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form class="input-group ms-4 flex-row align-items-center" action="/">    
+                        <div class="form-control-info">
+                            <input class="text"  type="search" id="form1" class="" placeholder="Search" aria-label="Search" />
+                            <label class="form-label" for="form1"></label>
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-light" type="submit">Search</button>
+                        </div>
+                    </form>
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
 
