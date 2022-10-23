@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
+use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
@@ -36,19 +38,23 @@ Route::get('/products/{product}', [ProductController::class, 'show']);
 //TuttiFrutti.com/products/Home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //ADMIN
+
+
 Route::resource('', IndexController::class)->only([
     'index'
 ]);
-Route::resource('admin', AdminController::class)->only([
-    'index'
-])->middleware('auth');
-Route::resource('purchases', PurchaseController::class)->middleware('auth');
-Route::resource('suppliers', PurchaseController::class)->middleware('auth');
-
+Route::middleware(['auth'])->group(function () {
+    Route::resource('admin', AdminController::class)->only([
+        'index'
+    ]);
+    Route::resource('admin/purchases', PurchaseController::class);
+    Route::resource('admin/suppliers', SupplierController::class);
+    Route::resource('admin/users', UserController::class);
+    Route::resource('admin/products', ProductController::class);
+});
 Route::resource('products', ProductController::class)->only([
     'index'
 ]);
-Route::resource('admin/products', ProductController::class);
 // Route::resource('admin.');
 
 // ('/admin/purchases/index', [AdminController::class, 'purchasesIndex'])->name('admin.purchases');

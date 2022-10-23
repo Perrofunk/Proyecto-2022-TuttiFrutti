@@ -21,6 +21,9 @@ class SaleSeeder extends Seeder
             $detailTotal=0;
             foreach (SaleDetail::where('sale_id', $sale->id)->get() as $saleDetail){
                 $detailTotal += $saleDetail->price*$saleDetail->quantity;
+                $saleDetail->update([
+                    'price'=>$saleDetail->product->price
+                ]);
             };
             $sale->update([
                 'total'=>$detailTotal

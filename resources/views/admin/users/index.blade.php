@@ -2,7 +2,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Proveedores - Index</h1>
+    <h1>Usuarios Registrados</h1>
 @stop
 
 @section('content')

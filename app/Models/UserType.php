@@ -20,14 +20,7 @@ class UserType extends Model
     public function users(){
         return $this->hasMany(User::class);
     }
-    public function getType(){
-        switch ($this->name) {
-            case 'admin':return Admin::where('user_id', '=', $this->id)->first();
-            case 'employee':return Employee::where('user_id', '=', $this->id)->first();
-            case 'client':return Client::where('user_id', '=', $this->id)->first();
-            default:'parece que hice cagada en algun lado che. Anda a saber donde';
-        }
-    }
+    
     public function allOfSameType(){
         switch ($this->name) {
             case 'admin':return Admin::all();

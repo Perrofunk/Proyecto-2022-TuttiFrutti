@@ -46,9 +46,9 @@
             </form>
         </div>
 
-
         <div x-transition x-show.important="card" class="row row-cols-2 row-cols-md-4">
             @foreach ($purchases as $purchase)
+            
                 <x-compra-card :purchase="$purchase" />
             @endforeach
         </div>

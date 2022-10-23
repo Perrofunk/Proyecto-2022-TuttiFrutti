@@ -15,9 +15,10 @@ class ProductController extends Controller
     //Mostrar todos los Productos
     public function index(){
         $products = Product::oldest('id')->filter(request(['category_id', 'search']))->paginate('8');
-        
-        if (!is_null(auth()->user())) {
-            if (auth()->user()->user_type==1){
+        $user = auth()->user();
+
+        if (!is_null($user)) {
+            if ($user->user_type==1){
                 return view('admin.products.index', [
                     'products' => $products
                 ]);

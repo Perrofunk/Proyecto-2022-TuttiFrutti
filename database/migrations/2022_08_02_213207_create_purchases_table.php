@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('fecha');
+            $table->dateTime('date');
             $table->integer('total');
             $table->foreignId('supplier_id')->constrained()->onDelete('cascade');
             $table->timestamps();

@@ -63,8 +63,8 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>TuttiFrutti</b>',
+    'logo_img' => '/img/logo.jpeg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,9 +86,9 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => '/img/logo.jpeg',
             'alt' => 'Auth Logo',
-            'class' => '',
+            'class' => 'rounded-circle',
             'width' => 50,
             'height' => 50,
         ],
@@ -109,11 +109,12 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => '/img/logo.jpeg',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
+            'class' => 'rounded-circle',
+            'width' => 120,
+            'height' => 120,
         ],
     ],
 
@@ -253,7 +254,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -321,7 +322,9 @@ return [
         [   'text' => 'Dashboard',
             'submenu' =>[   ['text'=>'Index', 'url'=>'admin'],
                             ['text'=>'Productos', 'url'=>'admin/products'],
-                            ['text'=>'Compras', 'url'=>'admin/purchases']]
+                            ['text'=>'Compras', 'url'=>'admin/purchases'],
+                            ['text'=>'Proveedores', 'url'=>'admin/suppliers']
+                            ]
         ],
         ['header' => 'account_settings'],
         [

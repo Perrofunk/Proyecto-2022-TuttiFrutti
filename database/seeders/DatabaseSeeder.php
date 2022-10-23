@@ -77,11 +77,13 @@ class DatabaseSeeder extends Seeder
             $detailTotal=0;
             foreach ($purchaseDetails as $purchaseDetail){
 
-                $price = $purchaseDetail->costo_unitario;
-
-                $quantity = $purchaseDetail->cantidad;
+                $price = $purchaseDetail->product->price;
+                $quantity = $purchaseDetail->quantity;
 
                 $detailTotal += $price*$quantity;
+                $purchaseDetail->update([
+                    'price'=>$purchaseDetail->product->price
+                ]);
             };
             $purchase->update([
                 'total'=> $detailTotal

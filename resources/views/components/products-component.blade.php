@@ -8,12 +8,18 @@
 
     En este caso decimos que, (importante prestar atencion a los simbolos) 'products' es igual a $products (variable que desde el controller pasamos a la vista, y que contiene la coleccion de datos de la Base de datos).
     --}}
-@props(['products'])
+    @props(['products', 'variable' => 'false'])
 @php
+    
+    use Illuminate\Support\Facades\URL;
     use Illuminate\Support\Facades\Route;
     $prefix = Route::current()->action['prefix'];
     $count = 0;
-@endphp
+    
+    @endphp
+    
+    
+    
 <!--
     Ahora que ya tenemos $products en este archivo (usando props, lo pasamos desde la vista [que a su vez se pasa desde el controller] hasta aca), podemos trabajar con esta variable. 
 
@@ -73,7 +79,12 @@
     <p class="card-text text-black"><strong>${{$product->price}}</strong></p>
 
     </div>
-    
+    @if ($variable === true)
+        <div class="btn-group-vertical">
+            <button class="btn rounded-0 btn-outline-primary">Modificar</button>
+            <button class="btn rounded-0 btn-danger">Borrar</button>
+        </div>
+    @endif
 </x-card-component>
 @endforeach
 @if ($count == 1)
