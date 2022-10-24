@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -19,7 +20,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
         'email',
+        'user_type',
         'password',
     ];
 
@@ -42,7 +45,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     //relacion de uno a muchos
-    public function posts(){
-        return $this->hasMany(Post::class);
+    public function sales(){
+        return $this->hasMany(Sale::class);
+    }
+    
+    public function userType(){
+        return $this->belongsTo(UserType::class, 'user_type');
+    }
+    public function getType(){
+        switch ($this->user_type) {
+            case '1':return Admin::where('user_id', '=', $this->id)->first();
+            case '2':return Employee::where('user_id', '=', $this->id)->first();
+            case '3':return Client::where('user_id', '=', $this->id)->first();
+            default:'parece que hice cagada en algun lado che. Anda a saber donde';
+        }
+    }
+    public function client(){
+        return $this->hasOne(Client::class);
+    }
+    public function employee(){
+        return $this->hasOne(Employee::class);
+    }
+    public function admin(){
+        return $this->hasOne(Admin::class);
     }
 }
