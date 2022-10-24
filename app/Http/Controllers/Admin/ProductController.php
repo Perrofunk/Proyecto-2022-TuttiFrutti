@@ -15,14 +15,20 @@ class ProductController extends Controller
     //Mostrar todos los Productos
     public function index(){
        
-        if (request()->input('orderBy') != "") {
-            $test = request()->input('orderBy');
-            $products = Product::orderBy($test)->filter(request(['category_id', 'search']))->paginate('8');
+        
+        if (request()->input('orderBy') != ""){
+            $query = request()->input('orderBy');
+        }else{
+            $query = 'id';
+        }
+            if (request()->input('order') === 'desc') {
+                $products = Product::orderBy($query, 'desc')->filter(request(['category_id', 'search']))->paginate('8');
+            }
+            else {
+                $products = Product::orderBy($query)->filter(request(['category_id', 'search']))->paginate('8');
+            }
             
-        }
-        else {
-            $products = Product::oldest('id')->filter(request(['category_id', 'search']))->paginate('8');
-        }
+        
         $user = auth()->user();
         if (!is_null($user)) {
             if ($user->user_type==1){

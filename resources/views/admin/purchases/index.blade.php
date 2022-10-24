@@ -17,12 +17,85 @@
 
     {{-- Main --}}
     {{-- style="display: flex; flex-wrap:wrap; justify-content:space-evenly; align-items:flex-start" --}}
+
+
+
+    {{-- Filtros --}}
     <div x-data="{ card: $persist(true), table: $persist(false) }">
-        <h2 style="display: flex; justify-content:space-evenly">
-            <a role="button" class="btn btn-primary w-25 mt-3" href="create">
-                Registrar Nueva Compra
-            </a>
-        </h2>
+        <div class="row">
+            <div class="col">
+                <p class="text-secondary">
+                    Mostrando {{$purchases->count()}} resultados.
+                </p>
+            </div>
+            <div class="col ">
+                    <h2 class="" style="display: flex; justify-content:space-evenly">
+                    <a role="button" class="btn btn-primary mt-3" href="{{route('products.create')}}">
+                        Registrar Compra
+                    </a>
+                </h2>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+
+         <div class="row mb-2">
+        
+<form class="" method="" action="">
+    @csrf
+    <legend>Filtros</legend>
+    <div class="input-group-text">
+        <label class="form-label" for="form1"></label>
+        <input type="text" name="search" id="form1" class="" />
+        <button class="btn btn-outline-primary border-0 rounded-0" type="submit">Search</button>
+      </div>
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Proveedor</label>
+        <select name="supplier_id" class="form-select" id="inputGroupSelect01">
+          <option aria-placeholder="Seleccionar..." value="">
+          Seleccionar...
+           </option>
+           @foreach (App\Models\Supplier::all() as $supplier)    
+            <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+           @endforeach
+        </select>
+      </div>
+    <div class="input-group">
+        <label class="input-group-text" for="inputGroupSelect02">Ordenar por</label>
+        <select name="orderBy" class="form-select" id="inputGroupSelect02">
+          <option aria-placeholder="Seleccionar..." value="">Seleccionar...</option>
+          <option value="id">ID</option>
+          <option value="date">Fecha</option>
+          <option value="total">Total</option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-check">
+            <input class="form-check-input" value="asc" type="radio" name="order" id="flexRadioDefault1" checked>
+            <label class="form-check-label" for="flexRadioDefault1">
+              Ascendente
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" value="desc" type="radio" name="order" id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Descendente
+            </label>
+          </div>
+        </div>
+        <div class="col d-flex align-items-center">
+            <button class="btn btn-primary" type="submit">Aplicar</button>
+          </div>
+          <div class="col">
+          </div>
+            </div>
+  </form>
+
+
+
+
+
 
         <div class="d-flex flex-column-reverse">
         <div class="btn-group" role="group" aria-label="Button group">
@@ -33,17 +106,6 @@
                 Vista De Tabla
             </button>
         </div>
-            <form class="input-group flex-row align-items-center" action="/">
-                
-                <div class="form-outline">
-                  <input type="text" name="search" id="form1" class="" />
-                  <label class="form-label" for="form1"></label>
-                </div>
-                
-                <div>
-                    <button class="btn rounded-0 btn-dark" type="submit">Search</button>
-                </div>
-            </form>
         </div>
 
         <div x-transition x-show.important="card" class="row row-cols-2 row-cols-md-4">
@@ -78,7 +140,8 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 @stop
 
 @section('js')

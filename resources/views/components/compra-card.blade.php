@@ -10,10 +10,10 @@
                 <p class="text-dark text-bold">{{ $purchase->total }}</p>
             </li>
             <li class="list-group-item text-center text-secondary">Fecha y hora: 
-                <p class="text-dark text-bold">{{ $purchase->fecha }}</p>
+                <p class="text-dark text-bold">{{ $purchase->date }}</p>
             </li>
             <li class="list-group-item text-center text-secondary">Proveedor: 
-                <p class="text-dark text-bold"><a class=" text-decoration-none" href="#">{{ $purchase->supplier->where('id', $purchase->supplier_id)->first()->nombre }}</a></p>
+                <p class="text-dark text-bold"><a class=" text-decoration-none" href="#">{{ $purchase->supplier->name }}</a></p>
             </li>
           </ul>
     </div>

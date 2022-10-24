@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 class PurchaseController extends Controller
 {
     public function index(){
+        // $purchases = 
+
         return view('admin.purchases.index', [
             'purchases' => Purchase::paginate('12')
         ]);
