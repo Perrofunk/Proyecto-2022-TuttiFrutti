@@ -31,8 +31,6 @@ Auth::routes();
 //TuttiFrutti.com/products
 
 //TuttiFrutti.com/products/Manzana
-Route::get('/products/{product}', [ProductController::class, 'show']);
-
 
 
 //TuttiFrutti.com/products/Home
@@ -53,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('admin/products', ProductController::class);
 });
 Route::resource('products', ProductController::class)->only([
-    'index'
+    'index', 'show'
 ]);
 // Route::resource('admin.');
 
@@ -67,7 +65,6 @@ Route::resource('products', ProductController::class)->only([
 
 // Route::get('/admin/products/index', [AdminController::class, 'productsIndex']);
 
-Route::post('/', [ProductController::class, 'store']);
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

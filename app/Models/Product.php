@@ -22,6 +22,7 @@ class Product extends Model
     
     //Filtrar por busqueda y por categoria
     public function scopeFilter($query, array $filters){
+        
         //Filtra por id de categoria, se llama cuando se apretan los botones en las vistas
         if($filters['category_id'] ?? false){
             $query->where('category_id', 'like', '%' . request('category_id') . '%');

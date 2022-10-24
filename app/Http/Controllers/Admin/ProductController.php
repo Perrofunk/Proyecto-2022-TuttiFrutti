@@ -14,9 +14,16 @@ class ProductController extends Controller
 {
     //Mostrar todos los Productos
     public function index(){
-        $products = Product::oldest('id')->filter(request(['category_id', 'search']))->paginate('8');
+       
+        if (request()->input('orderBy') != "") {
+            $test = request()->input('orderBy');
+            $products = Product::orderBy($test)->filter(request(['category_id', 'search']))->paginate('8');
+            
+        }
+        else {
+            $products = Product::oldest('id')->filter(request(['category_id', 'search']))->paginate('8');
+        }
         $user = auth()->user();
-
         if (!is_null($user)) {
             if ($user->user_type==1){
                 return view('admin.products.index', [
@@ -53,6 +60,9 @@ class ProductController extends Controller
         ]);
         Product::create($formFields);
         return redirect('/');
+    }
+    public function filter(Request $request){
+        dd($request);
     }
 }
 

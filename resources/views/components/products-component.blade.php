@@ -73,9 +73,14 @@
     <div class="card-body">
     
         <a class=" text-decoration-none" href="{{$prefix}}/products/{{$product->id}}">
-            <h4 class="text-center card-title">{{$product->name}}</h4>
-            <h6 class="card-subtitle mb-2 {{$textColor}}">{{$product->category->name}}</h6>
+            @if ($variable === true)
+        <h3 class="text-center">ID: {{$product->id}}</h3>
+    @endif
+        <h4 class="text-center card-title">{{$product->name}}</h4>
         </a>
+        <a class="text-decoration-none" href="?category_id={{$product->category_id}}">   
+            <h6 class="card-subtitle mb-2 {{$textColor}}">{{$product->category->name}}</h6>
+        </a> 
     <p class="card-text text-black"><strong>${{$product->price}}</strong></p>
 
     </div>
