@@ -132,8 +132,8 @@
                     <td>{{$product->price}}</td>
                     <td><a href="?category_id={{$product->category_id}}">{{$product->category->name}}</a></td>
                     <td class="d-flex justify-content-end"><div class="btn-group">
-                        <button class="btn rounded-0  btn-outline-info">Modificar</button>
-                        <button class="btn rounded-0  btn-danger">Borrar</button>
+                        <a class="btn rounded-0  btn-outline-warning" href="{{route('products.edit', ['product'=>$product])}}">Modificar</a>
+                        <a class="btn rounded-0  btn-danger" href="{{route('products.destroy', ['product'=>$product])}}">Borrar</a>
                     </div></td>
                 </tr>
                 @endforeach
