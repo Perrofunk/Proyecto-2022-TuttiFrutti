@@ -15,9 +15,20 @@ class SupplierController extends Controller
      */
     public function index()
     {
+        if (request()->input('orderBy') != ""){
+            $query = request()->input('orderBy');
+        }else{
+            $query = 'id';
+        }
+            if (request()->input('order') === 'desc') {
+                $suppliers = Supplier::orderBy($query, 'desc')->filter(request(['search']))->paginate('12');
+            }
+            else {
+                $suppliers = Supplier::orderBy($query)->filter(request(['search']))->paginate('12');
+            }
         
         return view('admin.suppliers.index', [
-            'suppliers'=>Supplier::all()
+            'suppliers'=>$suppliers
         ]);
     }
 
