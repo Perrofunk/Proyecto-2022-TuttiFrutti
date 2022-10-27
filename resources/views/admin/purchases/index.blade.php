@@ -18,12 +18,12 @@
         @php
             $modelos = App\Models\Supplier::all();
         @endphp
-    <x-crud-filters :variable="$purchases" :relacion_modelos="$modelos">
-        <a role="button" class="btn btn-primary mt-3" href="{{route('products.create')}}">
+    <x-crud.filters :variable="$purchases" :relacion_modelos="$modelos">
+        <a role="button" class="btn btn-primary mt-3" href="{{route('purchases.create')}}">
             Registrar Compra
-        </a></x-crud-filters>
+        </a></x-crud.filters>
 
-    <x-crud-views :variable="$purchases" relacion="supplier" ruta="purchases"></x-crud-views>
+    <x-crud.views :variable="$purchases" relacion="supplier" ruta="purchases"></x-crud.views>
 
 @stop
 

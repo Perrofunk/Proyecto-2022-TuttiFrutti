@@ -10,12 +10,12 @@
     <script defer src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
     <h3>Registro de Proveedores</h3>
-    <x-crud-filters :variable="$suppliers" >
+    <x-crud.filters :variable="$suppliers" >
         <a role="button" class="btn btn-primary mt-3" href="{{route('suppliers.create')}}">
             Registrar Proveedor
-        </a></x-crud-filters>
+        </a></x-crud.filters>
 
-    <x-crud-views :variable="$suppliers" ruta="suppliers"></x-crud-views>
+    <x-crud.views :variable="$suppliers" ruta="suppliers"></x-crud.views>
 @stop
 
 @section('css')

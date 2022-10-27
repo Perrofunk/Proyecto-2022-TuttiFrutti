@@ -42,8 +42,18 @@ $ruta_edit = $ruta . ".edit";
             <a class="btn btn-outline-primary" href="{{route($ruta_edit, [$ruta_singular=>$item])}}">Modificar</a>
 
         </div>
-            <a class="btn btn-danger" href="{{route($ruta_destroy, [$ruta_singular=>$item])}}">Borrar Registro</a>
+        <button onclick="if(confirm('Desea eliminar el elemento [{{$item->id}}] de la tabla [{{__($ruta)}}]')){
+                event.preventDefault();
+                document.getElementById('delete-card').action='{{route($ruta_destroy, [$ruta_singular=>$item])}}';
+                document.getElementById('delete-card').submit();
+                }else{event.preventDefault();}" type="submit" class="btn btn-danger">Borrar Registro
+        </button>
+        
     </div>
-
+    
 </x-card-component>
 @endforeach
+<form id="delete-card" class="d-none" action="" method="POST">
+    @csrf
+    @method('DELETE')
+</form>

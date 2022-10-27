@@ -12,12 +12,12 @@
 
     <div x-transition x-show.important="card" class="row row-cols-2 row-cols-md-4">
         
-            <x-crud-card :variable="$variable" :relacion="$relacion" :ruta="$ruta" />
+            <x-crud.card :variable="$variable" :relacion="$relacion" :ruta="$ruta" />
         
     </div>
     <div x-transition x-show.important="table">
         <table class="table table-striped table-bordered text-center">
-            <x-crud-table :variable="$variable" :relacion="$relacion" :ruta="$ruta" />
+            <x-crud.table :variable="$variable" :relacion="$relacion" :ruta="$ruta" />
         </table>
     </div>
 </div>

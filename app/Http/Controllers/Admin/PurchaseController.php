@@ -28,7 +28,10 @@ class PurchaseController extends Controller
     }
     public function create()
     {
-        return view('admin.purchases.create');
+        $purchases = Purchase::all();
+        return view('admin.purchases.create', [
+            'purchases' => $purchases
+        ]);
     }
     public function store(Request $request)
     {

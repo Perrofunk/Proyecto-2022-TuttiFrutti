@@ -8,6 +8,10 @@
     "email": "Email",
     "contact": "Contacto",
     "address": "Direccion",
-    "phone": "Telefono"
+    "phone": "Telefono",
+    "purchases": "Compras",
+    "price": "Precio",
+    "description": "Descripcion",
+    "category_id": "Categoria"
     
 }

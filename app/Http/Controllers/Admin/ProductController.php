@@ -56,7 +56,10 @@ class ProductController extends Controller
     }
     //Mostrar Creacion de Producto
     public function create(){
-        return view('admin.products.create');
+        $products = Product::all();
+        return view('admin.products.create', [
+            'products' => $products
+        ]);
     }
     //Guarda datos de Creacion
     public function store(Request $request){

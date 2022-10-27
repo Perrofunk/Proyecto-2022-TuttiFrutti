@@ -39,9 +39,18 @@ use Illuminate\Database\Eloquent\Model;
 
       <td class="d-flex justify-content-end"><div class="btn-group">
         <a class="text-decoration-none btn rounded-0  btn-outline-warning" href="{{route($ruta_edit, [$ruta_singular=>$item])}}">Modificar</a>
-        <a class="btn rounded-0  btn-danger text-decoration-none" href="{{route($ruta_destroy, [$ruta_singular=>$item])}}">Borrar</a>
+        <button onclick="if(confirm('Esta a punto de eliminar el elemento [{{$item->id}}] de la tabla [{{__($ruta)}}]')){
+          event.preventDefault();
+          document.getElementById('delete-table').action='{{route($ruta_destroy, [$ruta_singular=>$item])}}';
+          document.getElementById('delete-table').submit();
+          }else{event.preventDefault();}" type="submit" class="btn rounded-0 btn-danger"">Borrar</button>
       </div></td>
     </tr>
-  @endforeach
+
+    @endforeach
+    <form id="delete-table" class="d-none" action="" method="POST">
+      @csrf
+      @method('DELETE')
+    </form>
 </tbody>
       
