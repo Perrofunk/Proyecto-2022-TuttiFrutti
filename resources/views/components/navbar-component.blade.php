@@ -1,5 +1,5 @@
 @props(['action'])
-<div class="bg-dark d-flex flex-column align-top justify-content-center navbar-light">
+<div class="bg-dark d-flex flex-column align-top justify-content-center navbar-dark">
 
     <div class="d-flex shadow-sm">
         @if (Auth::check())
@@ -8,7 +8,7 @@
             <a href="/" class=" text-decoration-none d-flex flex-row align-items-center"><img class="ms-4" src="/img/logo2.png" height="30px" width="30px" alt=""></a>
         @endif
         
-        <x-partials.search :action="$action"/>
+        <x-partials.search  :action="$action"/>
         <ul class="navbar-nav ms-auto pe-5 d-flex flex-row gap-4">
 
 

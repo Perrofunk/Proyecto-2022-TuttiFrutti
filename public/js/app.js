@@ -1016,6 +1016,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 
 /***/ }),
 
+/***/ "./resources/css/app.css":
+/*!*******************************!*\
+  !*** ./resources/css/app.css ***!
+  \*******************************/
+/***/ (() => {
+
+throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/css-loader/dist/cjs.js):\nError: Can't resolve 'tailwind/base' in 'C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\resources\\css'\n    at finishWithoutResolve (C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\enhanced-resolve\\lib\\Resolver.js:309:18)\n    at C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\enhanced-resolve\\lib\\Resolver.js:386:15\n    at C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\enhanced-resolve\\lib\\Resolver.js:435:5\n    at eval (eval at create (C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:16:1)\n    at C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\enhanced-resolve\\lib\\Resolver.js:435:5\n    at eval (eval at create (C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:27:1)\n    at C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\enhanced-resolve\\lib\\DescriptionFilePlugin.js:87:43\n    at C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\enhanced-resolve\\lib\\Resolver.js:435:5\n    at eval (eval at create (C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\enhanced-resolve\\lib\\Resolver.js:435:5\n    at processResult (C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\webpack\\lib\\NormalModule.js:758:19)\n    at C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\webpack\\lib\\NormalModule.js:860:5\n    at C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\loader-runner\\lib\\LoaderRunner.js:400:11\n    at C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\loader-runner\\lib\\LoaderRunner.js:252:18\n    at context.callback (C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\loader-runner\\lib\\LoaderRunner.js:124:13)\n    at Object.loader (C:\\Users\\Angelica\\Documents\\GitHub\\proyecto-2022-verduleria-intentofinal\\node_modules\\css-loader\\dist\\index.js:155:5)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)");
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -1200,7 +1210,8 @@ eval("// shim for using process in browser\nvar process = module.exports = {};\n
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
