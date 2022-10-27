@@ -1,0 +1,17 @@
+{
+    "id": "ID",
+    "supplier": "Proveedor",
+    "date": "Fecha",
+    "total": "Total",
+    "supplier_id": "Proveedor",
+    "name": "Nombre",
+    "email": "Email",
+    "contact": "Contacto",
+    "address": "Direccion",
+    "phone": "Telefono",
+    "purchases": "Compras",
+    "price": "Precio",
+    "description": "Descripcion",
+    "category_id": "Categoria"
+    
+}

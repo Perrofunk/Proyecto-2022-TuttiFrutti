@@ -15,9 +15,20 @@ class SupplierController extends Controller
      */
     public function index()
     {
+        if (request()->input('orderBy') != ""){
+            $query = request()->input('orderBy');
+        }else{
+            $query = 'id';
+        }
+            if (request()->input('order') === 'desc') {
+                $suppliers = Supplier::orderBy($query, 'desc')->filter(request(['search']))->paginate('12');
+            }
+            else {
+                $suppliers = Supplier::orderBy($query)->filter(request(['search']))->paginate('12');
+            }
         
         return view('admin.suppliers.index', [
-            'suppliers'=>Supplier::all()
+            'suppliers'=>$suppliers
         ]);
     }
 
@@ -28,7 +39,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.suppliers.create');
     }
 
     /**
@@ -48,9 +59,11 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Supplier $supplier)
     {
-        //
+        return view('admin.suppliers.show', [
+            'supplier' => $supplier
+        ]);
     }
 
     /**
@@ -59,9 +72,11 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Supplier $supplier)
     {
-        //
+        return view('admin.suppliers.edit', [
+            'supplier'=>$supplier
+        ]);
     }
 
     /**
@@ -82,8 +97,8 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Supplier $supplier)
     {
-        //
+        $supplier->delete();
     }
 }

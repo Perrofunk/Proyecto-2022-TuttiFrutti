@@ -7,6 +7,9 @@
     @stop
 
     @section('content')
+
+
+    {{-- Filtros --}}
     <x-partials.alpine />
     <div x-data="{ card: $persist(true), table: $persist(false) }">
         <div class="row">
@@ -42,12 +45,12 @@
           <option aria-placeholder="Seleccionar..." value="">
           Seleccionar...
            </option>
-          <option value="1">Frutas</option>
-          <option value="2">Verduras</option>
-          <option value="3">Otro</option>
+           @foreach (App\Models\Category::all() as $category)    
+           <option value="{{$category->id}}">{{$category->name}}</option>
+          @endforeach
         </select>
       </div>
-    <div class="input-group mb-3">
+    <div class="input-group">
         <label class="input-group-text" for="inputGroupSelect02">Ordenar por</label>
         <select name="orderBy" class="form-select" id="inputGroupSelect02">
           <option aria-placeholder="Seleccionar..." value="">Seleccionar...</option>
@@ -56,9 +59,31 @@
           <option value="price">Precio</option>
         </select>
       </div>
-      <button type="submit">asd</button>
-      
+      <div class="row">
+    <div class="col">
+      <div class="form-check">
+        <input class="form-check-input" value="asc" type="radio" name="order" id="flexRadioDefault1" checked>
+        <label class="form-check-label" for="flexRadioDefault1">
+          Ascendente
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" value="desc" type="radio" name="order" id="flexRadioDefault2">
+        <label class="form-check-label" for="flexRadioDefault2">
+          Descendente
+        </label>
+      </div>
+    </div>
+    <div class="col d-flex align-items-center">
+      <button class="btn btn-primary" type="submit">Aplicar</button>
+    </div>
+    <div class="col">
+    </div>
+      </div>
   </form>
+
+
+
   
         {{-- <div class="col text-center">
             <span class=" text-secondary">Filtrar por Categoria</span>
@@ -107,8 +132,8 @@
                     <td>{{$product->price}}</td>
                     <td><a href="?category_id={{$product->category_id}}">{{$product->category->name}}</a></td>
                     <td class="d-flex justify-content-end"><div class="btn-group">
-                        <button class="btn rounded-0  btn-outline-info">Modificar</button>
-                        <button class="btn rounded-0  btn-danger">Borrar</button>
+                        <a class="btn rounded-0  btn-outline-warning" href="{{route('products.edit', ['product'=>$product])}}">Modificar</a>
+                        <a class="btn rounded-0  btn-danger" href="{{route('products.destroy', ['product'=>$product])}}">Borrar</a>
                     </div></td>
                 </tr>
                 @endforeach
@@ -119,7 +144,7 @@
     @stop
 
     @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 @stop
 

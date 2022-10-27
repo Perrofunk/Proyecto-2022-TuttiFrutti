@@ -41,6 +41,7 @@
                         <a href="?category_id=1"><button class="rounded-0 btn btn-danger ">Frutas</button></a>
                         <a href="?category_id=2"><button class="rounded-0 btn btn-success">Verduras</button></a>
                         <a href="?category_id=3"><button class="rounded-0 btn btn-primary">Otro</button></a>
+                        
                         </div>
                     </div> 
                 </div> --}}
@@ -52,6 +53,7 @@
                         </h3>
                         </div>
                     @else
+                    
                     <div id="product-list" class="row row-cols-2 row-cols-md-6 g-2 justify-content-center ">
                         
                         <x-products-component :products="$products" />
