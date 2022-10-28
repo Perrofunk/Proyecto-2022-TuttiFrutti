@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 use function PHPUnit\Framework\isNull;
 
@@ -63,12 +65,24 @@ class ProductController extends Controller
     }
     //Guarda datos de Creacion
     public function store(Request $request){
+        
         $formFields = $request->validate([
             'name'=>'required',
+            'description'=>'required',
+            'price'=>'required',
             'category_id'=>'required'
         ]);
-        Product::create($formFields);
-        return redirect('/');
+        
+        $product = Product::create($formFields);
+        
+        if ($request->image) {
+            $url = Storage::put('public/image', $request->image);
+            $product->image()->create([
+                'url'=>$url
+            ]);
+        }
+        
+        return redirect()->route('products.index');
     }
     public function filter(Request $request){
         dd($request);
