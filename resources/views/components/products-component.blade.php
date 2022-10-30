@@ -68,7 +68,7 @@
 @endphp
 
 {{-- Cuando el foreach recorre la coleccion y guarda el objeto individual en la variable $product se hace posible acceder a sus propiedades, como 'id' y 'name'. --}}
-    <a href="{{$prefix}}/products/{{$product->id}}"><img src="/{{ $product->image->url}}"  class="card-img-top" alt=""></a>
+    <a href="{{$prefix}}/products/{{$product->id}}"><img src="/{{ $product->image->url}}"  class="card-img-top" alt="" style="aspect-ratio:1/1;"></a>
     
     <div class="card-body">
     
@@ -87,7 +87,11 @@
     @if ($variable === true)
         <div class="btn-group-vertical">
             <button class="btn rounded-0 btn-outline-primary">Modificar</button>
-            <button class="btn rounded-0 btn-danger">Borrar</button>
+            <button class="btn rounded-0 btn-danger" onclick="if(confirm('Desea eliminar el elemento [{{$product->id}}] de la tabla [Productos]')){
+                event.preventDefault();
+                document.getElementById('delete-card').action='{{route('products.destroy', ['product'=>$product])}}';
+                document.getElementById('delete-card').submit();
+                }else{event.preventDefault();}" type="submit" class="btn btn-danger">Borrar Registro</button>
         </div>
     @endif
 </x-card-component>
@@ -96,4 +100,10 @@
 <script>
     document.getElementById('product-list').firstElementChild.classList.add('w-50');
 </script>
+@endif
+@if ($variable === true)    
+<form id="delete-card" class="d-none" action="" method="POST">
+    @csrf
+    @method('DELETE')
+</form>
 @endif

@@ -39,7 +39,10 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('admin.suppliers.create');
+        $suppliers = Supplier::all();
+        return view('admin.suppliers.create', [
+            'suppliers' => $suppliers
+        ]);
     }
 
     /**

@@ -12,9 +12,10 @@
 @php
     use App\Models\Supplier;
     $supplier=Supplier::all();
+    $details = App\Models\PurchaseDetail::all();
 @endphp
 <div class="">
-<x-crud.forms type="create" :variable="$purchases" ruta="purchases" :relacion_modelos="$supplier"></x-crud.forms>
+<x-crud.forms  :relacion_child_modelos="$details"  type="create" :variable="$purchases" ruta="purchases" :relacion_modelos="$supplier"></x-crud.forms>
 </div>
   
   
