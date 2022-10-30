@@ -26,6 +26,6 @@ class CategorySeeder extends Seeder
         Category::create([
             'name'=>'Otro',
             'description'=>'Se describe la categoria Otro.'
-        ]);
+        ],['name' => 'test', 'description'=>'test :)']);
     }
 }

@@ -5,11 +5,16 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Compra;
 use App\Models\DetalleCompra;
+use App\Models\Image;
+use App\Models\PaymentType;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Purchase;
+use App\Models\PurchaseDetail;
 use App\Models\Supplier;
 use App\Models\Tag;
 use App\Models\User;
+use Database\Factories\ImageFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
@@ -24,57 +29,64 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // Storage::deleteDirectory('public/storage');
+        // Storage::makeDirectory('public/imagenes');
+
         // Storage::deleteDirectory('public/imagenes');
         // Storage::makeDirectory('public/imagenes');
 
-        Storage::deleteDirectory('public/imagenes');
-        Storage::makeDirectory('public/imagenes');
+        //Zona / Zone
+        $this->call(ZoneSeeder::class);
+        //Direccion / Address
+        $this->call(AddressSeeder::class);
 
-
+        $this->call(UserTypeSeeder::class);
 
         $this->call(UserSeeder::class);
 
         $this->call(CategorySeeder::class);
         
-        Tag::factory(8)->create();
-        $this->call(PostSeeder::class);
         $this->call(ProductSeeder::class);
 
 
+        // $products = Product::all();
+        foreach (Product::all() as $product) {
+            Image::factory(1)->create([
+                'imageable_id'=>$product->id,
+                'imageable_type'=>Product::class
+            ]);
+        }
 
-        //Proveedores
-        $suppliers = Supplier::factory(3)->create();
+
+        //Proveedores / Suppliers
+        $suppliers = Supplier::factory(5)->create();
         foreach ($suppliers as $supplier) {
-            Compra::factory(3)->create([
+            Purchase::factory(3)->create([
                 'supplier_id'=>$supplier->id
             ]);
         }
     
-        //Compras, pertenecen a un proveedor
-        $compras=Compra::all();
-        foreach ($compras as $compra){
-            DetalleCompra::factory(3)->state(new Sequence(
-                fn ($sequence) => ['compra_id'=>$compra->id,
+        //Compras / Purchases, pertenecen a un proveedor
+        
+        foreach (Purchase::all() as $purchase){
+            PurchaseDetail::factory(3)->state(new Sequence(
+                fn ($sequence) => ['purchase_id'=>$purchase->id,
                 'product_id'=>Product::all()->random(1)->first()->id]
-                // ['compra_id'=>$compra->id,
-                // 'product_id'=>Product::all()->random(3)->first()->id],
-                // ['compra_id'=>$compra->id,
-                // 'product_id'=>Product::all()->random(3)->first()->id],
-                // ['compra_id'=>$compra->id,
-                // 'product_id'=>Product::all()->random(3)->first()->id]
                 ))->create();
-            $detalleCompras = DetalleCompra::where('compra_id', $compra->id)->get();
-            $totalDetalle=0;
-            foreach ($detalleCompras as $detalleCompra){
+            $purchaseDetails = PurchaseDetail::where('purchase_id', $purchase->id)->get();
+            $detailTotal=0;
+            foreach ($purchaseDetails as $purchaseDetail){
 
-                $compraIndividual = $detalleCompra->costo_unitario;
+                $price = $purchaseDetail->product->price;
+                $quantity = $purchaseDetail->quantity;
 
-                $cantidadIndividual = $detalleCompra->cantidad;
-
-                $totalDetalle += $compraIndividual*$cantidadIndividual;
+                $detailTotal += $price*$quantity;
+                $purchaseDetail->update([
+                    'price'=>$purchaseDetail->product->price
+                ]);
             };
-            $compra->update([
-                'total'=> $totalDetalle
+            $purchase->update([
+                'total'=> $detailTotal
             ]);
         
         }
@@ -82,5 +94,24 @@ class DatabaseSeeder extends Seeder
         //     'supplier_id'=>rand(1, 3)
         // ]);
         
+        //Tipos de Usuario
+            //Cliente / Clients
+                //Depende de:
+                    
+                        
+            //             $this->call(ClientSeeder::class);
+            // //Empleado / Employee
+            //     $this->call(EmployeeSeeder::class);
+            // //Admin
+            //     $this->call(AdminSeeder::class);
+
+            
+            //Ventas
+        
+            //Tipo de Pago / Payment_type
+            $this->call(PaymentTypeSeeder::class);
+
+            $this->call(SaleSeeder::class);
+
     }
 }
