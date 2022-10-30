@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <img src="/img/logo2.png" width="300" height="300">
-                <p>tu verduleria de confianza
+                <p class=" text-xl">Tu verduleria de confianza
                 </p>  
 
                 <style>
@@ -75,7 +75,7 @@ img {vertical-align: middle;}
 /* Fading animation */
 .fade {
   animation-name: fade;
-  animation-duration: 1.5s;
+  animation-duration: 4s;
 }
 
 @keyframes fade {
@@ -137,7 +137,7 @@ function showSlides() {
   }
   slides[slideIndex-1].style.display = "block";  
   dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
+  setTimeout(showSlides, 4000); // Change image every 2 seconds
 }
 </script>
 
