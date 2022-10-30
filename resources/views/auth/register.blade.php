@@ -74,6 +74,84 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="street" class="col-md-4 col-form-label text-md-end">Street</label>
+
+                            <div class="col-md-6">
+                                <input id="street" type="text" class="form-control @error('street') is-invalid @enderror" name="street" autocomplete="new-street">
+
+                                @error('street')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" required autocomplete="new-address">
+
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="department" class="col-md-4 col-form-label text-md-end">{{ __('Department') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="department" type="text" class="form-control @error('department') is-invalid @enderror" name="department" autocomplete="new-department">
+
+                                @error('department')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="zone" class="col-md-4 col-form-label text-md-end">Zone</label>
+
+                            <div class="col-md-6">
+                                <input id="zone" type="text" class="form-control @error('zone') is-invalid @enderror" name="zone" required autocomplete="new-zone">
+
+                                @error('zone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="details" class="col-md-4 col-form-label text-md-end">Details</label>
+                            
+                            <div class="col-md-6">
+                                <input id="details" type="text" class="form-control @error('between_streets') is-invalid @enderror" name="details" autocomplete="new-details">
+
+                                @error('details')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                            <div class="row mb-3">
+                                <label for="between_streets" class="col-md-4 col-form-label text-md-end">Between Streets</label>
+    
+                                <div class="col-md-6">
+                                    <input id="between_streets" type="text" class="form-control @error('between_streets') is-invalid @enderror" name="between_streets" autocomplete="new-between_streets">
+    
+                                    @error('between_streets')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">

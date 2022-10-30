@@ -32,8 +32,13 @@ class DatabaseSeeder extends Seeder
         // Storage::deleteDirectory('public/storage');
         // Storage::makeDirectory('public/imagenes');
 
-        Storage::deleteDirectory('imagenes');
-        Storage::makeDirectory('imagenes');
+        // Storage::deleteDirectory('public/imagenes');
+        // Storage::makeDirectory('public/imagenes');
+
+        //Zona / Zone
+        $this->call(ZoneSeeder::class);
+        //Direccion / Address
+        $this->call(AddressSeeder::class);
 
         $this->call(UserTypeSeeder::class);
 
@@ -72,11 +77,13 @@ class DatabaseSeeder extends Seeder
             $detailTotal=0;
             foreach ($purchaseDetails as $purchaseDetail){
 
-                $price = $purchaseDetail->costo_unitario;
-
-                $quantity = $purchaseDetail->cantidad;
+                $price = $purchaseDetail->product->price;
+                $quantity = $purchaseDetail->quantity;
 
                 $detailTotal += $price*$quantity;
+                $purchaseDetail->update([
+                    'price'=>$purchaseDetail->product->price
+                ]);
             };
             $purchase->update([
                 'total'=> $detailTotal
@@ -90,16 +97,13 @@ class DatabaseSeeder extends Seeder
         //Tipos de Usuario
             //Cliente / Clients
                 //Depende de:
-                    //Zona / Zone
-                    $this->call(ZoneSeeder::class);
-                    //Direccion / Address
-                    $this->call(AddressSeeder::class);
+                    
                         
-                        $this->call(ClientSeeder::class);
-            //Empleado / Employee
-                $this->call(EmployeeSeeder::class);
-            //Admin
-                $this->call(AdminSeeder::class);
+            //             $this->call(ClientSeeder::class);
+            // //Empleado / Employee
+            //     $this->call(EmployeeSeeder::class);
+            // //Admin
+            //     $this->call(AdminSeeder::class);
 
             
             //Ventas

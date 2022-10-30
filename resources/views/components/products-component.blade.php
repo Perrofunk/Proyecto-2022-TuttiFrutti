@@ -8,11 +8,18 @@
 
     En este caso decimos que, (importante prestar atencion a los simbolos) 'products' es igual a $products (variable que desde el controller pasamos a la vista, y que contiene la coleccion de datos de la Base de datos).
     --}}
-@props(['products'])
+    @props(['products', 'variable' => 'false'])
 @php
+    
+    use Illuminate\Support\Facades\URL;
     use Illuminate\Support\Facades\Route;
     $prefix = Route::current()->action['prefix'];
-@endphp
+    $count = 0;
+    
+    @endphp
+    
+    
+    
 <!--
     Ahora que ya tenemos $products en este archivo (usando props, lo pasamos desde la vista [que a su vez se pasa desde el controller] hasta aca), podemos trabajar con esta variable. 
 
@@ -23,6 +30,9 @@
     Ahora utilizando foreach vamos a iterar sobre la coleccion, guardando cada objeto en una variable y ejecutando el codigo para cada objeto individual. Todo el codigo que sigue, desde el foreach hasta el endforeach, se repite para cada objeto de la coleccion.
 -->
 @foreach ($products as $product)
+@php
+    $count += 1;
+@endphp
     {{-- Se utiliza un componente "wrapper" <x-card-component /> para encerrar el codigo en dos divs, uno que le asigna una columna, y otro que le asigna la clase "card" --}}
 <x-card-component>
     
@@ -58,17 +68,42 @@
 @endphp
 
 {{-- Cuando el foreach recorre la coleccion y guarda el objeto individual en la variable $product se hace posible acceder a sus propiedades, como 'id' y 'name'. --}}
-    <a href="{{$prefix}}/products/{{$product['id']}}"><img src="/{{ $product->image->url}}"  class="card-img-top" alt=""></a>
+    <a href="{{$prefix}}/products/{{$product->id}}"><img src="/{{ $product->image->url}}"  class="card-img-top" alt="" style="aspect-ratio:1/1;"></a>
     
     <div class="card-body">
     
-        <a class=" text-decoration-none" href="{{$prefix}}/products/{{$product['id']}}">
-            <h2 class="text-center card-title">{{$product['name']}}</h2>
-            <h6 class="card-subtitle mb-2 {{$textColor}}">{{$category}}</h6>
+        <a class=" text-decoration-none" href="{{$prefix}}/products/{{$product->id}}">
+            @if ($variable === true)
+        <h3 class="text-center">ID: {{$product->id}}</h3>
+    @endif
+        <h4 class="text-center card-title">{{$product->name}}</h4>
         </a>
-    <p class="card-text text-black">{{$product['description']}} Lorem ipsum dolor sit amet consectetur adipisicing elit. At, facilis!</p>
+        <a class="text-decoration-none" href="?category_id={{$product->category_id}}">   
+            <h6 class="card-subtitle mb-2 {{$textColor}}">{{$product->category->name}}</h6>
+        </a> 
+    <p class="card-text text-black"><strong>${{$product->price}}</strong></p>
 
     </div>
-    
+    @if ($variable === true)
+        <div class="btn-group-vertical">
+            <button class="btn rounded-0 btn-outline-primary">Modificar</button>
+            <button class="btn rounded-0 btn-danger" onclick="if(confirm('Desea eliminar el elemento [{{$product->id}}] de la tabla [Productos]')){
+                event.preventDefault();
+                document.getElementById('delete-card').action='{{route('products.destroy', ['product'=>$product])}}';
+                document.getElementById('delete-card').submit();
+                }else{event.preventDefault();}" type="submit" class="btn btn-danger">Borrar Registro</button>
+        </div>
+    @endif
 </x-card-component>
 @endforeach
+@if ($count == 1)
+<script>
+    document.getElementById('product-list').firstElementChild.classList.add('w-50');
+</script>
+@endif
+@if ($variable === true)    
+<form id="delete-card" class="d-none" action="" method="POST">
+    @csrf
+    @method('DELETE')
+</form>
+@endif

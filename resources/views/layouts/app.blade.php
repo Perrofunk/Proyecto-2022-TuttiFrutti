@@ -1,3 +1,4 @@
+@extends('adminlte::master')
 <x-partials.htmlhead />
 <body>
     <div id="app">

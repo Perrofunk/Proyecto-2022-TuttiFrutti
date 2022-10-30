@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class EmployeeController extends Controller
+class UserController extends Controller
 {
     public function index(){
-        ;
-    }
-    public function show(Employee $employee){
-        ;
+        return view('admin.users.index', [
+            'users' => User::all()
+        ]);
     }
 }

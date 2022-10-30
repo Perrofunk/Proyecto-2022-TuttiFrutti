@@ -7,10 +7,15 @@
         @else
             <a href="/" class=" text-decoration-none d-flex flex-row align-items-center"><img class="ms-4" src="/img/logo2.png" height="30px" width="30px" alt=""></a>
         @endif
+        <div class="btn-group ms-4">
+            <button class="btn btn-dark">Productos</button>
+            <button class="btn btn-dark">Productos</button>
+            <button class="btn btn-dark">Productos</button>
+        </div>
         
         <x-partials.search  :action="$action"/>
         <ul class="navbar-nav ms-auto pe-5 d-flex flex-row gap-4">
-
+            
 
             <!-- Authentication Links -->
             @guest
@@ -47,4 +52,4 @@
             @endguest
         </ul>
     </div>
-</div>
+</div> --}}

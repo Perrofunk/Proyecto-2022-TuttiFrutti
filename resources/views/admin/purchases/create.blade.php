@@ -7,16 +7,25 @@
 @stop
 
 @section('content')
-<a role="button" class="btn btn-outline-dark btn-sm" href="/admin">Volver al Dashboard</a>
-<div class="d-flex">
-    <form action="">
-        
-    </form>
+    
+
+@php
+    use App\Models\Supplier;
+    $supplier=Supplier::all();
+    $details = App\Models\PurchaseDetail::all();
+@endphp
+<div class="">
+<x-crud.forms  :relacion_child_modelos="$details"  type="create" :variable="$purchases" ruta="purchases" :relacion_modelos="$supplier"></x-crud.forms>
 </div>
+  
+  
+    
+
 @stop
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
 @stop
 
 @section('js')

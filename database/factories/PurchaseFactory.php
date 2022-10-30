@@ -17,7 +17,7 @@ class PurchaseFactory extends Factory
     public function definition()
     {
         return [
-            'fecha'=>$this->faker->dateTime(),
+            'date'=>$this->faker->dateTime(),
             'total'=>$this->faker->randomNumber()
         ];
     }

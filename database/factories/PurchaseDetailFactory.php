@@ -17,8 +17,8 @@ class PurchaseDetailFactory extends Factory
     public function definition()
     {
         return [
-            'cantidad'=> rand(1, 100),
-            'costo_unitario'=>rand(5, 50)
+            'quantity'=> rand(1, 100),
+            'price'=>rand(5, 50)
         ];
     }
 }

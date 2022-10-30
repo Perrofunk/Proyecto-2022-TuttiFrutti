@@ -24,7 +24,7 @@ class AdminController extends Controller
     //     ]);
     // }
     
-    public function PurchasesCreate(){
-        return view('admin.purchases.create');
+    public function pages(){
+        return view('admin.pages');
     }
 }

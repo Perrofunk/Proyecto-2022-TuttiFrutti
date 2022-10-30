@@ -12,4 +12,9 @@ class Supplier extends Model
     public function purchases(){
         return $this->hasMany(Purchase::class, 'supplier_id');
     }
+    public function scopeFilter($query, array $filters){
+        if($filters['search'] ?? false){
+            $query->where('name', 'like', '%' . request('search') . '%');
+        };
+    }
 }

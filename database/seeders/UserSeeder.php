@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-            User::create([
+            User::factory(1)->hasAdmin(1)->create([
             'name'=>'Rodrigo',
             'surname'=>'Zanabria',
             'email'=>'gatopunk99@gmail.com',
@@ -26,6 +26,15 @@ class UserSeeder extends Seeder
             //'user_type'=>DB::select('select * from user_types where id = :id', ['id'=> 1])[0]->id,
             'password'=>bcrypt('97132468')
         ]);
-        User::factory(10)->create();
+        // User::factory(10)->create();
+        User::factory(2)->hasAdmin(1)->create([
+            'user_type'=>'1'
+        ]);
+        User::factory(5)->hasEmployee(1)->create([
+            'user_type'=>'2'
+        ]);
+        User::factory(15)->hasClient()->create([
+            'user_type'=>'3'
+        ]);
     }
 }

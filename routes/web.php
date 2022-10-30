@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
+use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
@@ -22,28 +24,35 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 //Escucha una ruta ("https://www.TuttiFrutti.com/) y utiliza un Controlador para devolver una vista
-Route::get('/', [IndexController::class, 'index']);
+Auth::routes();
+
+
 
 //TuttiFrutti.com/products
-Route::get('/products', [ProductController::class, 'index']);
 
 //TuttiFrutti.com/products/Manzana
-Route::get('/products/{product}', [ProductController::class, 'show']);
 
-Auth::routes();
 
 //TuttiFrutti.com/products/Home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
 //ADMIN
 
-Route::resource('admin', AdminController::class)->only([
-    'index'
-])->middleware('auth');
-Route::resource('admin/purchases', PurchaseController::class)->middleware('auth');
-Route::resource('admin/products', ProductController::class)->middleware('auth');
 
+Route::resource('', IndexController::class)->only([
+    'index'
+]);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('admin', AdminController::class)->only([
+        'index'
+    ]);
+    Route::resource('admin/purchases', PurchaseController::class);
+    Route::resource('admin/suppliers', SupplierController::class);
+    Route::resource('admin/users', UserController::class);
+    Route::resource('admin/products', ProductController::class);
+});
+Route::resource('products', ProductController::class)->only([
+    'index', 'show'
+]);
 // Route::resource('admin.');
 
 // ('/admin/purchases/index', [AdminController::class, 'purchasesIndex'])->name('admin.purchases');
@@ -56,7 +65,6 @@ Route::resource('admin/products', ProductController::class)->middleware('auth');
 
 // Route::get('/admin/products/index', [AdminController::class, 'productsIndex']);
 
-Route::post('/', [ProductController::class, 'store']);
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

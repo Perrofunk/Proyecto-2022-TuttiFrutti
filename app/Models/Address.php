@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     use HasFactory;
+    protected $fillable=['street', 'address', 'department', 'between_streets', 'zone_id', 'details'];
 
     public function zone(){
-        $this->belongsTo(Zone::class);
+        return $this->belongsTo(Zone::class);
+    }
+    public function client(){
+        return $this->hasOne(Client::class);
     }
 }
