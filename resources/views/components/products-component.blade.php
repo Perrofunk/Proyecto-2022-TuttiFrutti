@@ -68,6 +68,7 @@
 @endphp
 
 {{-- Cuando el foreach recorre la coleccion y guarda el objeto individual en la variable $product se hace posible acceder a sus propiedades, como 'id' y 'name'. --}}
+
     <a href="{{$prefix}}/products/{{$product->id}}"><img src="/{{ $product->image->url}}"  class="card-img-top" alt="" style="aspect-ratio:1/1;"></a>
     
     <div class="card-body">

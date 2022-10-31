@@ -48,7 +48,7 @@
       <div class='delivery_info'>
         <i class="ti-truck"></i>DELIVERY GRATIS</div>
         <div class="price-rating-wrapper clearfix">
-          <p class="price"><span class="price-prefix">Kilogramo:</span><span class="woocommerce-Price-amount amount"><bdi>4,99&nbsp;<span class="simbolo-peso">&dollar;</span></bdi></span></p>
+          <p class="price"><span class="price-prefix">Kilogramo:</span><span class="woocommerce-Price-amount amount"><bdi> {{$product->price}}&nbsp;<span class="simbolo-peso">&dollar;</span></bdi></span></p>
           <p id="must_select_text" style="color: red;font-weight: 600;font-size: 20px;">Debe seleccionar kg o unidad</p>
         </div>
         <form class="unidad-venta">
@@ -74,7 +74,7 @@
           </div>
         </div>
         <div class="container">
-            <button class="button button3">comprar</button>
+            <button class="button button3">Añadir al Carrito</button>
             </div>
   </div>
   

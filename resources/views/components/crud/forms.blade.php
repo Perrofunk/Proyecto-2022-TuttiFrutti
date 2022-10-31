@@ -91,6 +91,7 @@ function inputType($column){
     </div>
     @else
     <div class="mb-6">
+        
         <label for="{{$column}}" class="block mb-2 font-medium text-gray-900">{{__($column)}}</label>
         <input name="{{$column}}" type="{{inputType($column)}}" id="{{$column}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
     </div>
@@ -123,7 +124,10 @@ function inputType($column){
                 
             @endphp
             
-            @foreach ($relacion_child_columns as $relacion_child_column)   
+            @foreach ($relacion_child_columns as $relacion_child_column)
+            @if ($relacion_child_column === "price")
+        @continue
+    @endif
             @if (preg_match('/(_id)/', $relacion_child_column) == true)
             <div class="mb-6">
                 <label for="{{$relacion_child_column}}" class="block mb-2 font-medium text-gray-900">{{__($relacion_child_column)}}</label>
@@ -140,6 +144,7 @@ function inputType($column){
             </select>
             </div>
             @else
+            
                 <div class="mb-6">
                     <label for="{{$relacion_child_column}}" class="block mb-2 font-medium text-gray-900">{{__($relacion_child_column)}}</label>
                     <input name="{{$relacion_child_column}}" type="{{inputType($relacion_child_column)}}" id="{{$relacion_child_column}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
@@ -164,6 +169,7 @@ function inputType($column){
     @csrf
     <div class="grid grid-cols-2 gap-6 ml-2 mr-5">
     @foreach ($columns as $column)
+    
     @if ($column === "total")
         @continue
     @endif
@@ -213,7 +219,10 @@ function inputType($column){
                 
             @endphp
             
-            @foreach ($relacion_child_columns as $relacion_child_column)   
+            @foreach ($relacion_child_columns as $relacion_child_column)
+            @if ($relacion_child_column === "price")
+            @continue
+            @endif  
             @if (preg_match('/(_id)/', $relacion_child_column) == true)
             <div class="mb-6">
                 <label for="{{$relacion_child_column}}" class="block mb-2 font-medium text-gray-900">{{__($relacion_child_column)}}</label>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 
@@ -57,6 +58,7 @@ class PurchaseController extends Controller
             'quantity'=>$request->quantity,
             'price'=>$request->price
         ]);
+        
         $total = $purchaseDetails->price * $purchaseDetails->quantity;
          
         $purchase->update([
@@ -108,8 +110,7 @@ class PurchaseController extends Controller
             'date'=>'date|nullable',
             'supplier_id'=>'integer|nullable',
             'product_id'=>'integer|nullable',
-            'quantity'=>'integer|nullable',
-            'price'=>'integer|nullable'
+            'quantity'=>'integer|nullable'
         ]);
         $formFields = array_filter($formFields);
         $purchase->update($formFields);

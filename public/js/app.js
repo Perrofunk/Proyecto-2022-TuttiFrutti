@@ -15,7 +15,7 @@
   \*****************************/
 /***/ (() => {
 
-eval("//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvYXBwLmpzLmpzIiwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vcmVzb3VyY2VzL2pzL2FwcC5qcz9jZWQ2Il0sInNvdXJjZXNDb250ZW50IjpbIlxyXG4iXSwibWFwcGluZ3MiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/js/app.js\n");
+eval("//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sInNvdXJjZXMiOlsid2VicGFjazovLy8uL3Jlc291cmNlcy9qcy9hcHAuanM/Y2VkNiJdLCJzb3VyY2VzQ29udGVudCI6WyJcclxuIl0sIm1hcHBpbmdzIjoiIiwiZmlsZSI6Ii4vcmVzb3VyY2VzL2pzL2FwcC5qcy5qcyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/js/app.js\n");
 
 /***/ }),
 
@@ -34,21 +34,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
   \*******************************/
-<<<<<<< HEAD
-/***/ (() => {
-
-throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/css-loader/dist/cjs.js):\nError: Can't resolve '~tailwind/base' in 'C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\resources\\css'\n    at finishWithoutResolve (C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\enhanced-resolve\\lib\\Resolver.js:309:18)\n    at C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\enhanced-resolve\\lib\\Resolver.js:386:15\n    at C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\enhanced-resolve\\lib\\Resolver.js:435:5\n    at eval (eval at create (C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:16:1)\n    at C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\enhanced-resolve\\lib\\Resolver.js:435:5\n    at eval (eval at create (C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:27:1)\n    at C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\enhanced-resolve\\lib\\DescriptionFilePlugin.js:87:43\n    at C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\enhanced-resolve\\lib\\Resolver.js:435:5\n    at eval (eval at create (C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\enhanced-resolve\\lib\\Resolver.js:435:5\n    at processResult (C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\webpack\\lib\\NormalModule.js:758:19)\n    at C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\webpack\\lib\\NormalModule.js:860:5\n    at C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\loader-runner\\lib\\LoaderRunner.js:400:11\n    at C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\loader-runner\\lib\\LoaderRunner.js:252:18\n    at context.callback (C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\loader-runner\\lib\\LoaderRunner.js:124:13)\n    at Object.loader (C:\\Users\\SandroSanders\\Documents\\GitHub\\proyecto-2022-verduleria\\node_modules\\css-loader\\dist\\index.js:155:5)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)");
-
-/***/ }),
-
-/***/ "./node_modules/process/browser.js":
-/*!*****************************************!*\
-  !*** ./node_modules/process/browser.js ***!
-  \*****************************************/
-/***/ ((module) => {
-=======
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
->>>>>>> master
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvY3NzL2FwcC5jc3MuanMiLCJtYXBwaW5ncyI6IjtBQUFBIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vcmVzb3VyY2VzL2Nzcy9hcHAuY3NzPzllY2YiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gZXh0cmFjdGVkIGJ5IG1pbmktY3NzLWV4dHJhY3QtcGx1Z2luXG5leHBvcnQge307Il0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./resources/css/app.css\n");

@@ -1,5 +1,5 @@
-@extends('adminlte::master')
-<x-partials.htmlhead/>
+
+<x-partials.htmlhead />
 
 
 <body class="antialiased" style="background-color: #C3CCE9">
@@ -7,7 +7,7 @@
 
      <div class="d-flex py-5 justify-content-center text-light ">
 
-            <div class="d-flex flex-column align-items-center">
+            <div class="flex flex-col items-center">
             
                 <?php 
                     
@@ -19,16 +19,11 @@
                 
                 ?>
 
-                    <x-partials.hero />
-                    </div>
-                    <div class="btn-group" style="display:flex;justify-content:flex-end;align-items:center;margin-left:auto">
-                        <a role="button" class="btn btn-dark" href="/admin/products/create">Create</a>
-                        <a role="button" class="btn btn-dark" href="/admin">Admin</a>
-                    </div>
-                </div>
-                <img src="/img/logo2.png" width="300" height="300">
-                <p class=" text-xl">Tu verduleria de confianza
-                </p>  
+              <x-partials.hero />
+                
+                
+            </div>
+     </div>
 
                 <style>
 * {box-sizing: border-box;}
@@ -146,41 +141,8 @@ function showSlides() {
   setTimeout(showSlides, 4000); // Change image every 2 seconds
 }
 </script>
-
-                <div class="d-flex pt-5 justify-content-center btn-group mb-3">
-
-                    <a href="/"><button class="btn-dark">Todo</button></a>
-
-                    <a href="?category_id=1"><button class="btn-dark">Frutas</button></a>
-            
-                    <a href="?category_id=2"><button class="btn-dark">Verduras</button></a>
-
-                    <a href="?category_id=3"><button class="btn-dark">Otro</button></a>
-                </div> 
+<x-products-explore :products="$products" />
                 
-                <div class=" container">
-                   @if ($error ?? false)
-                        <div class="d-flex justify-content-center p-5 m-5">
-                            <h3>
-                        {{$error}}
-                        </h3>
-                        </div>
-                    @else
-                    
-                    <div id="product-list" class="row row-cols-2 row-cols-md-6 g-2 justify-content-center ">
-                        
-                        <x-products-component :products="$products" />
-                        
-
-                    </div>
-                    @endif
-                    
-                </div>
-            </div>
-
-        </div>
-            
-        </div>
         {{-- Paginacion --}}
         @if ($error ?? false)
                         
@@ -189,78 +151,8 @@ function showSlides() {
             {{-- {{$products->links()}} --}}
         </div>
         @endif
-        <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js" ></script>
-        <section>
-            <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
-              <div
-                class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:items-stretch"
-              >
-                <div class="flex items-center rounded bg-gray-100 p-8">
-                  <div class="mx-auto text-center lg:text-left">
-                    <h2 class="text-2xl font-bold">Watches</h2>
-          
-                    <p class="mt-4 max-w-[45ch] text-sm text-gray-700">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos,
-                      cupiditate mollitia saepe vitae libero nobis.
-                    </p>
-          
-                    <a
-                      href="#"
-                      class="mt-6 inline-block rounded bg-black px-6 py-3 text-sm text-white"
-                    >
-                      View the Range
-                    </a>
-                  </div>
-                </div>
-          
-                <div class="grid grid-cols-2 gap-4 lg:col-span-2 lg:grid-cols-3 lg:py-12">
-                  <a href="#" class="block">
-                    <img
-                      alt="Simple Watch"
-                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1598&q=80"
-                      class="aspect-square w-full rounded object-cover"
-                    />
-          
-                    <div class="mt-2">
-                      <h3 class="font-medium">Simple Watch</h3>
-          
-                      <p class="mt-1 text-sm text-gray-700">$150</p>
-                    </div>
-                  </a>
-          
-                  <a href="#" class="block">
-                    <img
-                      alt="Simple Watch"
-                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1598&q=80"
-                      class="aspect-square w-full rounded object-cover"
-                    />
-          
-                    <div class="mt-2">
-                      <h3 class="font-medium">Simple Watch</h3>
-          
-                      <p class="mt-1 text-sm text-gray-700">$150</p>
-                    </div>
-                  </a>
-          
-                  <a href="#" class="block">
-                    <img
-                      alt="Simple Watch"
-                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1598&q=80"
-                      class="aspect-square w-full rounded object-cover"
-                    />
-          
-                    <div class="mt-2">
-                      <h3 class="font-medium">Simple Watch</h3>
-          
-                      <p class="mt-1 text-sm text-gray-700">$150</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </section>
-          
-        
+        <script src="https://unpkg.com/flowbite@1.4.5/dist/flowbite.js"></script>
+               
 </body>
 
 </html>
