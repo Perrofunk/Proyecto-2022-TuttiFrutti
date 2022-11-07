@@ -12,6 +12,8 @@
     "purchases": "Compras",
     "price": "Precio",
     "description": "Descripcion",
-    "category_id": "Categoria"
+    "category_id": "Categoria",
+    "product_id": "Producto",
+    "quantity": "Cantidad"
     
 }

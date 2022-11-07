@@ -76,13 +76,24 @@ class ProductController extends Controller
         $product = Product::create($formFields);
         
         if ($request->image) {
-            $url = Storage::put('public/image', $request->image);
+            $url = 'storage/' . Storage::disk('public')->put('imagenes', $request->image);
+            
+            // $url = Storage::url('imagenes/');
             $product->image()->create([
                 'url'=>$url
             ]);
         }
         
         return redirect()->route('products.index');
+    }
+    public function destroy(Product $product)
+    {
+        $res = $product->delete();
+        if ($res === true) {
+            $imagen = $product->image;
+            $imagen->delete();
+        }
+        return redirect()->back();
     }
     public function filter(Request $request){
         dd($request);

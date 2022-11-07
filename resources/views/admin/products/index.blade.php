@@ -5,7 +5,7 @@
 @section('content_header')
     <h1>Productos - Index</h1>
     @stop
-
+   
     @section('content')
 
 
@@ -133,10 +133,18 @@
                     <td><a href="?category_id={{$product->category_id}}">{{$product->category->name}}</a></td>
                     <td class="d-flex justify-content-end"><div class="btn-group">
                         <a class="btn rounded-0  btn-outline-warning" href="{{route('products.edit', ['product'=>$product])}}">Modificar</a>
-                        <a class="btn rounded-0  btn-danger" href="{{route('products.destroy', ['product'=>$product])}}">Borrar</a>
+                          <button onclick="if(confirm('Esta a punto de eliminar el elemento [{{$product->id}}] de la tabla [Productos]')){
+                          event.preventDefault();
+                          document.getElementById('delete-table').action='{{route('products.destroy', ['product'=>$product])}}';
+                          document.getElementById('delete-table').submit();
+                          }else{event.preventDefault();}" type="submit" class="btn rounded-0 btn-danger">Borrar</button>
                     </div></td>
                 </tr>
                 @endforeach
+                <form id="delete-table" class="d-none" action="" method="POST">
+                  @csrf
+                  @method('DELETE')
+                </form>
             </tbody>
         </table>
     </div>

@@ -43,7 +43,7 @@ use Illuminate\Database\Eloquent\Model;
           event.preventDefault();
           document.getElementById('delete-table').action='{{route($ruta_destroy, [$ruta_singular=>$item])}}';
           document.getElementById('delete-table').submit();
-          }else{event.preventDefault();}" type="submit" class="btn rounded-0 btn-danger"">Borrar</button>
+          }else{event.preventDefault();}" type="submit" class="btn rounded-0 btn-danger">Borrar</button>
       </div></td>
     </tr>
 

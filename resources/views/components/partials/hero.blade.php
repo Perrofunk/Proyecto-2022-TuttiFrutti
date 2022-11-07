@@ -1,5 +1,3 @@
-<div class="text-white text-center container-fluid py-5 border-start border-bottom border-end border-5 border-dark" style="background-image: url('/img/fruta.jpg');background-size:cover">
-<h1 class="bold shadow-sm text-center pt-5" style="margin-top:60px">Tutti Frutti</h1>
-<p>Lorem ipsum s dolor sit amet consectetur adipisicing elit. Vero corrupti ipsum est atque voluptas
-    molestias quaerat doloribus tenetur magnam nesciunt.</p>
-</div>
+{{-- <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl">Tutti Frutti</h1> --}}
+<img src="/img/logo2.png" width="300" height="300">
+<p class="text-lg text-center font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48">Tutti Frutti te ofrece solo las mejores frutas y verduras para vos y tu familia</p>

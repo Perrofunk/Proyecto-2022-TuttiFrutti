@@ -1,8 +1,8 @@
-@extends('adminlte::master')
+
 <x-partials.htmlhead />
 <body>
-    <div id="app" style="background-color: #093a4b">
-        <x-navbar-component />
+    <x-navbar-component />
+    <div id="app">
 
         <main class="py-4">
             @yield('content')
@@ -11,5 +11,6 @@
             @yield('footer')
         </footer>
     </div>
+    <script src="https://unpkg.com/flowbite@1.4.5/dist/flowbite.js"></script>
 </body>
 </html>
