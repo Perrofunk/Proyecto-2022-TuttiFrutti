@@ -4,6 +4,12 @@
 
 <body class="antialiased" style="background-color: #C3CCE9">
      <x-navbar-component action="/"/>
+     @if (session()->has('warning'))
+     <div x-transition x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+      <p class="font-bold">Advertencia</p>
+      <p>{!! session()->get('warning') !!}</p>
+    </div>
+    @endif
 
      <div class="d-flex py-5 justify-content-center text-light ">
 
