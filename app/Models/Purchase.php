@@ -13,7 +13,7 @@ class Purchase extends Model
     public function supplier(){
         return $this->belongsTo(Supplier::class, 'supplier_id');
     }
-    public function purchaseDetails(){
+    public function details(){
         return $this->hasMany(PurchaseDetail::class);
     }
     //Filtrar por busqueda y por categoria
