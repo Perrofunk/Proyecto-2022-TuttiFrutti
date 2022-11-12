@@ -14,21 +14,6 @@
     "description": "Descripcion",
     "category_id": "Categoria",
     "product_id": "Producto",
-    "quantity": "Cantidad",
-    "Name": "Nombre",
-    "Surname": "Apellido",
-    "Email Address": "Direccion E-mail",
-    "Password" : "Contraseña",
-    "Confirm Password": "Confirmar Contraseña",
-    "Street": "Calle",
-    "Address": "Direccion",
-    "Department": "Departamento",
-    "Zone": "Codigo Postal",
-    "Details": "Detalles",
-    "Between Streets": "Entre Calles",
-    "Register": "Registrarse",
-    "Forgot Your Password?": "Olvidaste tu contraseña?",
-    "Login": "Iniciar Sesion",
-    "Remember Me": "Recuerdame"
+    "quantity": "Cantidad"
     
 }
