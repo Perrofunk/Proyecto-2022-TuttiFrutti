@@ -15,7 +15,7 @@
     $details = App\Models\PurchaseDetail::all();
 @endphp
 <div class="">
-<x-crud.forms  :relacion_child_modelos="$details"  type="create" :variable="$purchases" ruta="purchases" :relacion_modelos="$supplier"></x-crud.forms>
+<x-crud.forms  :relationship_child_models="$details"  type="create" :variable="$purchases" :relationship_parent_models="$supplier"></x-crud.forms>
 </div>
   
   

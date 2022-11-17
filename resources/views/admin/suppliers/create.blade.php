@@ -11,7 +11,7 @@
 
 
 <div class="">
-<x-crud.forms type="create" :variable="$suppliers" ruta="suppliers"></x-crud.forms>
+<x-crud.forms type="create" :variable="$suppliers" route="suppliers"></x-crud.forms>
 </div>
   
   
