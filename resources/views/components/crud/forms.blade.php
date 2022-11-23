@@ -76,7 +76,7 @@ function inputType($column){
 {{-- EDIT --}}
 
 @if ($type === "edit")
-{!! Form::model($variable,['route' => [$route_update, $variable], 'autocomplete' => 'off', 'files' => true, 'method' => 'put']) !!}
+{!! Form::model($variable,['id'=>'form', 'route' => [$route_update, $variable], 'autocomplete' => 'off', 'files' => true, 'method' => 'put']) !!}
     <div class="grid grid-cols-2 gap-6 ml-2 mr-5">
     @foreach ($columns as $column)
     @if ($column === "total")
@@ -88,7 +88,7 @@ function inputType($column){
             <select name="{{$column}}" id="{{$column}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 @foreach ($relationship_parent_models as $relationship_item)  
                     @if ($loop->first)
-                    <option value="">Seleccionar...</option>
+                    <option value="{{$relationship_item->id}}">{{$relationship_item->name}}</option>
                     @endif
                     <option value="{{$relationship_item->id}}">{{$relationship_item->name}}</option>
                 @endforeach
@@ -98,7 +98,7 @@ function inputType($column){
     <div class="mb-6">
         
         <label for="{{$column}}" class="block mb-2 font-medium text-gray-900">{{__($column)}}</label>
-        <input name="{{$column}}" type="{{inputType($column)}}" id="{{$column}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        <input value="{{$variable->$column}}" name="{{$column}}" type="{{inputType($column)}}" id="{{$column}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
     </div>
     @endif
     @if ($loop->last)
@@ -125,34 +125,20 @@ function inputType($column){
                 }
                 
             @endphp
-            @foreach ($variable->details as $detail)
-                {{dd($variable->details)}}
-            @endforeach
             
             @foreach ($relationship_child_columns as $relationship_child_column)
             
     
             @if (preg_match('/(_id)/', $relationship_child_column) == true)
-            <div class="mb-6">
-                <label for="{{$relationship_child_column}}" class="block mb-2 font-medium text-gray-900">{{__($relationship_child_column)}}</label>
-                <select name="{{$relationship_child_column}}" id="{{$relationship_child_column}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    
-                    @foreach ($products as $product)
-                    
-                        @if ($loop->first)
-                        <option value="">Seleccionar...</option>
-                        @endif
-                        <option value="{{$product->id}}">{{$product->name}}</option>
-                        
-                    @endforeach
-            </select>
+            <div class="mb-6 col-span-2 text-center">
+                <input type="hidden" id="detail" name="detail">
+                <button class="text-center w-full bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded" type="submit" onclick="
+                event.preventDefault();
+                document.getElementById('detail').value=true;
+                document.getElementById('form').submit();
+                ">Modificar Detalles</button>
             </div>
-            @else
             
-                <div class="mb-6">
-                    <label for="{{$relationship_child_column}}" class="block mb-2 font-medium text-gray-900">{{__($relationship_child_column)}}</label>
-                    <input name="{{$relationship_child_column}}" type="{{inputType($relationship_child_column)}}" id="{{$relationship_child_column}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                </div>
                 @endif
             @endforeach
         @endif
@@ -226,8 +212,8 @@ function inputType($column){
                 
             @endphp
             
-            @foreach ($relacion_child_columns as $relacion_child_column)   
-            @if (preg_match('/(_id)/', $relacion_child_column) == true)
+            @foreach ($relationship_child_columns as $relationship_child_column)   
+            @if (preg_match('/(_id)/', $relationship_child_column) == true)
             <div class="mb-6">
                 <label for="{{$relationship_child_column}}" class="block mb-2 font-medium text-gray-900">{{__($relationship_child_column)}}</label>
                 <select name="{{$relationship_child_column}}" id="{{$relationship_child_column}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" {{required($relationship_child_column, $requiredFields)}}>

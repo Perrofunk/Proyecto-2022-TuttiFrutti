@@ -105,12 +105,10 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, Purchase $purchase)
     {
-        
+        dd($request);
         $formFields = $request->validate([
-            'date'=>'date|nullable',
-            'supplier_id'=>'integer|nullable',
-            'product_id'=>'integer|nullable',
-            'quantity'=>'integer|nullable'
+            'date'=>'date|required',
+            'supplier_id'=>'integer|required'
         ]);
         $formFields = array_filter($formFields);
         $purchase->update($formFields);

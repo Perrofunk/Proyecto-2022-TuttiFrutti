@@ -14,7 +14,7 @@
     $categories=Category::all();
 @endphp
 <div class="">
-<x-crud.forms type="create" :variable="$products" ruta="products" :relacion_modelos="$categories"></x-crud.forms>
+<x-crud.forms type="create" :variable="$products" ruta="products" :relationship_parent_models="$categories"></x-crud.forms>
 </div>
   
   
