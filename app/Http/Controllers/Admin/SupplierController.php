@@ -91,7 +91,12 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $formFields = $request->validate([
+        //     'date'=>'date|required',
+        //     'supplier_id'=>'integer|required'
+        // ]);
+        // $purchase->update($formFields);
+        // return redirect()->route('purchases.index');
     }
 
     /**

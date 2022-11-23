@@ -41,29 +41,23 @@ class PurchaseController extends Controller
             'supplier_id'=>'required|integer'
         ]);
        
-        $request->validate([
-            'product_id'=>'required|integer',
-            'quantity'=>'required|integer',
-            'price'=>'required|integer'
-        ]);
-        
         $purchase = Purchase::create([
             'date'=>$request->date,
             'supplier_id'=>$request->supplier_id,
             'total'=>'0'
         ]);
-        $purchaseDetails = $purchase->purchaseDetails()->create([
-            'product_id'=>$request->product_id,
-            'supplier_id' => $purchase->supplier_id,
-            'quantity'=>$request->quantity,
-            'price'=>$request->price
-        ]);
+        // $purchaseDetails = $purchase->purchaseDetails()->create([
+        //     'product_id'=>$request->product_id,
+        //     'supplier_id' => $purchase->supplier_id,
+        //     'quantity'=>$request->quantity,
+        //     'price'=>$request->price
+        // ]);
         
-        $total = $purchaseDetails->price * $purchaseDetails->quantity;
+        // $total = $purchaseDetails->price * $purchaseDetails->quantity;
          
-        $purchase->update([
-            'total'=>$total
-        ]);
+        // $purchase->update([
+        //     'total'=>$total
+        // ]);
         
         
         
@@ -105,12 +99,10 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, Purchase $purchase)
     {
-        dd($request);
         $formFields = $request->validate([
             'date'=>'date|required',
             'supplier_id'=>'integer|required'
         ]);
-        $formFields = array_filter($formFields);
         $purchase->update($formFields);
         return redirect()->route('purchases.index');
     }
