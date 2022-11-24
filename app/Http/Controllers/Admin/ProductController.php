@@ -86,6 +86,31 @@ class ProductController extends Controller
         
         return redirect()->route('products.index');
     }
+    public function edit(Product $product)
+    {
+        return view('admin.products.edit', [
+            'product' => $product
+        ]);
+    }
+    public function update(Request $request, Product $product)
+    {
+        $formFields = $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'price'=>'required',
+            'category_id'=>'required'
+        ]);
+        
+        $product->update($formFields);
+        if ($request->image) {
+            $url = 'storage/' . Storage::disk('public')->put('imagenes', $request->image);
+            // $url = Storage::url('imagenes/');
+            $product->image->update([
+                'url'=>$url
+            ]);
+        }
+        return redirect()->route('products.index');
+    }
     public function destroy(Product $product)
     {
         $res = $product->delete();

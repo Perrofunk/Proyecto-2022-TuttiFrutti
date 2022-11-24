@@ -1,4 +1,4 @@
-@props(['type', 'variable', 'relationship'=>"", 'relationship_parent_models'=>"", 'relationship_child_models'=>""])
+@props(['type', 'variable', 'relationship'=>"", 'parent'=>'', 'relationship_parent_models'=>"", 'relationship_child_models'=>""])
 @php
 use Illuminate\Support\Facades\DB;
 
@@ -7,8 +7,16 @@ $columns = array_keys($variable->first()->getAttributes());
 $columns = array_diff($columns, ['id', 'created_at', 'updated_at']);
 
 //Route (store, destroy, edit, create, show, index)
-$variable_table = $variable->first()->getTable();
-$variable_singular = rtrim($variable_table, "s");
+if (preg_match('/(purchase_)/', $variable)) {
+    $variable_table = 'details';
+}
+else {
+    $variable_table = $variable->first()->getTable();
+    $variable_singular = rtrim($variable_table, "s");
+}
+if (preg_match('/(purchase_)/', $variable_table)) {
+    $variable_table = 'details';
+}
 $route_store =  $variable_table . ".store";
 $route_update = $variable_table . ".update";
 $route_index = $variable_table . ".index";
@@ -76,10 +84,19 @@ function inputType($column){
 {{-- EDIT --}}
 
 @if ($type === "edit")
-{!! Form::model($variable,['id'=>'form', 'route' => [$route_update, $variable], 'autocomplete' => 'off', 'files' => true, 'method' => 'put']) !!}
+
+@if ($variable_table == "details")
+{!! Form::model($variable,['id'=>'form1', 'route' => [$route_update, ['purchase'=>$parent, 'detail'=>$variable]], 'autocomplete' => 'off', 'files' => true, 'method' => 'put']) !!}
+@else
+{!! Form::model($variable,['id'=>'form1', 'route' => [$route_update, $variable], 'autocomplete' => 'off', 'files' => true, 'method' => 'put']) !!}
+@endif
+
     <div class="grid grid-cols-2 gap-6 ml-2 mr-5">
     @foreach ($columns as $column)
     @if ($column === "total")
+        @continue
+    @endif
+    @if ($column == "purchase_id")
         @continue
     @endif
     @if (preg_match('/(_id)/', $column) == true)
@@ -135,8 +152,8 @@ function inputType($column){
                 <button class="text-center w-full bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded" type="submit" onclick="
                 event.preventDefault();
                 document.getElementById('detail').value=true;
-                document.getElementById('form').submit();
-                ">Modificar Detalles</button>
+                document.getElementById('form1').submit();
+                ">Guardar Cambios y Modificar Detalles</button>
             </div>
             
                 @endif
@@ -145,7 +162,11 @@ function inputType($column){
         @endisset
     </div>
     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center ">Aceptar</button>
+    @if ($variable_table == "details")
+    <a href="{{route($route_index, ['purchase'=>$parent])}}"><button type="button" class="text-white bg-zinc-700 hover:bg-zinc-800 focus:ring-4 focus:outline-none focus:ring-zinc-300 font-medium rounded-lg px-5 py-2.5 text-center ">Cancelar</button></a>
+    @else
     <a href="{{route($route_index)}}"><button type="button" class="text-white bg-zinc-700 hover:bg-zinc-800 focus:ring-4 focus:outline-none focus:ring-zinc-300 font-medium rounded-lg px-5 py-2.5 text-center ">Cancelar</button></a>
+    @endif
    {!! Form::close() !!}
   <script>
     
@@ -158,7 +179,12 @@ function inputType($column){
 {{-- CREATE --}}
 
 @if ($type === "create")
-<form method="POST" enctype="multipart/form-data" action="{{ route($route_store) }}">
+
+<form id="form2" method="POST" enctype="multipart/form-data" action="@if ($route_store != 'details.store')
+{{route($route_store)}}
+@else
+    {{route($route_store, ['purchase'=>$parent])}}
+@endif">
     @csrf
     <div class="grid grid-cols-2 gap-6 ml-2 mr-5">
     @foreach ($columns as $column)
@@ -167,6 +193,9 @@ function inputType($column){
         @continue
     @endif
     @if (preg_match('/(_id)/', $column) == true)
+    @if ($column == "purchase_id")
+        @continue
+    @endif
     <div class="mb-6">
         <label for="{{$column}}" class="block mb-2 font-medium text-gray-900">{{__($column)}}</label>
         <select name="{{$column}}" id="{{$column}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" {{required($column, $requiredFields)}}>
@@ -204,42 +233,43 @@ function inputType($column){
     @isset($relationship_child_table)
     @if (preg_match('/(_details)/', $relationship_child_table))
             @php
-                $relationship_child_columns = array_keys($relationship_child_models->first()->getAttributes());
-                $relationship_child_columns = array_diff($relationship_child_columns, ['id', 'created_at', 'updated_at']);
-                if (in_array('purchase_id', $relationship_child_columns)) {
-                    $relationship_child_columns = array_diff($relationship_child_columns, ['purchase_id']);
-                }
-                
+            $relationship_child_columns = array_keys($relationship_child_models->first()->getAttributes());
+            $relationship_child_columns = array_diff($relationship_child_columns, ['id', 'created_at', 'updated_at']);
+            if (in_array('purchase_id', $relationship_child_columns)) {
+                $relationship_child_columns = array_diff($relationship_child_columns, ['purchase_id']);
+            }    
             @endphp
-            
-            @foreach ($relationship_child_columns as $relationship_child_column)   
-            @if (preg_match('/(_id)/', $relationship_child_column) == true)
-            <div class="mb-6">
-                <label for="{{$relationship_child_column}}" class="block mb-2 font-medium text-gray-900">{{__($relationship_child_column)}}</label>
-                <select name="{{$relationship_child_column}}" id="{{$relationship_child_column}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" {{required($relationship_child_column, $requiredFields)}}>
-                    
-                    @foreach ($products as $product)
-                    
-                        @if ($loop->first)
-                        <option value="">Seleccionar...</option>
-                        @endif
-                        <option value="{{$product->id}}">{{$product->name}}</option>
-                        
-                    @endforeach
-            </select>
+
+        @foreach ($relationship_child_columns as $relationship_child_column)
+
+        @if (preg_match('/(_id)/', $relationship_child_column) == true)
+            <div class="mb-6 text-center">
+                <input type="hidden" id="detail" name="detail">
+                <button class="text-center bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded" type="submit" onclick="
+                event.preventDefault();
+                document.getElementById('detail').value=true;
+                document.getElementById('form2').submit();
+                ">Guardar Cambios y Modificar Detalles</button>
             </div>
-            @else
-                <div class="mb-6">
-                    <label for="{{$relationship_child_column}}" class="block mb-2 font-medium text-gray-900">{{__($relationship_child_column)}}</label>
-                    <input name="{{$relationship_child_column}}" type="{{inputType($relationship_child_column)}}" id="{{$relationship_child_column}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" {{required($relationship_child_column, $requiredFields)}}>
-                </div>
-                @endif
-            @endforeach
+            @if ($variable_table == 'purchases')
+                <a href="{{route($route_index)}}"><button type="button" class="text-white bg-zinc-700 hover:bg-zinc-800 focus:ring-4 focus:outline-none focus:ring-zinc-300 font-medium rounded-lg px-5 py-2.5 text-center ">Cancelar</button></a>
+            @endif
         @endif
-        @endisset
+
+        @endforeach
+    @endif
+    @endisset
     </div>
+    @if ($variable_table == 'purchases')
+        
+    @else
     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center ">Aceptar</button>
-    <a href="{{route($route_index)}}"><button type="button" class="text-white bg-zinc-700 hover:bg-zinc-800 focus:ring-4 focus:outline-none focus:ring-zinc-300 font-medium rounded-lg px-5 py-2.5 text-center ">Cancelar</button></a>
+        @if ($variable_table == "details")
+        <a href="{{route('purchases.index')}}"><button type="button" class="text-white bg-zinc-700 hover:bg-zinc-800 focus:ring-4 focus:outline-none focus:ring-zinc-300 font-medium rounded-lg px-5 py-2.5 text-center ">Cancelar</button></a>
+        @else
+        <a href="{{route($route_index)}}"><button type="button" class="text-white bg-zinc-700 hover:bg-zinc-800 focus:ring-4 focus:outline-none focus:ring-zinc-300 font-medium rounded-lg px-5 py-2.5 text-center ">Cancelar</button></a>
+        @endif
+    @endif
   </form>
   <script>
     

@@ -38,14 +38,19 @@ class PurchaseController extends Controller
     {
         $formFields = $request->validate([
             'date'=>'required',
-            'supplier_id'=>'required|integer'
+            'supplier_id'=>'required|integer',
+            'detail'=>'nullable'
         ]);
-       
         $purchase = Purchase::create([
             'date'=>$request->date,
             'supplier_id'=>$request->supplier_id,
             'total'=>'0'
         ]);
+        if ($request->detail != null) {
+            return redirect()->route('details.create', [$purchase]);
+        }else{
+        return redirect()->route('purchases.index');
+        }
         // $purchaseDetails = $purchase->purchaseDetails()->create([
         //     'product_id'=>$request->product_id,
         //     'supplier_id' => $purchase->supplier_id,
@@ -61,7 +66,7 @@ class PurchaseController extends Controller
         
         
         
-        return redirect()->route('purchases.index');
+        
     }
 
     /**
@@ -101,10 +106,16 @@ class PurchaseController extends Controller
     {
         $formFields = $request->validate([
             'date'=>'date|required',
-            'supplier_id'=>'integer|required'
+            'supplier_id'=>'integer|required',
+            'detail'=>'nullable'
         ]);
         $purchase->update($formFields);
+        if ($request->detail != null) {
+            return redirect()->route('details.index', [$purchase]);
+        }
+        else{
         return redirect()->route('purchases.index');
+        }
     }
 
     /**
@@ -118,4 +129,5 @@ class PurchaseController extends Controller
         $purchase->delete();
         return redirect()->back();
     }
+    
 }

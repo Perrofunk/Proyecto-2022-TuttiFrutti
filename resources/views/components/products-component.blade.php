@@ -87,7 +87,7 @@
     </div>
     @if ($variable === true)
         <div class="btn-group-vertical">
-            <button class="btn rounded-0 btn-outline-primary">Modificar</button>
+            <a class="btn rounded-0 btn-outline-primary" href="{{route('products.edit', ['product'=>$product])}}">Modificar</a>
             <button class="btn rounded-0 btn-danger" onclick="if(confirm('Desea eliminar el elemento [{{$product->id}}] de la tabla [Productos]')){
                 event.preventDefault();
                 document.getElementById('delete-card').action='{{route('products.destroy', ['product'=>$product])}}';

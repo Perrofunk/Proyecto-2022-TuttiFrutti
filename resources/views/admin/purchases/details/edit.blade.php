@@ -7,15 +7,13 @@
 @stop
 
 @section('content')
-    
+    @php
+        use App\Models\Product;
+        $products = Product::all();
+    @endphp
 
-@php
-    use App\Models\Category;
-    $categories=Category::all();
-    $details = App\Models\PurchaseDetail::all();
-@endphp
 <div class="">
-<x-crud.forms  type="edit" :variable="$product" ruta="products" :relationship_parent_models="$categories"></x-crud.forms>
+<x-crud.forms  type="edit" :relationship_parent_models="$products" :parent="$purchase" :variable="$detail"></x-crud.forms>
 </div>
   
   

@@ -53,7 +53,15 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formFields = $request->validate([
+            'name'=>'string|required',
+            'email'=>'required|email',
+            'contact'=>'required|string',
+            'address'=>'required|string',
+            'phone'=>'required'
+        ]);
+        $supplier = Supplier::create($formFields);
+        return redirect()->route('suppliers.index');
     }
 
     /**
@@ -89,12 +97,17 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Supplier $supplier)
     {
-        // $formFields = $request->validate([
-        //     'date'=>'date|required',
-        //     'supplier_id'=>'integer|required'
-        // ]);
+        $formFields = $request->validate([
+            'name'=>'string|required',
+            'email'=>'required|email',
+            'contact'=>'required|string',
+            'address'=>'required|string',
+            'phone'=>'required'
+        ]);
+        $supplier->update($formFields);
+        return redirect()->route('suppliers.index');
         // $purchase->update($formFields);
         // return redirect()->route('purchases.index');
     }

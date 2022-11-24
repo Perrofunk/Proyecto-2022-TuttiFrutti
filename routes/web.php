@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\ProductController;
@@ -49,6 +50,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/suppliers', SupplierController::class);
     Route::resource('admin/users', UserController::class);
     Route::resource('admin/products', ProductController::class);
+    Route::resource('admin/purchases/{purchase}/details', DetailController::class);
 });
 Route::resource('products', ProductController::class)->only([
     'index', 'show'

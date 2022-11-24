@@ -12,8 +12,8 @@
     "purchases": "Compras",
     "price": "Precio",
     "description": "Descripcion",
-    "category_id": "Categoria",
-    "product_id": "Producto",
+    "category_id": "ID Categoria",
+    "product_id": "ID Producto",
     "quantity": "Cantidad",
     "Name": "Nombre",
     "Surname": "Apellido",
@@ -29,6 +29,7 @@
     "Register": "Registrarse",
     "Forgot Your Password?": "Olvidaste tu contraseña?",
     "Login": "Iniciar Sesion",
-    "Remember Me": "Recuerdame"
+    "Remember Me": "Recuerdame",
+    "purchase_id": "ID Compra"
     
 }
