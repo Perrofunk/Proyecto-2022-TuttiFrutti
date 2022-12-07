@@ -1,4 +1,9 @@
-@props(['variable', 'parent'=>'', 'relacion'=>"", 'ruta'])
+@props(['manualPaginator'=>'', 'variable', 'parent'=>'', 'relacion'=>"", 'ruta'])
+
+@php
+   
+@endphp
+{{ $variable->links() }}
 <div class="d-flex flex-column-reverse">
     <div class="btn-group" role="group" aria-label="Button group">
         <button class="btn rounded-0 btn-primary" x-on:click="card = true, table = false">
@@ -23,4 +28,5 @@
 </div>
 
 {{-- Links de Paginacion --}}
-{{-- {{ $variable->links() }} --}}
+
+    {{ $variable->links() }}

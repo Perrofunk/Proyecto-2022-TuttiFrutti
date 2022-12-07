@@ -3,7 +3,9 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Compras - Index</h1>
+{{ Breadcrumbs::render() }}
+<hr>
+<h2>Registro de Compras</h2>
 @stop
 
 
@@ -13,16 +15,16 @@
     {{-- Alpine JS --}}
     <script defer src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
-    <h3>Registro de Compras</h3>
-
         @php
             $modelos = App\Models\Supplier::all();
         @endphp
+        <p class="text-secondary">
+            Total de registros: {{$purchases->total()}}
+        </p>
     <x-crud.filters :variable="$purchases" :relacion_modelos="$modelos">
-        <a role="button" class="btn btn-primary mt-3" href="{{route('purchases.create')}}">
-            Registrar Compra
+        <a role="button" class="w-100 btn btn-primary mt-3" href="{{route('purchases.create')}}">
+            Registrar Nueva Compra
         </a></x-crud.filters>
-
     <x-crud.views :variable="$purchases" relacion="supplier" ruta="purchases"></x-crud.views>
 
 @stop

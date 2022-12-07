@@ -3,11 +3,25 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Productos - Index</h1>
+    {{Breadcrumbs::render()}}
+    <hr class="mt-3">
+    <h1>{{$product->name}}</h1>
     @stop
 
+    @php
+    function test($product) {
+        $count = [];
+        foreach ($product->details as $detail) {
+        array_push($count, $detail->purchase_id);
+    }
+    $count = array_unique($count);
+    return count($count);
+    }
+    @endphp
     @section('content')
     <h2 class="display-2">{{ $product['name'] }}</h2>
+    <p>cantidad de compras que contienen este producto: {{test($product)}}
+    </p>
     <table class="table-bordered table-dark">
         <tr>
             <th>

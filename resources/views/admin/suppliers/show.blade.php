@@ -3,6 +3,8 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+{{Breadcrumbs::render()}}
+<hr class="mt-3">
     <h1>ID Proveedor: {{$supplier->id}}</h1>
 @stop
 

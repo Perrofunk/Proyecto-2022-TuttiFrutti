@@ -7,6 +7,9 @@ if ($parent != '') {
     $parent_table = $parent->getTable();
     $parent_singular = rtrim($parent_table, 's');
 }
+
+$variable_table = $variable->first()->getTable();
+$variable_singular = rtrim($variable_table, 's');
 $ruta_edit = $ruta . ".edit";
   $ruta_destroy = $ruta . ".destroy";
   $ruta_singular = rtrim($ruta, "s");
@@ -20,11 +23,16 @@ $ruta_edit = $ruta . ".edit";
   $columns = array_diff($columns, ['id', $relacion_id, 'created_at', 'updated_at']);
   array_splice($columns, 3, 4);
 @endphp
+
 @foreach ($variable as $item)
 <x-card-component class="border border-dark">
 
     
+    @if (preg_match('/(_details)/', $variable_table))
     <h2 class="text-center bg-dark card-header">ID {{ __($item->id) }}</h2>
+    @else   
+    <a class="text-decoration-none" href="{{route($ruta_show, [$variable_singular => $item])}}"><h2 class="text-center bg-dark card-header">ID {{ __($item->id) }}</h2></a>
+    @endif
     <div class="card-body">
         <ul class="list-group list-group-flush">
             @foreach ($columns as $column)    

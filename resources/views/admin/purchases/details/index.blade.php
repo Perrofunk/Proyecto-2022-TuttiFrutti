@@ -3,6 +3,8 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+    {{Breadcrumbs::render()}}
+    <hr>
     <h1> Compra ID {{$purchase->id}} - Detalles</h1>
 @stop
 
@@ -27,7 +29,8 @@
         </a>
         <div class="col"></div>
         </div>
-  <x-crud.views :variable="$purchase->details" :parent="$purchase" ruta="details"></x-crud.views>
+        
+  <x-crud.views :manualPaginator="true" :variable="$detail" :parent="$purchase" ruta="details"></x-crud.views>
 @stop
 
 @section('css')

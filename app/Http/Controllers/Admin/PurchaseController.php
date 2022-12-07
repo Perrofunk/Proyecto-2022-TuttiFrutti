@@ -10,17 +10,28 @@ use Illuminate\Http\Request;
 class PurchaseController extends Controller
 {
     public function index(){
-        // $purchases = 
-        if (request()->input('orderBy') != ""){
-            $query = request()->input('orderBy');
+        $orderBy = request()->input('orderBy');
+        if ($orderBy != ""){
+            $query = $orderBy;
         }else{
             $query = 'id';
         }
-            if (request()->input('order') === 'desc') {
-                $purchases = Purchase::orderBy($query, 'desc')->filter(request(['supplier_id', 'search']))->paginate('12');
+            if (request()->input('orderDirection') === 'desc') {
+                $purchases = Purchase::orderBy($query, 'desc')->filter(request(['supplier_id', 'search']));
+                if ($purchases->doesntExist()) {
+                    $purchases = Purchase::orderBy($query, 'desc')->paginate('12');
+                } else {
+                    $purchases = $purchases->paginate('12');
+                    
+                }
             }
             else {
-                $purchases = Purchase::orderBy($query)->filter(request(['supplier_id', 'search']))->paginate('12');
+                $purchases = Purchase::orderBy($query)->filter(request(['supplier_id', 'search']));
+                if ($purchases->doesntExist()) {
+                    $purchases = Purchase::orderBy($query)->paginate('12');
+                } else {
+                    $purchases = $purchases->paginate('12');
+                }
             }
 
         return view('admin.purchases.index', [

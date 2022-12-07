@@ -15,16 +15,26 @@ class SupplierController extends Controller
      */
     public function index()
     {
+        function checkIfEmpty(&$suppliers, $query, $direction){
+            if ($suppliers->doesntExist()) {
+                $suppliers = Supplier::orderBy($query, $direction)->paginate('12');
+            } else {
+                $suppliers = $suppliers->paginate('12');
+            };
+        };
+
         if (request()->input('orderBy') != ""){
             $query = request()->input('orderBy');
         }else{
             $query = 'id';
         }
-            if (request()->input('order') === 'desc') {
-                $suppliers = Supplier::orderBy($query, 'desc')->filter(request(['search']))->paginate('12');
-            }
-            else {
-                $suppliers = Supplier::orderBy($query)->filter(request(['search']))->paginate('12');
+        $suppliers = Supplier::orderBy($query)->filter(request(['search']));
+      
+        if (request()->input('orderDirection') === 'desc') {
+            checkIfEmpty($suppliers, $query, 'desc');
+        }
+        else {
+            checkIfEmpty($suppliers, $query, 'asc');
             }
         
         return view('admin.suppliers.index', [
@@ -121,5 +131,6 @@ class SupplierController extends Controller
     public function destroy(Supplier $supplier)
     {
         $supplier->delete();
+        return redirect()->back();
     }
 }

@@ -3,6 +3,8 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+{{ Breadcrumbs::render() }}
+<hr class="mt-3">
     <h1>Dashboard</h1>
 @stop
 

@@ -7,6 +7,7 @@ use App\Models\Purchase;
 use App\Http\Controllers\Controller;
 use App\Models\PurchaseDetail;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class DetailController extends Controller
 {
@@ -17,8 +18,11 @@ class DetailController extends Controller
      */
     public function index(Purchase $purchase)
     {
+        $detail = PurchaseDetail::where('purchase_id', '=', $purchase->id)->paginate(8);
+        
         return view('admin.purchases.details.index', [
-            'purchase'=>$purchase
+            'purchase'=>$purchase,
+            'detail'=>$detail
         ]);
     }
 

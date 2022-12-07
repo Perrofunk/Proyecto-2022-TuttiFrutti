@@ -3,6 +3,8 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+  {{Breadcrumbs::render()}}
+  <hr>
     <h1>Productos - Index</h1>
     @stop
    
@@ -15,12 +17,12 @@
         <div class="row">
             <div class="col">
                 <p class="text-secondary">
-                    Mostrando {{$products->count()}} resultados.
+                    Total de registros: {{$products->total()}}
                 </p>
             </div>
             <div class="col ">
                     <h2 class="" style="display: flex; justify-content:space-evenly">
-                    <a role="button" class="btn btn-primary mt-3" href="{{route('products.create')}}">
+                    <a role="button" class="w-100 btn btn-primary mt-3" href="{{route('products.create')}}">
                         Registrar Nuevo Producto
                     </a>
                 </h2>
@@ -81,6 +83,8 @@
     </div>
       </div>
   </form>
+  <hr class=" mt-3">
+  {{$products->links()}}
 
 
 
