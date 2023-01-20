@@ -19,11 +19,19 @@ class DetailController extends Controller
     public function index(Purchase $purchase)
     {
         $detail = PurchaseDetail::where('purchase_id', '=', $purchase->id)->paginate(8);
-        
+       
+        if ($detail->isEmpty()) {
+            
+            return view('admin.purchases.details.index', [
+                'purchase'=>$purchase,
+                'detail'=>$detail
+            ])->with('error', 'Actualmente, no existen registros.');
+            
+        } else {
         return view('admin.purchases.details.index', [
             'purchase'=>$purchase,
             'detail'=>$detail
-        ]);
+        ]);}
     }
 
     /**

@@ -16,24 +16,17 @@ class PurchaseController extends Controller
         }else{
             $query = 'id';
         }
-            if (request()->input('orderDirection') === 'desc') {
-                $purchases = Purchase::orderBy($query, 'desc')->filter(request(['supplier_id', 'search']));
+            if (!is_null(request()->input('orderDirection'))) {
+                $orderDirection = request()->input('orderDirection');
+            } else {$orderDirection = 'asc';}
+            
+            $purchases = Purchase::orderBy($query, $orderDirection)->filter(request(['supplier_id', 'search']));
                 if ($purchases->doesntExist()) {
-                    $purchases = Purchase::orderBy($query, 'desc')->paginate('12');
+                    return redirect()->back()->withErrors('No hay datos para este proveedor ');
                 } else {
                     $purchases = $purchases->paginate('12');
                     
                 }
-            }
-            else {
-                $purchases = Purchase::orderBy($query)->filter(request(['supplier_id', 'search']));
-                if ($purchases->doesntExist()) {
-                    $purchases = Purchase::orderBy($query)->paginate('12');
-                } else {
-                    $purchases = $purchases->paginate('12');
-                }
-            }
-
         return view('admin.purchases.index', [
             'purchases' => $purchases
         ]);
@@ -122,7 +115,7 @@ class PurchaseController extends Controller
         ]);
         $purchase->update($formFields);
         if ($request->detail != null) {
-            return redirect()->route('details.index', [$purchase]);
+            return redirect()->route('details.create', [$purchase]);
         }
         else{
         return redirect()->route('purchases.index');

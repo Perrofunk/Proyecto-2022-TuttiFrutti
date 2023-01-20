@@ -3,6 +3,8 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+{{Breadcrumbs::render()}}
+<hr class="mb-3">
     <h1>Dashboard</h1>
 @stop
 
@@ -14,7 +16,7 @@
 
 <div class="">
     
-<x-crud.forms  type="create" :relationship_parent_models="$products" :parent="$purchase" :variable="$detail"></x-crud.forms>
+<x-crud.forms  type="create" :first_parent_models="$products" :second_parent="$purchase" :variable="$detail"></x-crud.forms>
 </div>
   
   

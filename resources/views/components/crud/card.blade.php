@@ -26,7 +26,6 @@ $ruta_edit = $ruta . ".edit";
 
 @foreach ($variable as $item)
 <x-card-component class="border border-dark">
-
     
     @if (preg_match('/(_details)/', $variable_table))
     <h2 class="text-center bg-dark card-header">ID {{ __($item->id) }}</h2>

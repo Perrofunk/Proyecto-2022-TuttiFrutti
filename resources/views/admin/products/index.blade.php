@@ -13,7 +13,18 @@
 
     {{-- Filtros --}}
     <x-partials.alpine />
-    <div x-data="{ card: $persist(true), table: $persist(false) }">
+    @php
+            $modelos = App\Models\Category::all();
+        @endphp
+        <p class="text-secondary">
+            Total de registros: {{$products->total()}}
+        </p>
+    <x-crud.filters :variable="$products" :relacion_modelos="$modelos">
+      <a role="button" class="w-100 btn btn-primary mt-3" href="{{route('products.create')}}">
+          Registrar Producto
+      </a></x-crud.filters>
+  <x-crud.views :variable="$products" relacion="category" ruta="products"></x-crud.views>
+    {{-- <div x-data="{ card: $persist(true), table: $persist(false) }">
         <div class="row">
             <div class="col">
                 <p class="text-secondary">
@@ -89,15 +100,7 @@
 
 
   
-        {{-- <div class="col text-center">
-            <span class=" text-secondary">Filtrar por Categoria</span>
-            <div class="btn-group">
-            <button class="btn btn-primary">{{App\Models\Category::all()['0']->name}}</button>
-            <button class="btn btn-primary">{{App\Models\Category::all()['1']->name}}</button>
-            <button class="btn btn-primary">{{App\Models\Category::all()['2']->name}}</button>
-            </div>
-        </div>
-        <div class="col"></div> --}}
+       
     </div>
     
         <div class="d-flex flex-column-reverse">
@@ -153,6 +156,7 @@
         </table>
     </div>
     {{ $products->links() }}
+     --}}
     @stop
 
     @section('css')

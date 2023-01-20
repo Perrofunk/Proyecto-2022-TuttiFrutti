@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndexController;
@@ -51,6 +52,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/users', UserController::class);
     Route::resource('admin/products', ProductController::class);
     Route::resource('admin/purchases/{purchase}/details', DetailController::class);
+    Route::resource('admin/categories', CategoryController::class);
+    Route::get('admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    Route::get('admin/profile/settings', [AdminController::class, 'settings'])->name('admin.profile.settings');
 });
 Route::resource('products', ProductController::class)->only([
     'index', 'show'

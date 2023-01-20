@@ -23,14 +23,19 @@
 <p>Direccion: {{$supplier->address}}</p>
 <p>Telefono: {{$supplier->phone}}</p>
 <hr>
-<p>Compras:</p>
-<p>Cantidad de Compras: {{count($supplier->purchases)}}</p>
-<p>Valor Total de Todas las Compras: ${{$total}}</p>
-@foreach ($supplier->purchases as $purchase)
-    <p>ID de Compra: {{$purchase->id}}</p>
-    <p>Total de Compra: {{$purchase->total}}</p>
-    <br>
-@endforeach
+@if (count($supplier->purchases))
+    <p>Compras:</p>
+    <p>Cantidad de Compras: {{count($supplier->purchases)}}</p>
+    <p>Valor Total de Todas las Compras: ${{$total}}</p>
+    @foreach ($supplier->purchases as $purchase)
+        <p>ID de Compra: {{$purchase->id}}</p>
+        <p>Total de Compra: {{$purchase->total}}</p>
+        <br>
+    @endforeach
+@else
+    <p class="mb-2">Este proveedor no tiene ninguna compra registrada</p>
+    <a href="{{route('purchases.create')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">CLICK ACA PARA REGISTRAR UNA</a>
+@endif
 
   
   

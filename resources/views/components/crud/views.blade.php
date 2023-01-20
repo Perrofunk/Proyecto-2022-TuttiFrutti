@@ -3,6 +3,7 @@
 @php
    
 @endphp
+<hr class=" mt-3">
 {{ $variable->links() }}
 <div class="d-flex flex-column-reverse">
     <div class="btn-group" role="group" aria-label="Button group">
@@ -17,7 +18,12 @@
 
     <div x-transition x-show.important="card" class="row row-cols-2 row-cols-md-4">
         
-            <x-crud.card :variable="$variable" :parent="$parent" :relacion="$relacion" :ruta="$ruta" />
+        @if ($variable->first()->getTable() === "products")
+        <x-products-component :products="$variable" :variable="true" />
+        @else
+        <x-crud.card :variable="$variable" :parent="$parent" :relacion="$relacion" :ruta="$ruta" />
+            
+        @endif
         
     </div>
     <div x-transition x-show.important="table">

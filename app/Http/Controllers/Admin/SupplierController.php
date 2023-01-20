@@ -15,27 +15,21 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        function checkIfEmpty(&$suppliers, $query, $direction){
-            if ($suppliers->doesntExist()) {
-                $suppliers = Supplier::orderBy($query, $direction)->paginate('12');
-            } else {
-                $suppliers = $suppliers->paginate('12');
-            };
-        };
-
         if (request()->input('orderBy') != ""){
             $query = request()->input('orderBy');
         }else{
             $query = 'id';
         }
-        $suppliers = Supplier::orderBy($query)->filter(request(['search']));
-      
-        if (request()->input('orderDirection') === 'desc') {
-            checkIfEmpty($suppliers, $query, 'desc');
-        }
-        else {
-            checkIfEmpty($suppliers, $query, 'asc');
-            }
+        if (!is_null(request()->input('orderDirection'))) {
+            $orderDirection = request()->input('orderDirection');
+        } else {$orderDirection = 'asc';}
+
+        $suppliers = Supplier::orderBy($query, $orderDirection)->filter(request(['search']));
+            if ($suppliers->doesntExist()) {
+                $suppliers = Supplier::orderBy($query, $orderDirection)->paginate('12');
+            } else {
+                $suppliers = $suppliers->paginate('12');
+            };
         
         return view('admin.suppliers.index', [
             'suppliers'=>$suppliers

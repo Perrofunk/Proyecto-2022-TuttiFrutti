@@ -18,19 +18,24 @@
 <p>Proveedor: {{$purchase->supplier->name}}</p>
 <p>Fecha: {{$purchase->date}}</p>
 <p>Total: {{$purchase->total}}</p>
-<h3>Detalles de Compra</h3>
 
-        
     <div x-data="{ card: $persist(true), table: $persist(false) }">
         <div class="row mb-3">
             <div class="col"></div>
-        <a role="button" class="btn btn-primary mt-3 col" href="{{route('details.create', ['purchase'=>$purchase])}}">
+        <a role="button" id="createButton" class="btn btn-primary mt-3 col" href="{{route('details.create', ['purchase'=>$purchase])}}">
             Añadir Detalle de Compra
         </a>
         <div class="col"></div>
         </div>
-        
-  <x-crud.views :manualPaginator="true" :variable="$detail" :parent="$purchase" ruta="details"></x-crud.views>
+       
+        @isset ($error)
+        {{$error}}. Toca el botón <span onclick="document.getElementById('createButton').click()" class="text-decoration-underline" id="test"></span> para empezar a poblar la base de datos.
+        <script>document.getElementById("test").innerHTML = document.getElementById('createButton').innerHTML</script>
+        @else
+        <x-crud.views :manualPaginator="true" :variable="$detail" :parent="$purchase" ruta="details"></x-crud.views>
+        @endisset
+  
+
 @stop
 
 @section('css')

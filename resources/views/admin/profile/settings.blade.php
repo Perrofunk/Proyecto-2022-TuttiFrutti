@@ -5,7 +5,7 @@
 @section('content_header')
 {{ Breadcrumbs::render() }}
 <hr>
-<h2>Registro de Compras</h2>
+<h2>Configuracion</h2>
 @stop
 
 
@@ -16,19 +16,9 @@
     <script defer src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
     @if ($errors->any())
-            {{($errors->first())}} <a href="{{route('purchases.index')}}" class="btn btn-primary" type="button">Volver</a>
+            {{($errors->first())}} <a href="{{route('admin.profile')}}" class="btn btn-primary" type="button">Volver</a>
     @else
-        @php
-            $modelos = App\Models\Supplier::all();
-        @endphp
-        <p class="text-secondary">
-            Total de registros: {{$purchases->total()}}
-        </p>
-    <x-crud.filters :variable="$purchases" :relacion_modelos="$modelos">
-        <a role="button" class="w-100 btn btn-primary mt-3" href="{{route('purchases.create')}}">
-            Registrar Nueva Compra
-        </a></x-crud.filters>
-    <x-crud.views :variable="$purchases" relacion="supplier" ruta="purchases"></x-crud.views>
+        
     @endif
 @stop
 

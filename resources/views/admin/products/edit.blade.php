@@ -3,6 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+{{Breadcrumbs::render()}}
     <h1>Dashboard</h1>
 @stop
 
@@ -15,7 +16,7 @@
     $details = App\Models\PurchaseDetail::all();
 @endphp
 <div class="">
-<x-crud.forms  type="edit" :variable="$product" ruta="products" :relationship_parent_models="$categories"></x-crud.forms>
+<x-crud.forms  type="edit" :variable="$product" ruta="products" :first_parent_models="$categories"></x-crud.forms>
 </div>
   
   

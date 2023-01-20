@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    
+{{ Breadcrumbs::render() }}
 
 
 <div class="">

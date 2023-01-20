@@ -18,17 +18,23 @@ class ProductController extends Controller
     public function index(){
        
         
-        if (request()->input('orderBy') != ""){
-            $query = request()->input('orderBy');
+        $orderBy = request()->input('orderBy');
+        if ($orderBy != ""){
+            $query = $orderBy;
         }else{
             $query = 'id';
         }
-            if (request()->input('order') === 'desc') {
-                $products = Product::orderBy($query, 'desc')->filter(request(['category_id', 'search']))->paginate('8');
-            }
-            else {
-                $products = Product::orderBy($query)->filter(request(['category_id', 'search']))->paginate('8');
-            }
+        if (!is_null(request()->input('orderDirection'))) {
+            $orderDirection = request()->input('orderDirection');
+        } else {$orderDirection = 'asc';}
+        
+            $products = Product::orderBy($query, $orderDirection)->filter(request(['category_id', 'search']));
+                if ($products->doesntExist()) {
+                    $products = Product::orderBy($query, 'desc')->paginate('12');
+                } else {
+                    $products = $products->paginate('12');
+                    
+                }
             
         
         $user = auth()->user();

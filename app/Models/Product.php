@@ -9,6 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable=['name', 'description', 'category_id', 'price'];
+    public $availableFilters = ['id', 'name', 'description', 'price', 'category_id'];
     //relacion uno a muchos inversa
     public function category(){
         return $this->belongsTo(Category::class);

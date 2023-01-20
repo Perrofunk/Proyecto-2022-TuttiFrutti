@@ -31,6 +31,8 @@
     "Login": "Iniciar Sesion",
     "Remember Me": "Recuerdame",
     "purchase_id": "ID Compra",
-    "orderBy": "Ordenar por"
+    "orderBy": "Ordenar por",
+    "category": "Categoria",
+    "search":"Busqueda"
     
 }

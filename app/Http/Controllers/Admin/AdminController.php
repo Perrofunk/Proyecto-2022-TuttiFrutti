@@ -18,6 +18,18 @@ class AdminController extends Controller
             'purchases' => Purchase::all()
         ]);
     }
+    public function profile(){
+        $user = auth()->user();
+        return view('admin.profile.index', [
+            'admin' => $user
+        ]);
+    }
+    public function settings(){
+        $user = auth()->user();
+        return view('admin.profile.settings', [
+            'admin' => $user
+        ]);
+    }
     // public function productsindex(){
     //     return view('admin.products.index', [
     //         'products' => Product::all()

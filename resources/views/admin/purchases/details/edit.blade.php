@@ -3,6 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+{{Breadcrumbs::render()}}
     <h1>Dashboard</h1>
 @stop
 
@@ -13,7 +14,7 @@
     @endphp
 
 <div class="">
-<x-crud.forms  type="edit" :relationship_parent_models="$products" :parent="$purchase" :variable="$detail"></x-crud.forms>
+<x-crud.forms  type="edit" :first_parent_models="$products" :second_parent="$purchase" :variable="$detail"></x-crud.forms>
 </div>
   
   

@@ -9,6 +9,7 @@ class Supplier extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'email', 'contact', 'address', 'phone'];
+    public $availableFilters = ['id', 'email'];
 
     public function purchases(){
         return $this->hasMany(Purchase::class, 'supplier_id');

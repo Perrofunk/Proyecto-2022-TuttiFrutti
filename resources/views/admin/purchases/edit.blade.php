@@ -4,7 +4,7 @@
 
 @section('content_header')
 {{ Breadcrumbs::render() }}
-    
+<hr>
 @stop
 
 @section('content')
@@ -16,7 +16,7 @@
     $details = App\Models\PurchaseDetail::all();
 @endphp
 <div class="">
-<x-crud.forms  :relationship_child_models="$details"  type="edit" :variable="$purchase" ruta="purchases" :relationship_parent_models="$supplier"></x-crud.forms>
+<x-crud.forms  :first_child_models="$details"  type="edit" :variable="$purchase" ruta="purchases" :first_parent_models="$supplier"></x-crud.forms>
 </div>
   
   

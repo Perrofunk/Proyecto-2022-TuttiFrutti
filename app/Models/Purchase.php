@@ -9,6 +9,7 @@ class Purchase extends Model
 {
     use HasFactory;
     protected $fillable = ['date', 'total', 'supplier_id' ];
+    public $availableFilters = ['id', 'date', 'total', 'supplier_id', 'supplier_name'];
 
     public function supplier(){
         return $this->belongsTo(Supplier::class, 'supplier_id');
