@@ -16,4 +16,10 @@ class Address extends Model
     public function client(){
         return $this->hasOne(Client::class);
     }
+    public function admin(){
+        return $this->hasOne(Admin::class);
+    }
+    public function employee(){
+        return $this->hasOne(Employee::class);
+    }
 }

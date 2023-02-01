@@ -82,6 +82,10 @@ Breadcrumbs::for('suppliers.edit', function (BreadcrumbTrail $trail, Supplier $s
 Breadcrumbs::for('admin.profile', function (BreadcrumbTrail $trail) {
     $trail->push('Perfil', route('admin.profile'));
 });
+Breadcrumbs::for('admin.profile.change-password', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.profile');
+    $trail->push('Cambiar Contraseña', route('admin.profile.change-password'));
+});
 
 
 ?>

@@ -15,4 +15,7 @@ class Employee extends Model
     public function userType(){
         return $this->belongsTo(UserType::class, 'name');
     }
+    public function address(){
+        return $this->belongsTo(Address::class);
+    }
 }

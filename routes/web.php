@@ -54,7 +54,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/purchases/{purchase}/details', DetailController::class);
     Route::resource('admin/categories', CategoryController::class);
     Route::get('admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
-    Route::get('admin/profile/settings', [AdminController::class, 'settings'])->name('admin.profile.settings');
+    Route::get('admin/profile/change-password', [AdminController::class, 'changePassword'])->name('admin.profile.change-password');
+    Route::post('admin/profile/change-password', [AdminController::class, 'updatePassword'])->name('admin.profile.update-password');
 });
 Route::resource('products', ProductController::class)->only([
     'index', 'show'

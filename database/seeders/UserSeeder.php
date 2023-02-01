@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Address;
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,10 +18,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-            User::factory(1)->hasAdmin(1)->create([
+            User::factory(1)->hasAdmin(1, ['address_id' => Address::all()->random()->id])->create([
             'name'=>'Rodrigo',
             'surname'=>'Zanabria',
             'email'=>'gatopunk99@gmail.com',
+            'phone'=>'3794-110162',
             //1 = admin, 2 = employee, 3 = client
             'user_type'=>'1',
             //Random:
@@ -36,5 +39,8 @@ class UserSeeder extends Seeder
         User::factory(15)->hasClient()->create([
             'user_type'=>'3'
         ]);
+        Address::factory(1)->create(['address'=>'305 Negro Arroyo Lane']);
+        $admin = Admin::where('user_id', 1);
+        $admin->update(['address_id' => Address::where('address', '305 Negro Arroyo Lane')->first()->id]);
     }
 }

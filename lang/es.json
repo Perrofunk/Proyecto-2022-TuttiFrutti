@@ -33,6 +33,11 @@
     "purchase_id": "ID Compra",
     "orderBy": "Ordenar por",
     "category": "Categoria",
-    "search":"Busqueda"
+    "search":"Busqueda",
+    "Change Password":"Cambiar Contraseña",
+    "New Password":"Contraseña Nueva",
+    "Old Password":"Contraseña Anterior",
+    "Employee":"Empleado",
+    "Client":"Cliente"
     
 }

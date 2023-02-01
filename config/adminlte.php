@@ -319,8 +319,9 @@ return [
             'submenu' =>[   ['text'=>'Index', 'url'=>'admin'],
                             ['text'=>'Productos', 'url'=>'admin/products'],
                             ['text'=>'Compras', 'url'=>'admin/purchases'],
-                            ['text'=>'Proveedores', 'url'=>'admin/suppliers']
-                            ]
+                            ['text'=>'Proveedores', 'url'=>'admin/suppliers'],
+                            ['text'=>'Usuarios', 'url'=>'admin/users']
+            ]
         ],
         ['header' => 'account_settings'],
         [
@@ -330,7 +331,7 @@ return [
         ],
         [
             'text' => 'change_password',
-            'route'  => 'admin.profile.settings',
+            'route'  => 'admin.profile.change-password',
             'icon' => 'fas fa-fw fa-lock',
         ],
         
