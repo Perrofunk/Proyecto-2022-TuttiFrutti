@@ -2,11 +2,23 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+{{Breadcrumbs::render()}}
     <h1>Usuarios Registrados</h1>
 @stop
 
 @section('content')
-
+<form action="" method="">
+  @csrf
+  <div class="d-flex justify-content-start">
+    <div class="btn btn-group">
+      <button class="btn btn-dark" type="submit" name="user_type" value="0">Todos</button>
+      <button class="btn btn-danger" type="submit" name="user_type" value="1">Admin</button>
+      <button class="btn btn-warning" type="submit" name="user_type" value="2">Empleado</button>
+      <button class="btn btn-primary" type="submit" name="user_type" value="3">Cliente</button>
+    </div>
+  </div>
+</form>
+{{ $users->links() }}
 <div class="d-flex">
 
     <div class="row row-cols-3">
@@ -16,8 +28,15 @@
     
     @endforeach
     </div>
-
-</div>
+    
+  </div>
+  <form id="delete-user" class="d-none" action="" method="POST">
+    @csrf
+    @method('DELETE')
+</form>
+    
+    {{ $users->appends(Request::all())->links() }}
+ 
 @stop
 
 @section('css')
@@ -59,7 +78,8 @@
       }
       .number3{
         font-weight:500;
-      }</style>
+      }
+      </style>
 @stop
 
 @section('js')

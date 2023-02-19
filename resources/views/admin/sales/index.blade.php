@@ -1,24 +1,32 @@
 @extends('adminlte::page')
+
 @section('title', 'Dashboard')
 
 @section('content_header')
 {{ Breadcrumbs::render() }}
-    <h1>Proveedores - Index</h1>
-    
+
+<h2>Registro de Compras</h2>
 @stop
 
+
 @section('content')
+    {{-- Header --}}
+
     {{-- Alpine JS --}}
     <script defer src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
-    <p class="text-secondary">
-        Total de registros: {{$suppliers->total()}}
-    </p>
-    <x-crud.filters :variable="$suppliers" >
-        <a role="button" class="w-100 btn btn-primary mt-3" href="{{route('suppliers.create')}}">
-            Registrar Proveedor
+        @php
+            $modelos = App\Models\PaymentType::all();
+        @endphp
+        <p class="text-secondary">
+            Total de registros: {{$sales->total()}}
+        </p>
+    <x-crud.filters :variable="$sales" :relacion_modelos="$modelos">
+        <a role="button" class="w-100 btn btn-primary mt-3" href="{{route('sales.create')}}">
+            Registrar Nueva Venta
         </a></x-crud.filters>
-    <x-crud.views :variable="$suppliers" ruta="suppliers"></x-crud.views>
+    <x-crud.views :variable="$sales" ruta="sales"></x-crud.views>
+    
 @stop
 
 @section('css')

@@ -26,9 +26,9 @@ class SupplierController extends Controller
 
         $suppliers = Supplier::orderBy($query, $orderDirection)->filter(request(['search']));
             if ($suppliers->doesntExist()) {
-                $suppliers = Supplier::orderBy($query, $orderDirection)->paginate('12');
+                $suppliers = Supplier::orderBy($query, $orderDirection)->paginate('12')->appends(request()->query());
             } else {
-                $suppliers = $suppliers->paginate('12');
+                $suppliers = $suppliers->paginate('12')->appends(request()->query());
             };
         
         return view('admin.suppliers.index', [

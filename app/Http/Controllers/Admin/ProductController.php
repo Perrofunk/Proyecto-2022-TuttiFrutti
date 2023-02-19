@@ -30,9 +30,9 @@ class ProductController extends Controller
         
             $products = Product::orderBy($query, $orderDirection)->filter(request(['category_id', 'search']));
                 if ($products->doesntExist()) {
-                    $products = Product::orderBy($query, 'desc')->paginate('12');
+                    $products = Product::orderBy($query, 'desc')->paginate('12')->appends(request()->query());
                 } else {
-                    $products = $products->paginate('12');
+                    $products = $products->paginate('12')->appends(request()->query());
                     
                 }
             

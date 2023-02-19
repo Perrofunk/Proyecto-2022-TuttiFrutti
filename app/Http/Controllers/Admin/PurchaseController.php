@@ -24,7 +24,7 @@ class PurchaseController extends Controller
                 if ($purchases->doesntExist()) {
                     return redirect()->back()->withErrors('No hay datos para este proveedor ');
                 } else {
-                    $purchases = $purchases->paginate('12');
+                    $purchases = $purchases->paginate('12')->appends(request()->query());
                     
                 }
         return view('admin.purchases.index', [

@@ -16,10 +16,10 @@ class PaymentTypeSeeder extends Seeder
     public function run()
     {
         PaymentType::create([
-            'payment_type'=>'card'
+            'name'=>'card'
         ]);
         PaymentType::create([
-            'payment_type'=>'cash'
+            'name'=>'cash'
         ]);
     }
 }

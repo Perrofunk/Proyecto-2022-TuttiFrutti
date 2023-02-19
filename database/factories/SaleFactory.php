@@ -22,7 +22,7 @@ class SaleFactory extends Factory
             'date'=>$this->faker->dateTime(),
             'total'=>$this->faker->randomNumber(3),
             'payment_type_id'=>PaymentType::all()->random()->id,
-            'user_id'=>User::all()->random()->id
+            'user_id'=>User::where('user_type', '=', '3')->get()->random()->id
         ];
     }
 }

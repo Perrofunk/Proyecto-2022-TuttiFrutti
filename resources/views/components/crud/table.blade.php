@@ -22,7 +22,7 @@ if ($parent != '') {
 <thead class="table-dark">
   <tr>
     @foreach ($columns as $column)
-      <th scope="col">{{__($column)}}</th>
+      <th scope="col">{{ucfirst(__($column))}}</th>
     @endforeach
       <th scope="col" class="bg-primary border-primary border-bottom-0">Acciones</th>
   </tr>

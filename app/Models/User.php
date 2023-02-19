@@ -69,4 +69,11 @@ class User extends Authenticatable
     public function admin(){
         return $this->hasOne(Admin::class);
     }
+    public function scopeFilter($query, array $filters){
+        
+        //Filtra por id de categoria, se llama cuando se apretan los botones en las vistas
+        if($filters['user_type'] ?? false){
+            $query->where('user_type', '=', request('user_type'));
+        };
+        }
 }

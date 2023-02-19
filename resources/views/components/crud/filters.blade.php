@@ -46,8 +46,8 @@ $requestInput = request()->input();
                     }
                     if (preg_match('/(_id)/', $key)) {
                       $key = rtrim($key, '_id');
-                      echo __($key).": " ."<span class='text-bold'>".$relacion_modelos->where('id', $value)->first()->name . "</span><br>";
-                    } else{echo __($key) . ": "."<span class='text-bold'>". __($value) . "</span><br>";}
+                      echo ucfirst(__($key)).": " ."<span class='text-bold'>".ucfirst(__($relacion_modelos->where('id', $value)->first()->name)) . "</span><br>";
+                    } else{echo ucfirst(__($key)) . ": "."<span class='text-bold'>". __($value) . "</span><br>";}
                     }
                   };
               }
@@ -78,13 +78,13 @@ $requestInput = request()->input();
     </div>
       @if ($relacion_id != null)
       <div class="input-group mb-1">
-          <label class="input-group-text" for="inputGroupSelect01">{{__($relacion)}}</label>
+          <label class="input-group-text" for="inputGroupSelect01">{{ucfirst(__($relacion))}}</label>
           <select name="{{$relacion_id}}" class="form-select" id="inputGroupSelect01">
             <option aria-placeholder="Seleccionar..." value="">
             Seleccionar...
              </option>
              @foreach ($relacion_modelos as $relacion_item)    
-              <option value="{{$relacion_item->id}}" {{selected($relacion_item->id, $relacion_id)}}>{{$relacion_item->name}}</option>
+              <option value="{{$relacion_item->id}}" {{selected($relacion_item->id, $relacion_id)}}>{{ucfirst(__($relacion_item->name))}}</option>
              @endforeach
           </select>
         </div>
@@ -94,7 +94,7 @@ $requestInput = request()->input();
         <select name="orderBy" class="form-select" id="inputGroupSelect02">
           <option aria-placeholder="Seleccionar..." value="">Seleccionar...</option>
           @php
-              $invalid = ['email', 'contact', 'address', 'phone'];
+              $invalid = ['email', 'contact', 'address', 'phone', 'user_id'];
           @endphp
           @foreach ($columns as $column)
                 @if (!in_array($column, $invalid))

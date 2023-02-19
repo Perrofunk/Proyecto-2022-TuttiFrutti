@@ -319,6 +319,7 @@ return [
             'submenu' =>[   ['text'=>'Index', 'url'=>'admin'],
                             ['text'=>'Productos', 'url'=>'admin/products'],
                             ['text'=>'Compras', 'url'=>'admin/purchases'],
+                            ['text'=>'Ventas', 'url'=>'admin/sales'],
                             ['text'=>'Proveedores', 'url'=>'admin/suppliers'],
                             ['text'=>'Usuarios', 'url'=>'admin/users']
             ]

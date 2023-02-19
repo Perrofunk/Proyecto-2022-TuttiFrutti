@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
+use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\WelcomeController;
@@ -53,6 +54,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/products', ProductController::class);
     Route::resource('admin/purchases/{purchase}/details', DetailController::class);
     Route::resource('admin/categories', CategoryController::class);
+    Route::resource('admin/sales', SaleController::class);
     Route::get('admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::get('admin/profile/change-password', [AdminController::class, 'changePassword'])->name('admin.profile.change-password');
     Route::post('admin/profile/change-password', [AdminController::class, 'updatePassword'])->name('admin.profile.update-password');

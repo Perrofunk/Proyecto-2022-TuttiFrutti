@@ -38,6 +38,11 @@
     "New Password":"Contraseña Nueva",
     "Old Password":"Contraseña Anterior",
     "Employee":"Empleado",
-    "Client":"Cliente"
+    "Client":"Cliente",
+    "card":"tarjeta",
+    "cash":"efectivo",
+    "payment_type":"tipo de pago",
+    "user_id":"ID Usuario",
+    "payment_type_id":"ID Tipo de pago"
     
 }

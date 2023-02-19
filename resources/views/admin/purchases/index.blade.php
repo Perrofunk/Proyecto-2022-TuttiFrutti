@@ -4,7 +4,7 @@
 
 @section('content_header')
 {{ Breadcrumbs::render() }}
-<hr>
+
 <h2>Registro de Compras</h2>
 @stop
 

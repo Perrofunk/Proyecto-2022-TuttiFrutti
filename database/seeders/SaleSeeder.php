@@ -20,10 +20,10 @@ class SaleSeeder extends Seeder
         foreach (Sale::all() as $sale) {
             $detailTotal=0;
             foreach (SaleDetail::where('sale_id', $sale->id)->get() as $saleDetail){
-                $detailTotal += $saleDetail->price*$saleDetail->quantity;
                 $saleDetail->update([
                     'price'=>$saleDetail->product->price
                 ]);
+                $detailTotal += $saleDetail->price*$saleDetail->quantity;
             };
             $sale->update([
                 'total'=>$detailTotal
