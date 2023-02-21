@@ -119,6 +119,10 @@ Breadcrumbs::for('users.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.index');
     $trail->push('Usuarios', route('users.index'));
 });
+Breadcrumbs::for('users.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('users.index');
+    $trail->push('Crear Usuario', route('users.create'));
+});
 Breadcrumbs::for('users.show', function (BreadcrumbTrail $trail, User $user) {
     $trail->parent('users.index');
     $trail->push($user->name.$user->surname, route('users.show', ['user'=>$user]));

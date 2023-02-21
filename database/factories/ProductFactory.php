@@ -22,7 +22,7 @@ class ProductFactory extends Factory
         
         return [
             'name'=>$this->faker->unique()->word(10),
-            'description'=>$this->faker->word(20),
+            'description'=>$this->faker->text(),
             'price'=>$this->faker->randomFloat(2, 0, 1000),
             'category_id'=>Category::all()->random()->id
         ];

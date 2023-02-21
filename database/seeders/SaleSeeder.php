@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Client;
 use App\Models\Sale;
 use App\Models\SaleDetail;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,7 +17,9 @@ class SaleSeeder extends Seeder
      */
     public function run()
     {
-        Sale::factory(3)->has(SaleDetail::factory()->count(3), 'details')->create();
+        foreach (Client::all() as $client) {
+            Sale::factory(3)->has(SaleDetail::factory()->count(3), 'details')->create();
+        }
         foreach (Sale::all() as $sale) {
             $detailTotal=0;
             foreach (SaleDetail::where('sale_id', $sale->id)->get() as $saleDetail){

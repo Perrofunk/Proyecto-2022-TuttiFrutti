@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->dateTime('date');
-            $table->integer('total');
+            $table->integer('total')->default('0');
             $table->foreignId('payment_type_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

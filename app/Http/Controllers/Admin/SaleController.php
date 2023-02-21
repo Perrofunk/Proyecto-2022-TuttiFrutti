@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Sale;
+use App\Models\SaleDetail;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -24,7 +26,12 @@ class SaleController extends Controller
             $orderDirection = request()->input('orderDirection');
         } else {$orderDirection = 'asc';}
 
-        $sales = Sale::orderBy($query, $orderDirection)->filter(request(['payment_type_id']))->paginate(6)->appends(request()->query());
+        $sales = Sale::orderBy($query, $orderDirection)->filter(request(['payment_type_id', 'search']));
+        if ($sales->doesntExist()) {
+            return redirect()->back()->withErrors('No hay datos');
+        } else {
+            $sales = $sales->paginate('8')->appends(request()->query());
+        }
         return view('admin.sales.index', [
             'sales'=>$sales
         ]);
@@ -37,7 +44,10 @@ class SaleController extends Controller
      */
     public function create()
     {
-        //
+        $products = Product::all();
+        return view('admin.sales.create', [
+            'products' => $products
+        ]);
     }
 
     /**
@@ -48,7 +58,30 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    
+        $request->validate([
+            'user_id'=>'required',
+            'payment_type_id'=>'required',
+            'date'=>'required'
+        ]);
+    
+        $sale = Sale::create($request->all());
+        
+    $products = $request->input('products', []);
+    $quantities = $request->input('quantities', []);
+    $total = 0;
+    
+    for ($product=0; $product < count($products); $product++) {
+        if ($products[$product] != '') {
+            $productModel = Product::where('id', '=', $products[$product])->first();
+            $subtotal = $productModel->price * $quantities[$product];
+            $total += $subtotal;
+            SaleDetail::create(['sale_id'=>$sale->id, 'product_id'=>$products[$product], 'quantity'=>$quantities[$product], 'price'=>$productModel->price]);
+        }
+    }
+    $sale->update(['total'=>$total]);
+
+    return redirect()->route('sales.index');
     }
 
     /**
@@ -70,9 +103,12 @@ class SaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Sale $sale)
     {
-        //
+        return view('admin.sales.edit', [
+            'sale'=>$sale,
+            'products'=>Product::all()
+        ]);
     }
 
     /**
@@ -82,9 +118,32 @@ class SaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Sale $sale)
     {
-        //
+        $request->validate([
+            'user_id'=>'required',
+            'payment_type_id'=>'required',
+            'date'=>'required'
+        ]);
+    
+       
+        $sale->details()->delete();
+        $sale->update($request->all());
+    $products = $request->input('products', []);
+    $quantities = $request->input('quantities', []);
+    $total = 0;
+    
+    for ($product=0; $product < count($products); $product++) {
+        if ($products[$product] != '') {
+            $productModel = Product::where('id', '=', $products[$product])->first();
+            $subtotal = $productModel->price * $quantities[$product];
+            $total += $subtotal;
+            SaleDetail::create(['sale_id'=>$sale->id, 'product_id'=>$products[$product], 'quantity'=>$quantities[$product], 'price'=>$productModel->price]);
+        }
+    }
+    $sale->update(['total'=>$total]);
+
+    return redirect()->route('sales.index');
     }
 
     /**
@@ -93,8 +152,9 @@ class SaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Sale $sale)
     {
-        //
+        $sale->delete();
+        return redirect()->route('sales.index');
     }
 }

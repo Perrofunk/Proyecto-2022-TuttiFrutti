@@ -47,6 +47,20 @@
                             </div>
                         </div>
 
+                        <div class="w-full px-3">
+                            <label for="phone" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">{{ __('phone') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="tel" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+
+                                @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label for="password" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">{{ __('Password') }}</label>
 

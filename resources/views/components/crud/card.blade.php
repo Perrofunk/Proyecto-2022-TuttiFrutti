@@ -34,6 +34,12 @@ $ruta_edit = $ruta . ".edit";
     @endif
     <div class="card-body">
         <ul class="list-group list-group-flush">
+            @if ($variable_table == "sales")
+            
+            <li class="list-group-item text-center text-secondary">Usuario 
+                <a href="{{route('users.show', ['user'=>$item->user->id])}}"><p  class="">{{$item->user->name}}</p></a>
+            </li>
+            @endif
             @foreach ($columns as $column)    
                 <li class="list-group-item text-center text-secondary">{{__($column)}}: 
                     <p class="text-dark text-bold">{{ $item[$column] }}</p>

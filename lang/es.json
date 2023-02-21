@@ -38,11 +38,18 @@
     "New Password":"Contraseña Nueva",
     "Old Password":"Contraseña Anterior",
     "Employee":"Empleado",
+    "employee":"empleado",
     "Client":"Cliente",
+    "client":"cliente",
     "card":"tarjeta",
     "cash":"efectivo",
     "payment_type":"tipo de pago",
     "user_id":"ID Usuario",
-    "payment_type_id":"ID Tipo de pago"
+    "payment_type_id":"ID Tipo de pago",
+    "save":"guardar",
+    "row":"fila",
+    "add":"añadir",
+    "delete":"borrar",
+    "The user_id field is required":"El campo * debe rellenarse"
     
 }

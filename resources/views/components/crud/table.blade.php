@@ -51,6 +51,11 @@ if ($parent != '') {
             document.getElementById('delete-table').submit();
             }else{event.preventDefault();}" type="submit" class="btn rounded-0 btn-danger">Borrar</button>
         @else  
+          @if ($ruta == 'purchases')
+          <a class="btn btn-outline-primary" href="{{$ruta}}/{{$item->id}}/details">Detalles</a>
+          @else
+          <a class="btn btn-outline-primary" href="{{$ruta}}/{{$item->id}}">Detalles</a>
+          @endif
           <a class="text-decoration-none btn rounded-0  btn-outline-warning" href="{{route($ruta_edit, [$ruta_singular=>$item])}}">Modificar</a>
           <button onclick="if(confirm('Esta a punto de eliminar el elemento [{{$item->id}}] de la tabla [{{__($ruta)}}]')){
             event.preventDefault();

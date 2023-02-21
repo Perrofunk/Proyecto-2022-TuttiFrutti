@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'user_type',
         'password',
+        'phone'
     ];
 
     /**
@@ -74,6 +75,11 @@ class User extends Authenticatable
         //Filtra por id de categoria, se llama cuando se apretan los botones en las vistas
         if($filters['user_type'] ?? false){
             $query->where('user_type', '=', request('user_type'));
-        };
+        }
+        else{
+            if ($filters['search'] ?? false) {
+                $query->has('sales')->where('name', 'like', '%' . $filters['search'] . '%');
+            }
+        }
         }
 }

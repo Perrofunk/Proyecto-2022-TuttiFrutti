@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sale extends Model
 {
     use HasFactory;
+    protected $fillable = ['products[]', 'quantities[]', 'date', 'user_id', 'payment_type_id', 'total'];
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -27,16 +28,18 @@ class Sale extends Model
         if($filters['payment_type_id'] ?? false){
             $query->where('payment_type_id', '=', request('payment_type_id'));
         };
+        // Busqueda
         if($filters['search'] ?? false){
-            //Si la busqueda es una categoria:
-                    $search = Supplier::filter(request(['search']))->get('id');
-                    if ($search->count()) {
-                        $search = $search[0]['id'];
-                        $query->where('supplier_id', 'like', '%' . $search . '%');
+            $clients = User::filter(request(['search']))->get();
+                    if ($clients->count()) {
+                        foreach ($clients as $client) {
+                           
+                            $query->where('user_id', '=', $client->id);
+                        }
                         
                     }else {
-                        $search = $query->where('id', '=', $filters['search'])->orWhere('total', 'like', '%' . $filters['search'] . '%')->orWhere('date', 'like', '%' . $filters['search'] . '%');
-                    };
+                        $query->where('user_id', '=', $filters['search'])->orWhere('id', '=', $filters['search']);
             }
         }
+    }
 }

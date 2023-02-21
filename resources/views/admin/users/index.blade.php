@@ -17,6 +17,7 @@
       <button class="btn btn-primary" type="submit" name="user_type" value="3">Cliente</button>
     </div>
   </div>
+  <a href="{{route('users.create')}}" class="btn btn-primary">Crear Usuario</a>
 </form>
 {{ $users->links() }}
 <div class="d-flex">

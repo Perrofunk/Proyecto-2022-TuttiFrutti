@@ -5,7 +5,7 @@
 @section('content_header')
 {{ Breadcrumbs::render() }}
 
-<h2>Registro de Compras</h2>
+<h2>Registro de Ventas</h2>
 @stop
 
 
@@ -21,11 +21,16 @@
         <p class="text-secondary">
             Total de registros: {{$sales->total()}}
         </p>
+
+        @if ($errors->any())
+            {{($errors->first())}} <a href="{{route('sales.index')}}" class="btn btn-primary" type="button">Volver</a>
+    @else
     <x-crud.filters :variable="$sales" :relacion_modelos="$modelos">
         <a role="button" class="w-100 btn btn-primary mt-3" href="{{route('sales.create')}}">
             Registrar Nueva Venta
         </a></x-crud.filters>
     <x-crud.views :variable="$sales" ruta="sales"></x-crud.views>
+    @endif
     
 @stop
 
