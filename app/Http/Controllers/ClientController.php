@@ -28,6 +28,12 @@ class ClientController extends Controller
             'user'=>auth()->user()
         ]);
     }
+    public function showOrder(Sale $sale){
+   
+        return view('client.showOrder', [
+            'order'=>$sale
+        ]);
+    }
     public function update(Request $request){
         
         $request->validate([

@@ -57,7 +57,7 @@ Route::post('/checkout', [SaleController::class, 'clientStore'])->name('client.s
 
 Route::get('/profile', [ClientController::class, 'profile'])->name('client.profile');
 Route::get('/profile/orders', [ClientController::class, 'orders'])->name('client.orders');
-Route::get('/profile/orders/{order}', [ClientController::class, 'showOrder'])->name('client.orders.show');
+Route::get('/profile/orders/{sale}', [ClientController::class, 'showOrder'])->name('client.orders.show');
 Route::get('/profile/edit', [ClientController::class, 'edit'])->name('client.profile.edit');
 Route::post('/profile/edit', [ClientController::class, 'update'])->name('client.profile.update');
 

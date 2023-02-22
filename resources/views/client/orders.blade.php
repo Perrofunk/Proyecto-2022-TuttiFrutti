@@ -11,11 +11,14 @@
     <x-products-explore :products="\App\Models\Product::all()" />
     </div>
 @else
+<div class="container mx-auto py-4">
+  <h1 class="text-2xl font-bold mb-4">Mis Pedidos</h1>
+</div>
 {{$orders->links('pagination::tailwind')}}
 <div class="grid grid-cols-2 gap-4">
 @foreach ($orders as $order)
     <a
-  href="{{route('client.orders.show', ['order'=>$order])}}"
+  href="{{route('client.orders.show', ['sale'=>$order])}}"
   class="group flex flex-col justify-between rounded-sm bg-white p-4 shadow-xl transition-shadow hover:shadow-lg sm:p-6 lg:p-8"
 >
   <div>
