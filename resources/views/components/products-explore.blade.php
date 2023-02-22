@@ -29,8 +29,8 @@
           @endif
           <a href="{{route('products.show', ['product'=>$product])}}" class="block">
             <img
-              alt="Simple Watch"
-              src="{{$product->image->url}}"
+              alt="{{$product->name}}"
+              src="/{{$product->image->url}}"
               class="aspect-square w-full rounded object-cover"
             />
   

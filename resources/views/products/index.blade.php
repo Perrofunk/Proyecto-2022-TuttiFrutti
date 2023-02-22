@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+@if(session()->has('success'))
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+      <span class="font-medium">{{ session()->get('success') }}</span> <a href="{{route('cart')}}" class="hover:text-blue-900"> Acceder al carrito </a>
+    </div>
+    @endif
 <div class="d-flex flex-column align-items-center p-2 border border-info border-1 rounded-3">
     
     <div class=" container">
@@ -12,7 +17,7 @@
             </div>
         @else
         
-        {{$products->links('pagination::tailwind')}}
+        {{$products->links('vendor.pagination.tailwind')}}
         <section>
             <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
               <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:items-start">
@@ -21,7 +26,7 @@
                     <summary
                       class="flex items-center justify-between bg-gray-100 px-5 py-3 lg:hidden"
                     >
-                      <span class="text-sm font-medium"> Toggle Filters </span>
+                      <span class="text-sm font-medium"> Mostrar Filtros </span>
           
                       <svg
                         class="h-5 w-5"
@@ -38,8 +43,10 @@
                         />
                       </svg>
                     </summary>
-                  
-                    <form method="POST" action="" class="border-t border-gray-200 lg:border-t-0">
+                
+                    {{-- Formulario --}}
+                    <form method="" action="" class="border-t border-gray-200 lg:border-t-0">
+                      @csrf
                       <fieldset>
                         <legend
                           class="block w-full bg-gray-50 px-5 py-3 text-xs font-medium"
@@ -50,47 +57,51 @@
                         <div class="space-y-2 px-5 py-6">
                           <div class="flex items-center">
                             <input
-                              id="category_id"
-                              type="checkbox"
+                              id="category_id1"
+                              type="radio"
                               name="category_id"
+                              value="1"
+                              {{ request()->input('category_id')=="1" ? 'checked='.'"checked"' : '' }}
                               class="h-5 w-5 rounded border-gray-300"
                             />
           
-                            <label for="category_id" class="ml-3 text-sm font-medium">
+                            <label for="category_id1" class="ml-3 text-sm font-medium">
                               Fruta
                             </label>
                           </div>
           
                           <div class="flex items-center">
                             <input
-                              id="game"
-                              type="checkbox"
+                              id="category_id2"
+                              type="radio"
                               name="category_id"
+                              value="2"
+                              {{ request()->input('category_id')=="2" ? 'checked='.'"checked"' : '' }}
                               class="h-5 w-5 rounded border-gray-300"
                             />
           
-                            <label for="game" class="ml-3 text-sm font-medium">
+                            <label for="category_id2" class="ml-3 text-sm font-medium">
                               Verdura
                             </label>
                           </div>
           
                           <div class="flex items-center">
                             <input
-                              id="outdoor"
-                              type="checkbox"
-                              name="type[outdoor]"
+                              id="category_id3"
+                              type="radio"
+                              name="category_id"
+                              value="3"
+                              {{ request()->input('category_id')=="3" ? 'checked='.'"checked"' : '' }}
                               class="h-5 w-5 rounded border-gray-300"
                             />
           
-                            <label for="outdoor" class="ml-3 text-sm font-medium">
+                            <label for="category_id3" class="ml-3 text-sm font-medium">
                               Otro
                             </label>
                           </div>
           
                           <div class="pt-2">
-                            <button type="button" class="text-xs text-gray-500 underline">
-                              Reiniciar filtro
-                            </button>
+                            <input type="button" value="Reiniciar Filtro" class="text-xs text-gray-500 underline" onclick="clearInput()">
                           </div>
                         </div>
                       </fieldset>
@@ -98,23 +109,27 @@
                       <div
                         class="flex justify-between border-t border-gray-200 px-5 py-3"
                       >
-                        <button
-                          name="reset"
+                      
+                        <input
+                          value="Limpiar filtros"
                           type="button"
+                          onclick="this.form.reset();clearInput();this.form.submit()"
                           class="rounded text-xs font-medium text-gray-600 underline"
                         >
-                          Limpiar Todos los Filtros
-                        </button>
           
                         <button
-                          name="commit"
-                          type="button"
+                          
+                          type="submit"
                           class="rounded bg-green-600 px-5 py-3 text-xs font-medium text-white"
                         >
                           Aplicar Filtros
                         </button>
                       </div>
-                    </form>
+                    
+
+
+
+
                   </details>
                 </div>
           
@@ -126,29 +141,36 @@
                     </p> --}}
           
                     <div class="ml-4">
-                      <label for="SortBy" class="sr-only"> Sort </label>
+                      <label for="SortBy" class="sr-only"> Ordenar </label>
           
                       <select
-                        id="SortBy"
+                        id="sortBy"
                         name="sort_by"
                         class="rounded border-gray-100 text-sm"
                       >
-                        <option readonly>Sort</option>
-                        <option value="title-asc">Title, A-Z</option>
-                        <option value="title-desc">Title, Z-A</option>
-                        <option value="price-asc">Price, Low-High</option>
-                        <option value="price-desc">Price, High-Low</option>
+                      @php
+                      function selected($order){
+                        if (request()->query('sort_by') == $order) {
+                          echo "selected";
+                        };
+                      }
+                      @endphp
+                        <option readonly>Ordenar por</option>
+                        <option value="name-asc"{{selected('name-asc')}}>Nombre, A-Z</option>
+                        <option value="name-desc" {{ selected('name-desc') }}>Nombre, Z-A</option>
+                        <option value="price-asc" {{ selected('price-asc') }}>Precio, Menor-Mayor</option>
+                        <option value="price-desc" {{ selected('price-desc') }}>Precio, Mayor-Menor</option>
                       </select>
                     </div>
                   </div>
-          
+                </form>
                   <div
-                    class="mt-4 grid grid-cols-1 gap-px border border-gray-200 bg-gray-200 sm:grid-cols-2 lg:grid-cols-3"
+                    class="mt-4 grid grid-cols-1 gap-px border border-gray-200 bg-rose-400 sm:grid-cols-2 lg:grid-cols-3"
                   >
                   @foreach ($products as $product)
                       
                   
-                    <div class="relative block bg-white">
+                    <div class="relative block bg-white ">
                       
                       <a href="{{route('products.show', ['product'=>$product])}}">
                       <img
@@ -158,36 +180,59 @@
                       />
                     </a>
                       <div class="p-6">
-                        <span class="inline-block bg-yellow-400 px-3 py-1 text-xs font-medium">
-                          {{$product->category->name}}
-                        </span>
+                        @switch($product->category->name)
+                          @case('Fruta')
+                          <span class="inline-block bg-red-400 px-3 py-1 text-xs font-medium">
+                            {{$product->category->name}}
+                          </span>
+                            @break
+                          @case('Verdura')
+                          <span class="inline-block bg-emerald-400 px-3 py-1 text-xs font-medium">
+                            {{$product->category->name}}
+                          </span>
+                            @break
+                          @case('Otro')
+                          <span class="inline-block bg-blue-400 px-3 py-1 text-xs font-medium">
+                            {{$product->category->name}}
+                          </span>
+                            @break
+                        
+                          @default
+                            
+                        @endswitch
           
                         <a href="{{route('products.show', ['product'=>$product])}}">
                         <h3 class="mt-4 text-lg font-bold hover:text-blue-500">{{$product->name}}</h3>
                       </a>
                         <p class="mt-2 text-sm font-medium text-gray-600">${{$product->price}}</p>
-          
+      
+                        <form id="" action="{{route('cart.add')}}" method="POST">
+                        @csrf
+                        <input name="product_id" type="hidden" value="{{$product->id}}">
+                        <input type="hidden" name="quantity" value="1" min="1">
                         <button
-                          type="button"
-                          class="mt-4 flex w-full items-center justify-center rounded-sm bg-green-500 px-8 py-4"
+                          type="submit"
+                          class="mt-4 flex w-full items-center justify-center rounded-sm bg-amber-500 hover:bg-amber-400 px-8 py-4"
                         >
-                          <span class="text-sm font-medium"> Añadir al Carrito </span>
-          
-                          <svg
+                            <span class="text-sm font-medium"> Añadir al Carrito </span>
+                            
+                            <svg
                             class="ml-1.5 h-5 w-5"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
-                          >
+                            >
                             <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                             />
                           </svg>
                         </button>
+                      </form>
+
                       </div>
                     </div>
                     @endforeach
@@ -198,7 +243,7 @@
             </div>
           </section>
           @endif  
-          {{$products->links('pagination::tailwind')}}
+          
           <script>
             window.addEventListener('resize', () => {
               const desktopScreen = window.innerWidth < 768
@@ -210,4 +255,14 @@
         
     </div>
 </div>
+{{$products->links('vendor.pagination.tailwind')}}
+<script>
+  function clearInput(){
+    $('input[name=category_id]').prop('checked',false);
+    try {
+            document.getElementById('sortBy').selectedIndex = 0; 
+            } catch (error){}
+  }
+
+</script>
 @endsection

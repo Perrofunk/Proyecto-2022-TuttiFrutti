@@ -27,6 +27,30 @@ class ProductController extends Controller
         if (!is_null(request()->input('orderDirection'))) {
             $orderDirection = request()->input('orderDirection');
         } else {$orderDirection = 'asc';}
+        if (request()->input('sort_by') !== null) {
+            switch (request()->input('sort_by')) {
+                case 'name-asc':
+                    $query = 'name';
+                    $orderDirection = 'asc';
+                    break;
+                case 'name-desc':
+                    $query = 'name';
+                    $orderDirection = 'desc';
+                    break;
+                case 'price-asc':
+                    $query = 'price';
+                    $orderDirection = 'asc';
+                    break;
+                case 'price-desc':
+                    $query = 'price';
+                    $orderDirection = 'asc';
+                    break;
+                
+                default:
+                    
+                    break;
+            }
+        }
         
             $products = Product::orderBy($query, $orderDirection)->filter(request(['category_id', 'search']));
                 if ($products->doesntExist()) {

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
@@ -45,10 +46,22 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('', IndexController::class)->only([
     'index'
 ]);
+Route::middleware(['auth'])->group(function () {
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::delete('/cart', [CartController::class, 'remove'])->name('cart.remove');
+Route::patch('/cart', [CartController::class, 'update'])->name('cart.update');
+
+Route::post('/checkout', [SaleController::class, 'clientStore'])->name('client.sale.store');
+
+Route::get('/profile', [ClientController::class, 'profile'])->name('client.profile');
+Route::get('/profile/orders', [ClientController::class, 'orders'])->name('client.orders');
+Route::get('/profile/orders/{order}', [ClientController::class, 'showOrder'])->name('client.orders.show');
+Route::get('/profile/edit', [ClientController::class, 'edit'])->name('client.profile.edit');
+Route::post('/profile/edit', [ClientController::class, 'update'])->name('client.profile.update');
+
+});
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin', AdminController::class)->only([

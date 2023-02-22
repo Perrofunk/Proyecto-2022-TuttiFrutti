@@ -84,6 +84,40 @@ class SaleController extends Controller
     return redirect()->route('sales.index');
     }
 
+
+    public function clientStore(Request $request)
+    {
+    
+        $request->validate([
+            'user_id'=>'required',
+            'payment_type_id'=>'required',
+            'date'=>'required'
+        ]);
+    
+    $userId = auth()->user()->id;
+    $sale = Sale::create($request->all());
+    $products = \Cart::session($userId)->getContent();
+
+    $total = 0;
+    foreach ($products as $product) {
+        $subtotal = $product->price * $product->quantity;
+        $total += $subtotal;
+        SaleDetail::create([
+            'sale_id'=>$sale->id,
+            'product_id'=>$product->id,
+            'price'=>$product->price,
+            'quantity'=>$product->quantity
+            ]
+        );
+    }
+    $sale->update(['total'=>$total]);
+
+    \Cart::session($userId)->clear();
+
+
+    return redirect()->route('client.orders')->with('success', 'Pedido realizado con exito!');
+    }
+
     /**
      * Display the specified resource.
      *

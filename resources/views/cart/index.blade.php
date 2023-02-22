@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- component -->
-<!-- Create By Joker Banny -->
+   
 <style>
     @layer utilities {
     input[type="number"]::-webkit-inner-spin-button,
@@ -14,17 +13,36 @@
 </style>
 
 
-    
+    @if (count($items) == 0)
+    <div class="container mx-auto py-4">
+      <h1 class="text-2xl font-bold mb-4">Carrito vacio, empeza a llenarlo:</h1>
+  </div>
+  <div class="flex flex-col items-center">
         
+  
+      <div class="">
+      <p class="w-full text-center mt-6 w-full bg-blue-500 py-1.5 font-medium text-blue-50 ">Seguir Comprando</p>
+      <x-products-explore :products="\App\Models\Product::all()" />
+      </div>
+  </div>
+  </div>
+    @else
  
   <div class="h-full bg-gray-100 pt-20">
     <h1 class="mb-10 text-center text-2xl font-bold">Carrito</h1>
+
+    {{-- Formulario --}}
+    <form id="cart-checkout-form" action="{{ route("cart.update") }}" method="POST" enctype="multipart/form-data">
+      @method('PATCH')
+      @csrf
+      <input id="checkout" type="hidden" name="checkout" value="">
     <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
       <div class="rounded-lg md:w-2/3">
         @foreach ($items as $item)
         <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
           <img src="{{$item->model->image->url}}" alt="product-image" class="w-full rounded-lg sm:w-40" />
           <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+
             <div class="mt-5 sm:mt-0">
               <h2 class="text-lg font-bold text-gray-900">{{$item->model->name}}</h2>
               <p class="mt-1 text-xs text-gray-700">{{$item->model->category->name}}</p>
@@ -52,6 +70,8 @@
         </div>
         @endforeach
       </div>
+      </form>
+
       <!-- Sub total -->
       <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
         <div class="mb-2 flex justify-between">
@@ -69,9 +89,12 @@
             
           </div>
         </div>
-        <a href="{{route('products.index')}}"><button class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Seguir Comprando</button></a>
-        <a href="{{route('cart.checkout')}}"><button class="mt-1 w-full rounded-md bg-green-500 py-1.5 font-medium text-blue-50 hover:bg-green-600">Finalizar</button></a>
+        <a href="{{route('products.index')}}"><button type="button" class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Seguir Comprando</button></a>
+        
+        <button onclick="document.getElementById('checkout').value='false';document.getElementById('cart-checkout-form').submit" class="mt-1 w-full rounded-md bg-yellow-500 py-1.5 font-medium text-blue-50 hover:bg-yellow-600">Actualizar Total</button>
+        <button onclick="document.getElementById('checkout').value='true';document.getElementById('cart-checkout-form').submit" class="mt-1 w-full rounded-md bg-green-500 py-1.5 font-medium text-blue-50 hover:bg-green-600">Finalizar</button>
       </div>
+  </div>
     </div>
   </div>
   <form id="delete-cart" class="d-none" action="{{route('cart.remove')}}" method="POST">
@@ -79,4 +102,5 @@
     @method('DELETE')
     <input id="product_id" type="hidden" name="product_id">
 </form>
+@endif
 @endsection

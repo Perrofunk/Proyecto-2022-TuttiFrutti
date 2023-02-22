@@ -13,7 +13,7 @@
     </div>
 
 
-@endif.
+@endif
 <section class="text-gray-700 body-font overflow-hidden bg-white">
   <div class="container px-5 py-24 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
@@ -34,24 +34,23 @@
             
           </div>
         </div>
-        <div class="flex">
-          <span class="title-font font-medium text-2xl text-gray-900">${{$product->price}}</span>
+        <div class="flex flex-wrap justify-evenly">
+          <span class="title-font pb-4 font-medium text-2xl text-gray-900">${{$product->price}}</span>
           <form action="{{ route('cart.add') }}" method="post">
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <div class="flex justify-between items-center mb-4">
                 <div class="flex items-center">
-                    <label class="mr-2">Quantity:</label>
-                    <input type="number" name="quantity" value="1" min="1" class="border rounded py-1 px-2">
+                    <label class="mr-2">Cantidad</label>
+                    
+                    <input name="quantity" class=" w-14 mr-4 h-10 bg-gray-200 text-gray-500" type="number" value="1" min="1">
                 </div>
-                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded">
-                    Add to Cart
-                </button>
+                <button class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded" type="submit">Añadir al Carrito</button>
             </div>
         </form>
         
-          <input class=" w-10 h-10 bg-gray-200 p-0 inline-flex items-center justify-center text-gray-500 ml-4" type="number" min="1">
-          <button class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded" type="submit">Añadir al Carrito</button>
+          
+          
         </div>
       </div>
     </div>

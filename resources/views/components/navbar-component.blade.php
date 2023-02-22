@@ -24,11 +24,11 @@
       <div class="font-medium truncate">{{Auth::user()->email}}</div>
     </div>
     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
-        @if (Auth::user()->user_type == "1")    
+          
         <li>
-          <a href="{{route('admin.index')}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+          <a href="{{route('client.profile')}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mi Perfil</a>
         </li>
-        @endif
+        
     </ul>
     <div class="py-1">
       <a href="{{ route('logout') }}"
@@ -53,6 +53,15 @@
                     <li>
                         <a href="{{route('products.index')}}" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0">Productos</a>
                     </li>
+                    @auth
+                    
+                    <li>
+                        <a href="{{route('client.orders')}}" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0">Pedidos</a>
+                    </li>
+                    <li>
+                        <a href="{{route('cart')}}" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0">Carrito</a>
+                    </li>
+                    @endauth
                     
                 </ul>
             </div>

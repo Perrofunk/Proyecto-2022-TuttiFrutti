@@ -96,7 +96,7 @@ img {vertical-align: middle;}
 }
 </style>
 </head>
-<body>
+
 <div class="slideshow-container">
 
 <div class="mySlides fade">

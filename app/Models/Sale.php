@@ -20,6 +20,14 @@ class Sale extends Model
     public function details(){
         return $this->hasMany(SaleDetail::class);
     }
+    public function total(){
+        $total = 0;
+        foreach ($this->details as $detail) {
+            $subtotal = $detail->price * $detail->quantity;
+            $total += $subtotal;
+        };
+        return $total;
+    }
     //Filtrar por busqueda y por categoria
     public function scopeFilter($query, array $filters){
         
