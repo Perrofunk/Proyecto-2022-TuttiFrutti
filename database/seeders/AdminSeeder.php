@@ -19,9 +19,10 @@ class AdminSeeder extends Seeder
     {
         $users = User::where('user_type', '=', '1')->get();
         foreach ($users as $user) {
-            Admin::factory(1)->create([
-                'user_id' => $user->id
-            ]);
+            
+                Admin::factory(1)->create([
+                    'user_id' => $user->id
+                ]);
         }
     }
 }

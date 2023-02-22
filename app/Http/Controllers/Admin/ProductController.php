@@ -18,17 +18,47 @@ class ProductController extends Controller
     public function index(){
        
         
-        if (request()->input('orderBy') != ""){
-            $query = request()->input('orderBy');
+        $orderBy = request()->input('orderBy');
+        if ($orderBy != ""){
+            $query = $orderBy;
         }else{
             $query = 'id';
         }
-            if (request()->input('order') === 'desc') {
-                $products = Product::orderBy($query, 'desc')->filter(request(['category_id', 'search']))->paginate('8');
+        if (!is_null(request()->input('orderDirection'))) {
+            $orderDirection = request()->input('orderDirection');
+        } else {$orderDirection = 'asc';}
+        if (request()->input('sort_by') !== null) {
+            switch (request()->input('sort_by')) {
+                case 'name-asc':
+                    $query = 'name';
+                    $orderDirection = 'asc';
+                    break;
+                case 'name-desc':
+                    $query = 'name';
+                    $orderDirection = 'desc';
+                    break;
+                case 'price-asc':
+                    $query = 'price';
+                    $orderDirection = 'asc';
+                    break;
+                case 'price-desc':
+                    $query = 'price';
+                    $orderDirection = 'asc';
+                    break;
+                
+                default:
+                    
+                    break;
             }
-            else {
-                $products = Product::orderBy($query)->filter(request(['category_id', 'search']))->paginate('8');
-            }
+        }
+        
+            $products = Product::orderBy($query, $orderDirection)->filter(request(['category_id', 'search']));
+                if ($products->doesntExist()) {
+                    $products = Product::orderBy($query, 'desc')->paginate('12')->appends(request()->query());
+                } else {
+                    $products = $products->paginate('12')->appends(request()->query());
+                    
+                }
             
         
         $user = auth()->user();
@@ -84,6 +114,31 @@ class ProductController extends Controller
             ]);
         }
         
+        return redirect()->route('products.index');
+    }
+    public function edit(Product $product)
+    {
+        return view('admin.products.edit', [
+            'product' => $product
+        ]);
+    }
+    public function update(Request $request, Product $product)
+    {
+        $formFields = $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'price'=>'required',
+            'category_id'=>'required'
+        ]);
+        
+        $product->update($formFields);
+        if ($request->image) {
+            $url = 'storage/' . Storage::disk('public')->put('imagenes', $request->image);
+            // $url = Storage::url('imagenes/');
+            $product->image->update([
+                'url'=>$url
+            ]);
+        }
         return redirect()->route('products.index');
     }
     public function destroy(Product $product)

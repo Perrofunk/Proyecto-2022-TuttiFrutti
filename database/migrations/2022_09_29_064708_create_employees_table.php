@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('name')->constrained('user_types');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('address_id')->constrained();
             $table->date('date_of_employment');
             $table->timestamps();
         });

@@ -1,12 +1,17 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
+use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
@@ -42,6 +47,23 @@ Route::resource('', IndexController::class)->only([
     'index'
 ]);
 Route::middleware(['auth'])->group(function () {
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::delete('/cart', [CartController::class, 'remove'])->name('cart.remove');
+Route::patch('/cart', [CartController::class, 'update'])->name('cart.update');
+
+Route::post('/checkout', [SaleController::class, 'clientStore'])->name('client.sale.store');
+
+Route::get('/profile', [ClientController::class, 'profile'])->name('client.profile');
+Route::get('/profile/orders', [ClientController::class, 'orders'])->name('client.orders');
+Route::get('/profile/orders/{order}', [ClientController::class, 'showOrder'])->name('client.orders.show');
+Route::get('/profile/edit', [ClientController::class, 'edit'])->name('client.profile.edit');
+Route::post('/profile/edit', [ClientController::class, 'update'])->name('client.profile.update');
+
+});
+
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin', AdminController::class)->only([
         'index'
     ]);
@@ -49,6 +71,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('admin/suppliers', SupplierController::class);
     Route::resource('admin/users', UserController::class);
     Route::resource('admin/products', ProductController::class);
+    Route::resource('admin/purchases/{purchase}/details', DetailController::class);
+    Route::resource('admin/categories', CategoryController::class);
+    Route::resource('admin/sales', SaleController::class);
+    Route::get('admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    Route::get('admin/profile/change-password', [AdminController::class, 'changePassword'])->name('admin.profile.change-password');
+    Route::post('admin/profile/change-password', [AdminController::class, 'updatePassword'])->name('admin.profile.update-password');
 });
 Route::resource('products', ProductController::class)->only([
     'index', 'show'

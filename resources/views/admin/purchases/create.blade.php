@@ -3,7 +3,8 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    {{Breadcrumbs::render()}}
+    <hr class="mt-3">
 @stop
 
 @section('content')
@@ -15,10 +16,10 @@
     $details = App\Models\PurchaseDetail::all();
 @endphp
 <div class="">
-<x-crud.forms  :relacion_child_modelos="$details"  type="create" :variable="$purchases" ruta="purchases" :relacion_modelos="$supplier"></x-crud.forms>
+<x-crud.forms  :first_child_models="$details"  type="create" :variable="$purchases" :first_parent_models="$supplier"></x-crud.forms>
 </div>
   
-  
+
     
 
 @stop

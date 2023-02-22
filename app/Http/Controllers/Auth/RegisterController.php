@@ -59,6 +59,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'street'=>['nullable'],
             'address'=>['required'],
+            'phone'=>['nullable'],
             'department'=>['nullable'],
             'between_streets'=>['nullable'],
             'zone'=>['required', 'integer', 'max:9999'],
@@ -89,6 +90,7 @@ class RegisterController extends Controller
         'surname'=>$data['surname'],
         'email' => $data['email'],
         'user_type'=>'3',
+        'phone'=>$data['phone'],
         'password' => Hash::make($data['password'])]);
         Client::create([
             'user_id'=>$user->id,

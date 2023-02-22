@@ -2,19 +2,22 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+{{ Breadcrumbs::render() }}
     <h1>Proveedores - Index</h1>
+    
 @stop
 
 @section('content')
     {{-- Alpine JS --}}
     <script defer src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
-    <h3>Registro de Proveedores</h3>
+    <p class="text-secondary">
+        Total de registros: {{$suppliers->total()}}
+    </p>
     <x-crud.filters :variable="$suppliers" >
-        <a role="button" class="btn btn-primary mt-3" href="{{route('suppliers.create')}}">
+        <a role="button" class="w-100 btn btn-primary mt-3" href="{{route('suppliers.create')}}">
             Registrar Proveedor
         </a></x-crud.filters>
-
     <x-crud.views :variable="$suppliers" ruta="suppliers"></x-crud.views>
 @stop
 

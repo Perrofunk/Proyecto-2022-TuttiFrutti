@@ -3,25 +3,30 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
 {
     public function index(){
-        // $purchases = 
-        if (request()->input('orderBy') != ""){
-            $query = request()->input('orderBy');
+        $orderBy = request()->input('orderBy');
+        if ($orderBy != ""){
+            $query = $orderBy;
         }else{
             $query = 'id';
         }
-            if (request()->input('order') === 'desc') {
-                $purchases = Purchase::orderBy($query, 'desc')->filter(request(['supplier_id', 'search']))->paginate('12');
-            }
-            else {
-                $purchases = Purchase::orderBy($query)->filter(request(['supplier_id', 'search']))->paginate('12');
-            }
-
+            if (!is_null(request()->input('orderDirection'))) {
+                $orderDirection = request()->input('orderDirection');
+            } else {$orderDirection = 'asc';}
+            
+            $purchases = Purchase::orderBy($query, $orderDirection)->filter(request(['supplier_id', 'search']));
+                if ($purchases->doesntExist()) {
+                    return redirect()->back()->withErrors('No hay datos para este proveedor ');
+                } else {
+                    $purchases = $purchases->paginate('12')->appends(request()->query());
+                    
+                }
         return view('admin.purchases.index', [
             'purchases' => $purchases
         ]);
@@ -37,35 +42,35 @@ class PurchaseController extends Controller
     {
         $formFields = $request->validate([
             'date'=>'required',
-            'supplier_id'=>'required|integer'
+            'supplier_id'=>'required|integer',
+            'detail'=>'nullable'
         ]);
-       
-        $request->validate([
-            'product_id'=>'required|integer',
-            'quantity'=>'required|integer',
-            'price'=>'required|integer'
-        ]);
-        
         $purchase = Purchase::create([
             'date'=>$request->date,
             'supplier_id'=>$request->supplier_id,
             'total'=>'0'
         ]);
-        $purchaseDetails = $purchase->purchaseDetails()->create([
-            'product_id'=>$request->product_id,
-            'supplier_id' => $purchase->supplier_id,
-            'quantity'=>$request->quantity,
-            'price'=>$request->price
-        ]);
-        $total = $purchaseDetails->price * $purchaseDetails->quantity;
-         
-        $purchase->update([
-            'total'=>$total
-        ]);
-        
-        
-        
+        if ($request->detail != null) {
+            return redirect()->route('details.create', [$purchase]);
+        }else{
         return redirect()->route('purchases.index');
+        }
+        // $purchaseDetails = $purchase->purchaseDetails()->create([
+        //     'product_id'=>$request->product_id,
+        //     'supplier_id' => $purchase->supplier_id,
+        //     'quantity'=>$request->quantity,
+        //     'price'=>$request->price
+        // ]);
+        
+        // $total = $purchaseDetails->price * $purchaseDetails->quantity;
+         
+        // $purchase->update([
+        //     'total'=>$total
+        // ]);
+        
+        
+        
+        
     }
 
     /**
@@ -103,17 +108,18 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, Purchase $purchase)
     {
-        
         $formFields = $request->validate([
-            'date'=>'date|nullable',
-            'supplier_id'=>'integer|nullable',
-            'product_id'=>'integer|nullable',
-            'quantity'=>'integer|nullable',
-            'price'=>'integer|nullable'
+            'date'=>'date|required',
+            'supplier_id'=>'integer|required',
+            'detail'=>'nullable'
         ]);
-        $formFields = array_filter($formFields);
         $purchase->update($formFields);
+        if ($request->detail != null) {
+            return redirect()->route('details.create', [$purchase]);
+        }
+        else{
         return redirect()->route('purchases.index');
+        }
     }
 
     /**
@@ -127,4 +133,5 @@ class PurchaseController extends Controller
         $purchase->delete();
         return redirect()->back();
     }
+    
 }

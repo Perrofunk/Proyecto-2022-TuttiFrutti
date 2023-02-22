@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class AdminFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>'1'
+            'name'=>'1',
+            'address_id' => Address::all()->random()->id,
         ];
     }
 }

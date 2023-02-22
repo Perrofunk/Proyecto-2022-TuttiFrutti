@@ -20,12 +20,16 @@ class SupplierController extends Controller
         }else{
             $query = 'id';
         }
-            if (request()->input('order') === 'desc') {
-                $suppliers = Supplier::orderBy($query, 'desc')->filter(request(['search']))->paginate('12');
-            }
-            else {
-                $suppliers = Supplier::orderBy($query)->filter(request(['search']))->paginate('12');
-            }
+        if (!is_null(request()->input('orderDirection'))) {
+            $orderDirection = request()->input('orderDirection');
+        } else {$orderDirection = 'asc';}
+
+        $suppliers = Supplier::orderBy($query, $orderDirection)->filter(request(['search']));
+            if ($suppliers->doesntExist()) {
+                $suppliers = Supplier::orderBy($query, $orderDirection)->paginate('12')->appends(request()->query());
+            } else {
+                $suppliers = $suppliers->paginate('12')->appends(request()->query());
+            };
         
         return view('admin.suppliers.index', [
             'suppliers'=>$suppliers
@@ -53,7 +57,15 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formFields = $request->validate([
+            'name'=>'string|required',
+            'email'=>'required|email',
+            'contact'=>'required|string',
+            'address'=>'required|string',
+            'phone'=>'required'
+        ]);
+        $supplier = Supplier::create($formFields);
+        return redirect()->route('suppliers.index');
     }
 
     /**
@@ -89,9 +101,19 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Supplier $supplier)
     {
-        //
+        $formFields = $request->validate([
+            'name'=>'string|required',
+            'email'=>'required|email',
+            'contact'=>'required|string',
+            'address'=>'required|string',
+            'phone'=>'required'
+        ]);
+        $supplier->update($formFields);
+        return redirect()->route('suppliers.index');
+        // $purchase->update($formFields);
+        // return redirect()->route('purchases.index');
     }
 
     /**
@@ -103,5 +125,6 @@ class SupplierController extends Controller
     public function destroy(Supplier $supplier)
     {
         $supplier->delete();
+        return redirect()->back();
     }
 }

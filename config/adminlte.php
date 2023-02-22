@@ -292,11 +292,7 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
+        
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
@@ -323,58 +319,23 @@ return [
             'submenu' =>[   ['text'=>'Index', 'url'=>'admin'],
                             ['text'=>'Productos', 'url'=>'admin/products'],
                             ['text'=>'Compras', 'url'=>'admin/purchases'],
-                            ['text'=>'Proveedores', 'url'=>'admin/suppliers']
-                            ]
+                            ['text'=>'Ventas', 'url'=>'admin/sales'],
+                            ['text'=>'Proveedores', 'url'=>'admin/suppliers'],
+                            ['text'=>'Usuarios', 'url'=>'admin/users']
+            ]
         ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'admin/settings',
+            'route'  => 'admin.profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'route'  => 'admin.profile.change-password',
             'icon' => 'fas fa-fw fa-lock',
         ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
+        
         ['header' => 'labels'],
         [
             'text'       => 'important',

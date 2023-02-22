@@ -3,6 +3,8 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+{{ Breadcrumbs::render() }}
+<hr class="mt-3">
     <h1>Dashboard</h1>
 @stop
 
@@ -14,7 +16,7 @@
     $categories=Category::all();
 @endphp
 <div class="">
-<x-crud.forms type="create" :variable="$products" ruta="products" :relacion_modelos="$categories"></x-crud.forms>
+<x-crud.forms type="create" :variable="$products" ruta="products" :first_parent_models="$categories"></x-crud.forms>
 </div>
   
   

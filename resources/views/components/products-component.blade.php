@@ -68,6 +68,7 @@
 @endphp
 
 {{-- Cuando el foreach recorre la coleccion y guarda el objeto individual en la variable $product se hace posible acceder a sus propiedades, como 'id' y 'name'. --}}
+
     <a href="{{$prefix}}/products/{{$product->id}}"><img src="/{{ $product->image->url}}"  class="card-img-top" alt="" style="aspect-ratio:1/1;"></a>
     
     <div class="card-body">
@@ -86,7 +87,7 @@
     </div>
     @if ($variable === true)
         <div class="btn-group-vertical">
-            <button class="btn rounded-0 btn-outline-primary">Modificar</button>
+            <a class="btn rounded-0 btn-outline-primary" href="{{route('products.edit', ['product'=>$product])}}">Modificar</a>
             <button class="btn rounded-0 btn-danger" onclick="if(confirm('Desea eliminar el elemento [{{$product->id}}] de la tabla [Productos]')){
                 event.preventDefault();
                 document.getElementById('delete-card').action='{{route('products.destroy', ['product'=>$product])}}';

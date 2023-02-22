@@ -19,4 +19,10 @@ class Client extends Model
     public function userType(){
         return $this->belongsTo(UserType::class, 'name');
     }
+    public function scopeFilter($query, array $filters){
+    if ($filters['search']) {
+        
+        $query->where($this->user->name, 'like', '%' . $filters['search'] . '%');
+    }
+}
 }
