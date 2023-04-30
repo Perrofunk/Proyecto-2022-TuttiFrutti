@@ -70,11 +70,7 @@ return [
     */
 
     'links' => [
-<<<<<<< HEAD
-        public_path('storage') => storage_path('/app/public'),
-=======
         public_path('storage') => storage_path('app/public'),
->>>>>>> parent of b029343 (Update filesystems.php)
     ],
 
 ];
